@@ -1,0 +1,44 @@
+<h3>Информация о документах, подтверждающих качество</h3>
+<ng-container *ngIf="formArray">
+	<section *ngIf="!formArray.length">
+		<app-button type="button" (click)="addDocument()" skin="add-field" icon="add">Добавить информацию о документах
+		</app-button>
+	</section>
+	<section *ngIf="formArray.length">
+		<label>
+			<span>Информация о документе:</span>
+			<button type="button" class="pointer" (click)="clearAllDocs()">
+				<app-icon>delete</app-icon>
+				Удалить
+			</button>
+		</label>
+		<div>
+			<div class="document" *ngFor="let control of formArray?.controls; let i = index">
+				<fieldset [formGroup]="control">
+					<app-select-box-self-fetch [option]="documentTypesOption" formControlName="certType"
+											   placeholder="Название" class="without-radius"
+											   name="Название в информации о документе"
+											   [attr.disabled]="i !== formArray.length - 1"></app-select-box-self-fetch>
+					<app-textbox class="without-radius" placeholder="Номер" formControlName="certNumber" maxLength="70"
+								 name="Номер в информации о документе" [isDisabled]="i !== formArray.length - 1">
+					</app-textbox>
+					<div class="range">
+						<app-datebox class="without-radius" placeholder="С" formControlName="dateFrom"
+									 [isDisabled]="i !== formArray.length - 1">
+						</app-datebox>
+						<app-datebox class="without-radius" placeholder="До" formControlName="dateTo"
+									 [isDisabled]="i !== formArray.length - 1">
+						</app-datebox>
+					</div>
+					<app-textbox class="without-radius" placeholder="Кем выдан" formControlName="certPartyIssuingName"
+								 maxLength="175" [isDisabled]="i !== formArray.length - 1">
+					</app-textbox>
+				</fieldset>
+				<nav>
+					<app-icon class="basket" (click)="removeDocumentAt(i)">delete</app-icon>
+					<app-icon class="add" (click)="addDocument()">add</app-icon>
+				</nav>
+			</div>
+		</div>
+	</section>
+</ng-container>

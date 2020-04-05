@@ -1,0 +1,19 @@
+.currency {
+	app-selectbox {
+		width: 350px;
+	}
+}
+
+.transport {
+	display: flex;
+	flex-direction: row;
+
+	:nth-child(1) {
+		width: 350px;
+		margin-right: 10px;
+	}
+}
+
+app-textbox {
+	width: 350px;
+}

@@ -1,0 +1,35 @@
+<header>
+	<h3>Грузоотправитель</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent" [ngSwitch]="showContent">
+		<ng-container *ngSwitchCase="false">Развернуть</ng-container>
+		<ng-container *ngSwitchCase="true">Свернуть</ng-container>
+	</button>
+</header>
+
+<fieldset *ngIf="showContent && form" [formGroup]="form">
+	<section>
+		<div class="field">
+			<label class="required">Наименование:</label>
+			<app-textbox maxLength="175" [formControl]="form?.get('name')" class="naming"
+				name="Наименование (грузоотправитель)"></app-textbox>
+		</div>
+
+		<div class="field">
+			<label class="required">Адрес:</label>
+			<app-textbox [formControl]="form?.get('address')" [class.error]="form?.get('address')?.errors && form?.touched"
+				maxLength="70" class="naming" withTitle></app-textbox>
+		</div>
+
+		<div class="field">
+			<label class="required">УНП</label>
+			<app-textbox [formControl]="form?.get('unp')" [class.error]="form?.get('unp')?.errors && form?.touched"
+				maxLength="70" class="unp"></app-textbox>
+		</div>
+
+		<div class="field">
+			<label>GLN</label>
+			<app-numberbox [formControl]="form?.get('gln')" [class.error]="form?.get('gln')?.errors && form?.touched"
+				maxLength="13" class="unp"></app-numberbox>
+		</div>
+	</section>
+</fieldset>

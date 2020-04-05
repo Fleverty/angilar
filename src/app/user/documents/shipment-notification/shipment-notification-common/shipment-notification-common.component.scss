@@ -1,0 +1,13 @@
+:host {
+	display: block;
+	padding-top: 35px;
+}
+
+.deliveryError label,
+span {
+	font-size: inherit;
+}
+
+.deliveryError span {
+	color: var(--error-color);
+}

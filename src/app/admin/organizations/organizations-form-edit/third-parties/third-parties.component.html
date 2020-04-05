@@ -1,0 +1,28 @@
+<header>
+	<div>
+		<label>Группа компаний партнера:</label>
+		<app-selectbox placeholder="Выберите группу компаний"></app-selectbox>
+	</div>
+	<div>
+		<label>Партнер:</label>
+		<app-textbox></app-textbox>
+	</div>
+	<div>
+		<label>Третье лицо:</label>
+		<app-selectbox placeholder="Не выбрано"></app-selectbox>
+	</div>
+	<div>
+		<label>Сообщение:</label>
+		<app-textbox></app-textbox>
+	</div>
+</header>
+<hr>
+<main>
+	<div class="controls">
+		<app-button skin="simple-blue" icon="add">Добавить</app-button>
+		<app-button skin="simple-edit" icon="person_outline">Добавить</app-button>
+		<app-button skin="simple-red" icon="delete">Удалить</app-button>
+	</div>
+	<app-grid [items]="testData" [properties]="testProperties" withoutFooter="true"></app-grid>
+</main>
+<hr>

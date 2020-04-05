@@ -1,0 +1,15 @@
+<header>
+	<app-icon class="left-icon" (click)="switchDecade(date, false);$event.stopPropagation();">
+		arrow_back</app-icon>
+	<div class="button" (click)="changePicker.emit(date);$event.stopPropagation();">{{date?.getFullYear() - 5}}
+		- {{date?.getFullYear() + 6}}</div>
+	<app-icon class="right-icon" (click)="switchDecade(date, true);$event.stopPropagation();">
+		arrow_forward</app-icon>
+</header>
+<app-grid-drawer [columns]="4" [rows]="3" [items]="decades">
+	<ng-template #itemTemplate let-item>
+		<div class="grid-item" [class.today]="isToday(item.date)" [class.selected]="isSelected(item.date)"
+			(click)="setDecade(item.date);$event.stopPropagation();">
+			{{item.date.getFullYear()}}</div>
+	</ng-template>
+</app-grid-drawer>

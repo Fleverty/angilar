@@ -1,0 +1,57 @@
+.add {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 24px;
+	height: 22px;
+	margin-left: 3px;
+	padding: 0;
+	font-size: 20px;
+	background-color: #0066d1;
+	border: none;
+	border-radius: 2px;
+	transition: 0.2s;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+	app-icon {
+		color: white;
+		width: auto;
+	}
+}
+
+.row {
+	display: flex;
+	align-items: center;
+	margin-bottom: 8px;
+
+	app-datebox {
+		width: 180px;
+	}
+	:nth-child(2) {
+		width: 350px;
+	}
+	:nth-child(3) {
+		width: 350px;
+	}
+}
+
+.remove {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgb(234, 234, 234);
+	border-radius: 2px;
+	height: 22px;
+	width: 24px;
+	margin-left: 3px;
+	font-size: 16px;
+	cursor: pointer;
+
+	app-icon {
+		width: auto;
+	}
+}

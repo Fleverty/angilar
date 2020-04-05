@@ -1,0 +1,79 @@
+<div class="product" *ngIf="order">
+	<h3>Товарный раздел</h3>
+	<table *ngIf="(type$ | async) as type">
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование товара</th>
+				<th>Един. изм-ия</th>
+				<th [ngSwitch]="type">
+					<ng-container *ngSwitchCase="'ORDERS'">Количество</ng-container>
+					<ng-container *ngSwitchCase="'ORDRSP'">Заказанное количество</ng-container>
+				</th>
+				<th *ngIf="type === 'ORDRSP'">Принятое количество</th>
+				<th>Кол-во грузовых мест</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+			</tr>
+		</thead>
+		<tbody>
+			<div class="product-row" *ngFor="let item of (products$ | async); let i = index"
+				[ngClass]="{'added': item.action === 1, 'changed': item.action === 3, 'accepted': item.action === 5, 'discarded': item.action === 7}">
+				<tr>
+					<td>{{item.position}}</td>
+					<td>{{item.gtin}}</td>
+					<td>{{item.fullName}}</td>
+					<td>{{item.uom?.name}}</td>
+					<td>{{item.quantityOrdered || 0}}</td>
+					<td *ngIf="type === 'ORDRSP'">{{item.quantityAccepted || 0}}</td>
+					<td>{{item.quantityOrderedLu || 0}}</td>
+					<td>{{item.priceNet || 0}}</td>
+					<td>{{item.amountWithoutVat || 0}}</td>
+					<td>{{item.vatRate || 0}}</td>
+					<td>{{item.amountVat || 0}}</td>
+					<td>{{item.amountWithVat || 0}}</td>
+				</tr>
+				<tr>
+					<td colspan="13" class="note">
+						<div>
+							<p>
+								<ng-container *ngIf="item.codeByBuyer">Код товара присвоенный поку-лем:
+									<span>{{item.codeByBuyer}}</span> </ng-container>
+								<ng-container *ngIf="item.codeBySupplier">Код товара присвоенный пост-ком:
+									<span>{{item.codeBySupplier}}</span> </ng-container>
+								<ng-container *ngIf="item.type">Тип товара:
+									<span>{{item.type === "CU" ? "Товар": "Тара"}}</span> </ng-container>
+								<ng-container *ngIf="item.quantityInPack">Количество в упаковке:
+									<span>{{item.quantityInPack}}</span> </ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</div>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{order?.totalQuantity}}</td>
+				<td *ngIf="type === 'ORDRSP'">{{order?.responseDocument?.totalQuantity}}</td>
+				<td *ngIf="type === 'ORDRSP'">{{order?.responseDocument?.totalQuantityLu}}</td>
+				<td *ngIf="type === 'ORDERS'">{{order?.totalQuantityLu}}</td>
+				<td></td>
+				<td *ngIf="type === 'ORDRSP'">{{order?.responseDocument?.totalAmountWithoutVat}}</td>
+				<td *ngIf="type === 'ORDERS'">{{order?.totalAmountWithoutVat}}</td>
+				<td></td>
+				<td *ngIf="type === 'ORDRSP'">{{order?.responseDocument?.totalAmountVat}}</td>
+				<td *ngIf="type === 'ORDERS'">{{order?.totalAmountVat}}</td>
+				<td *ngIf="type === 'ORDRSP'">{{order?.responseDocument?.totalAmountWithVat}}</td>
+				<td *ngIf="type === 'ORDERS'">{{order?.totalAmountWithVat}}</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

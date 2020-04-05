@@ -1,0 +1,55 @@
+<div class="empty" *ngIf="!value || value.length === 0" (click)="openPopup(true)">{{placeholder}}</div>
+
+
+<div *ngIf="value && value.length > 0">
+	<div class="field" (click)="openPopup(true)">
+		<div class="element" *ngFor="let el of value; let i = index">
+			<div>{{valueTransformFn ? valueTransformFn(el) : el}}</div>
+			<app-icon (click)="deleteItem(i); $event.stopPropagation()">close</app-icon>
+		</div>
+	</div>
+</div>
+<div class="popup" *ngIf="isPopupDisplay">
+	<div class="header">
+		<label>{{title}}</label>
+		<app-icon (click)="openPopup(false)">close</app-icon>
+	</div>
+	<div class="content">
+		<form [formGroup]="searchCriterion" class="first-line">
+			<div class="selector">
+				<label>Организация:</label>
+				<app-multiselect-box placeholder="Не выбрано" [data]="organization" formControlName="organizations"
+					(appNextPage)="updateOrganizationFilter({})" (appFilterChanges)="updateOrganizationFilter($event)"
+					(appCollapse)="updateOrganizationFilter({search: ''})" [valueTransformFn]="transformFn">
+				</app-multiselect-box>
+			</div>
+
+			<div class="selector">
+				<label>GLN:</label>
+				<app-textbox formControlName="gln"></app-textbox>
+			</div>
+
+			<div class="selector">
+				<label>Адрес:</label>
+				<app-textbox formControlName="address"></app-textbox>
+			</div>
+		</form>
+		<div class="second-line">
+			<div class="count">
+				Выбрано: {{countOfChecked}}
+			</div>
+			<div class="list" #container
+				(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+				<div class="list-element" *ngFor="let el of addresses; let i = index">
+					<app-icon (click)="el.checked = !el.checked">
+						{{ el.checked ? "check_box" : "check_box_outline_blank" }}</app-icon>
+					<p>{{el.text}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<button class="save" appSkin="action" (click)="save()">Сохранить</button>
+		<button class="save" appSkin="simple" (click)="openPopup(false)">Отмена</button>
+	</div>
+</div>

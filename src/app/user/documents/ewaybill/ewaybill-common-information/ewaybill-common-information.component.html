@@ -1,0 +1,85 @@
+<header>
+	<h3>Общая информация</h3>
+	<button appSkin="dots" type="button" *ngIf="showContent" (click)="showContent = false">Свернуть</button>
+	<button appSkin="dots" type="button" *ngIf="!showContent" (click)="showContent = true">Развернуть</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="error" *ngIf="[3, 5].indexOf(form.getRawValue().deliveryStatus) !== -1">
+		<label>Текст ошибки при доставке:</label>
+		<label class="red">{{form?.getRawValue().deliveryError}}</label>
+	</div>
+	<div class="line">
+		<div>
+			<label class="required">Статус:</label>
+			<app-selectbox isDisabled="true" [data]="statuses" formControlName="processingStatus" class="status"
+				name="Статус">
+			</app-selectbox>
+		</div>
+	</div>
+	<div class="line">
+		<div>
+			<label class="required">Серия и номер:</label>
+			<div class="series">
+				<app-numberbox isDisabled="true" formControlName="seria01"></app-numberbox>
+				-
+				<app-numberbox isDisabled="true" formControlName="seria02">
+				</app-numberbox>
+				-
+				<app-numberbox formControlName="number" maxLength="25" name="Серия и номер">
+				</app-numberbox>
+			</div>
+		</div>
+		<div>
+			<label class="required">Дата накладной:</label>
+			<app-datebox formControlName="deliveryNoteDate" class="date" name="Дата накладной">
+			</app-datebox>
+		</div>
+	</div>
+	<div class="line">
+		<div>
+			<label class="required">Основание отпуска</label>
+			<div class="leave">
+				<app-datebox formControlName="contractDate" name="Основание отпуска">
+				</app-datebox>
+				<app-textbox maxLength="70" formControlName="contractName" maxLength="70" placeholder="Наименование"
+					name="Наименование (основание отпуска)"></app-textbox>
+				<app-textbox formControlName="contractNumber" maxLength="70" placeholder="Номер"
+					name="Номер (основание отпуска)">
+				</app-textbox>
+			</div>
+		</div>
+	</div>
+	<div class="line">
+		<div>
+			<label class="required">Валюта:</label>
+			<div class="currency">
+				<app-selectbox formControlName="currency" (appNextPage)="nextCurrenciesPage()"
+					(appFilterChanges)="onCurrenciesFilterChanges($event)" [data]="currencies" placeholder="Выберите валюту"
+					(appCollapse)="onCurrenciesFilterChanges({search: ''})" [valueTransforFn]="transformFn" name="Валюта">
+				</app-selectbox>
+			</div>
+		</div>
+		<div *ngIf="!isNumberOfOrder && !form?.get('ordersNumber')?.value; else showOrderNumber" class="without-label">
+			<label></label>
+			<app-button (click)="isNumberOfOrder = true" skin="add-field" icon="add">Номер заказа</app-button>
+		</div>
+		<ng-template #showOrderNumber>
+			<div>
+				<label>
+					<span>Номер заказа:</span>
+					<button type="button" class="pointer" (click)="deleteNumberOrder()">
+						<app-icon>delete</app-icon>Удалить
+					</button>
+				</label>
+				<app-textbox formControlName="ordersNumber" maxLength="35"></app-textbox>
+			</div>
+		</ng-template>
+	</div>
+</div>
+
+<template #statuses>
+	<dl>
+		<dt>0</dt>
+		<dd>Черновик</dd>
+	</dl>
+</template>

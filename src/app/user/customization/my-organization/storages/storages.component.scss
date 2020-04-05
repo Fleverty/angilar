@@ -1,0 +1,38 @@
+:host {
+	display: contents;
+}
+
+header {
+	padding: 20px 20px 12px 20px;
+
+	> app-button {
+		margin-right: 6px;
+	}
+}
+
+main {
+	height: 100%;
+	overflow: auto;
+	font-size: 13px;
+	position: relative;
+}
+
+footer {
+	padding: 4px 12px;
+	font-size: 13px;
+	background: rgb(98, 110, 128);
+	color: white;
+}
+
+app-icon {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	font-size: 16px;
+	color: rgb(98, 110, 128);
+}
+
+app-storages-grid {
+	flex: 1 1 auto;
+	overflow: auto;
+}

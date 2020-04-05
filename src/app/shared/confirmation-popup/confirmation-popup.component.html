@@ -1,0 +1,12 @@
+<section>
+	<h3>
+		{{message || "Подтвердить действие?"}}
+	</h3>
+	<app-icon (click)="appComfirm.emit(false)">clear</app-icon>
+</section>
+
+<nav>
+	<button [appSkin]="'action'" (click)="appComfirm.emit(true)">{{agreeButtonText || "ОК" }}</button>
+	<button *ngIf="!withoutDisagree" [appSkin]="'simple-cancel'"
+		(click)="appComfirm.emit(false)">{{disagreeButtonText || "Отмена"}}</button>
+</nav>

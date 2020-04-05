@@ -1,0 +1,12 @@
+<div class="input">
+	<input #time (input)="onInputTime($event.target.value)" type="time">
+</div>
+<div class="time">
+	<ul #ulList>
+		<li *ngFor="let time of timeList" (click)="setTime(time)"
+			[class.select]="toTimeString(time) === toTimeString(selectedTime)"
+			[class.now-time]="toTimeString(time) === toTimeString(nowTime)">
+			{{ toTimeString(time) }}
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,192 @@
+<div *ngIf="document">
+	<h3 *ngIf="document?.testIndicator" class="warning">Счет-фактура для расчетов является тестовым</h3>
+	<table>
+		<h3>Общая информация</h3>
+		<tbody>
+		<tr *ngIf="document?.processingStatus">
+			<td i18n>Статус обработки:</td>
+			<td>{{statuses?.get(document?.processingStatus)}}</td>
+		</tr>
+		<tr *ngIf="document?.supplierData && document?.supplierData?.dateCreate">
+			<td i18n>Дата создания:</td>
+			<td>{{document?.supplierData?.dateCreate | date: 'dd.MM.yyy HH:mm:ss'}}</td>
+		</tr>
+		<tr *ngIf="document?.invoicepmtNumber">
+			<td i18n>Номер счета-фактуры:</td>
+			<td>{{document?.invoicepmtNumber}}</td>
+		</tr>
+		<tr *ngIf="document?.invoicepmtDate">
+			<td i18n>Дата счета-фактуры:</td>
+			<td>{{document?.invoicepmtDate | date:'dd.MM.yyy'}}</td>
+		</tr>
+		<tr *ngIf="document?.contractNumber">
+			<td i18n>Номер договора:</td>
+			<td>{{document?.contractNumber}}</td>
+		</tr>
+		<tr *ngIf="document?.contractDate">
+			<td i18n>Дата договора:</td>
+			<td>{{document?.contractDate | date:'dd.MM.yyy'}}</td>
+		</tr>
+		<tr *ngIf="document?.currency?.code">
+			<td i18n>Валюта:</td>
+			<td>{{document?.currency?.code}} ({{document?.currency?.name}})</td>
+		</tr>
+		<tr *ngIf="document?.paymentTerm">
+			<td i18n>Условие оплаты:</td>
+			<td>{{document?.paymentTerm}}</td>
+		</tr>
+		<tr *ngIf="document?.buyingFor">
+			<td i18n>Цель приобретения:</td>
+			<td>{{document?.buyingFor}}</td>
+		</tr>
+		<tr *ngIf="document?.deliveryTerm">
+			<td i18n>Условие доставки:</td>
+			<td>{{document?.deliveryTerm}}</td>
+		</tr>
+		<tr *ngIf="document?.expireDate">
+			<td i18n>Срок действия:</td>
+			<td>{{document?.expireDate | date:'dd.MM.yyy'}}</td>
+		</tr>
+		<tr *ngIf="document?.deliveryTime">
+			<td i18n>Срок поставки:</td>
+			<td>{{document?.deliveryTime}}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table *ngIf="document?.supplier as supplier">
+		<h3>Поставщик</h3>
+		<tbody>
+		<tr *ngIf="supplier?.name || supplier?.address">
+			<td>Наименование и адрес:</td>
+			<td>{{[supplier?.name, supplier?.address] | smartJoin}}</td>
+		</tr>
+		<tr *ngIf="supplier?.gln">
+			<td>GLN:</td>
+			<td>{{supplier?.gln}}</td>
+		</tr>
+		<tr *ngIf="supplier?.unp">
+			<td>УНП:</td>
+			<td>{{supplier?.unp}}</td>
+		</tr>
+		<tr *ngIf="supplier?.okpo">
+			<td>ОКПО:</td>
+			<td>{{supplier?.okpo}}</td>
+		</tr>
+		<tr *ngIf="supplier?.accountNumber">
+			<td>Расчетный счет:</td>
+			<td>{{supplier?.accountNumber}}</td>
+		</tr>
+		<tr *ngIf="supplier?.bankName">
+			<td>Банк:</td>
+			<td>{{supplier?.bankName}}</td>
+		</tr>
+		<tr *ngIf="supplier?.bankAddress">
+			<td>Адрес банка:</td>
+			<td>{{supplier?.bankAddress}}</td>
+		</tr>
+		<tr *ngIf="supplier?.bankCode">
+			<td>Код банка:</td>
+			<td>{{supplier?.bankCode}}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table *ngIf="document?.buyer as buyer">
+		<h3>Покупатель</h3>
+		<tbody>
+		<tr *ngIf="buyer?.name || buyer?.address">
+			<td>Наименование и адрес:</td>
+			<td>{{[buyer?.name, buyer?.address] | smartJoin}}</td>
+		</tr>
+		<tr *ngIf="buyer?.gln">
+			<td>GLN:</td>
+			<td>{{buyer?.gln}}</td>
+		</tr>
+		<tr *ngIf="buyer?.unp">
+			<td>УНП:</td>
+			<td>{{buyer?.unp}}</td>
+		</tr>
+		<tr *ngIf="buyer?.okpo">
+			<td>ОКПО:</td>
+			<td>{{buyer?.okpo}}</td>
+		</tr>
+		<tr *ngIf="buyer?.accountNumber">
+			<td>Расчетный счет:</td>
+			<td>{{buyer?.accountNumber}}</td>
+		</tr>
+		<tr *ngIf="buyer?.bankName">
+			<td>Банк:</td>
+			<td>{{buyer?.bankName}}</td>
+		</tr>
+		<tr *ngIf="buyer?.bankAddress">
+			<td>Адрес банка:</td>
+			<td>{{buyer?.bankAddress}}</td>
+		</tr>
+		<tr *ngIf="buyer?.bankCode">
+			<td>Код банка:</td>
+			<td>{{buyer?.bankCode}}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table *ngIf="document?.shipper as shipper">
+		<h3>Грузоотправитель</h3>
+		<tbody>
+		<tr *ngIf="shipper?.name || shipper?.address">
+			<td>Наименование и адрес:</td>
+			<td>{{[shipper?.name, shipper?.address] | smartJoin}}</td>
+		</tr>
+		<tr *ngIf="shipper?.gln">
+			<td>GLN:</td>
+			<td>{{shipper?.gln}}</td>
+		</tr>
+		<tr *ngIf="shipper?.unp">
+			<td>УНП:</td>
+			<td>{{shipper?.unp}}</td>
+		</tr>
+		</tbody>
+	</table>
+	<table *ngIf="document?.receiver as receiver">
+		<h3>Грузополучатель</h3>
+		<tbody>
+		<tr *ngIf="receiver?.name || receiver?.address">
+			<td>Наименование и адрес:</td>
+			<td>{{[receiver?.name, receiver?.address] | smartJoin}}</td>
+		</tr>
+		<tr *ngIf="receiver?.gln">
+			<td>GLN:</td>
+			<td>{{receiver?.gln}}</td>
+		</tr>
+		<tr *ngIf="receiver?.unp">
+			<td>УНП:</td>
+			<td>{{receiver?.unp}}</td>
+		</tr>
+		</tbody>
+	</table>
+	<ng-container *ngIf="document?.extraFieldList && document?.extraFieldList?.length">
+		<h3>Дополнительно</h3>
+		<table>
+			<tbody>
+			<tr *ngFor="let additional of document?.extraFieldList">
+				<td>{{additional.fieldName}}</td>
+				<td>{{additional.fieldValue}}</td>
+			</tr>
+			</tbody>
+		</table>
+	</ng-container>
+</div>
+
+<template #statusesTemplate>
+	<dl>
+		<dt json>0</dt>
+		<dd i18n>Черновик</dd>
+		<dt json>1</dt>
+		<dd i18n>Отправлен</dd>
+		<dt json>2</dt>
+		<dd i18n>Передан</dd>
+		<dt json>3</dt>
+		<dd i18n>Получен</dd>
+		<dt json>98</dt>
+		<dd i18n>Черновик с ЭЦП</dd>
+		<dt json>99</dt>
+		<dd i18n>Черновик с ЭЦП</dd>
+	</dl>
+</template>

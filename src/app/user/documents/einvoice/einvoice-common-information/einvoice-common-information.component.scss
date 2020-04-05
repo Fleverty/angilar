@@ -1,0 +1,50 @@
+.series {
+	width: 570px;
+
+	app-numberbox {
+		&:nth-child(1) {
+			width: 60px;
+		}
+
+		&:nth-child(3) {
+			width: 150px;
+		}
+
+		&:nth-child(5) {
+			width: 340px;
+		}
+	}
+
+	span {
+		margin: 0 2px;
+	}
+}
+
+.contract {
+	:nth-child(1) {
+		width: 350px;
+	}
+}
+
+.test {
+	display: flex;
+	align-items: center;
+
+	label {
+		padding-left: 3px;
+		padding-bottom: 0;
+		font-size: 13px;
+	}
+}
+
+.order-number {
+	vertical-align: bottom;
+}
+
+.error > label.red {
+	color: var(--error-color);
+}
+
+.text-act {
+	width: 778px;
+}

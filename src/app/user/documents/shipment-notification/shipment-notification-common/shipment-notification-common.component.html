@@ -1,0 +1,47 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Общее</legend>
+	<div class="deliveryError" *ngIf="form.value.deliveryError">
+		<label>Текст ошибки при доставке: </label>
+		<span>{{ form.value.deliveryError }}</span>
+	</div>
+	<div>
+		<label>Номер уведомления об отгрузке</label>
+		<app-textbox formControlName="documentNumber" name="Номер уведомления об отгрузке"></app-textbox>
+	</div>
+	<div>
+		<label class="required">Дата уведомления об отгрузке</label>
+		<app-datebox formControlName="documentDate" name="Дата уведомления об отгрузке"></app-datebox>
+	</div>
+	<div>
+		<label class="required">Номер накладной</label>
+		<app-textbox formControlName="deliveryNoteNumber" maxLength="255" name="Номер накладной"></app-textbox>
+	</div>
+	<div>
+		<label>Дата накладной</label>
+		<app-datebox formControlName="deliveryNoteDate"></app-datebox>
+	</div>
+	<div>
+		<label>Номер накладной для конечного получателя</label>
+		<app-textbox formControlName="ultimateDeliveryNoteNumber" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>Номер заказа</label>
+		<app-textbox formControlName="orderNumber" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>Дата и время заказа</label>
+		<app-datebox formControlName="orderDate" withTime="true"></app-datebox>
+	</div>
+	<div>
+		<label>Дата и время поставки</label>
+		<app-datebox formControlName="deliveryDate" withTime="true"></app-datebox>
+	</div>
+	<div>
+		<label>Номер договора</label>
+		<app-textbox formControlName="contractNumber" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>Дата договора</label>
+		<app-datebox formControlName="contractDate"></app-datebox>
+	</div>
+</fieldset>

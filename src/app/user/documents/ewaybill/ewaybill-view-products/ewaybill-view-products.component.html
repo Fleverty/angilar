@@ -1,0 +1,93 @@
+<div class="product" *ngIf="draft">
+	<h3>Товарный раздел</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование товара</th>
+				<th>Един. изм-ия</th>
+				<th>Кол-во</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Сумма акциза</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+				<ng-container *ngIf="messageType === 'BLRWBL' || messageType==='BLRWBR'">
+					<th>Кол-во груз. мест</th>
+					<th>Масса груза, т.</th>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor=" let item of draft?.msgEwaybillProductList; let i=index">
+				<tr>
+					<td>{{item.position}}</td>
+					<td>{{item.gtin || '-'}}</td>
+					<td>{{item.fullName}}</td>
+					<td>{{item.uom && item.uom.name}}</td>
+					<td>{{item.quantityDespatch}}</td>
+					<td>{{item.priceNet}}</td>
+					<td>{{item.amountWithoutVat || 0}}</td>
+					<td>{{item.amountExcise || 0}}</td>
+					<td>{{item.vatRate || 0}}</td>
+					<td>{{item.amountVat || 0}}</td>
+					<td>{{item.amountWithVat || 0}}</td>
+					<ng-container *ngIf="messageType === 'BLRWBL' || messageType === 'BLRWBR'">
+						<td>{{item.quantityDespatchLu || 0}}</td>
+						<td>{{item.grossWeight}}</td>
+					</ng-container>
+				</tr>
+				<tr>
+					<td colspan="13" class="note">
+						<div>
+							<p *ngIf="item.addInfo"><span class="notice">Примечание:</span> {{item.addInfo}}</p>
+							<p>
+								<ng-container *ngIf="item.codeByBuyer">Код товара присвоенный поку-лем:
+									<span>{{item.codeByBuyer}}</span> </ng-container>
+								<ng-container *ngIf="item.codeBySupplier">Код товара присвоенный пост-ком:
+									<span>{{item.codeBySupplier}}</span> </ng-container>
+								<ng-container *ngIf="item.priceManufacturer">Цена изготовителя: <span>{{item.priceManufacturer}}
+										Br</span> </ng-container>
+								<ng-container *ngIf="item.discountBulkRate">Оптовая скидка, %: <span>{{item.discountBulkRate}}</span>
+								</ng-container>
+								<ng-container *ngIf="item.discountRate">Скидка, %: <span>{{item.discountRate}}</span>
+								</ng-container>
+								<ng-container *ngIf="item.expireDate">Cрок реализации:
+									<span>{{item.expireDate | date: "dd.MM.yyy"}}</span>
+								</ng-container>
+								<ng-container *ngIf="item.countryOfOrigin && item.countryOfOrigin.name">Страна производства:
+									<span>{{item.countryOfOrigin.name}}</span> </ng-container>
+								<ng-container *ngIf="item?.msgEwaybillExtraFieldList && item?.msgEwaybillExtraFieldList.length && isAllIsNotNull(item?.msgEwaybillExtraFieldList)">
+									Доп. поля:<span> {{ getFormatedExtraFieldsList(item?.msgEwaybillExtraFieldList) }}</span> </ng-container>
+								<ng-container *ngIf="item?.msgEwaybillItemCertList && item?.msgEwaybillItemCertList.length && isAllIsNotNull(item?.msgEwaybillItemCertList)">
+									Сертификаты:<span> {{ getFormatedCertsList(item?.msgEwaybillItemCertList) }}</span>
+								</ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{draft?.totalQuantity}}</td>
+				<td></td>
+				<td>{{draft?.totalAmountWithoutVat}}</td>
+				<td>{{draft?.totalAmountExcise}}</td>
+				<td></td>
+				<td>{{draft?.totalAmountVat}}</td>
+				<td>{{draft?.totalAmountWithVat}}</td>
+				<ng-container *ngIf="messageType === 'BLRWBL' || messageType === 'BLRWBR'">
+					<td>{{draft?.totalQuantityLu}}</td>
+					<td>{{draft?.totalGrossWeight}}</td>
+				</ng-container>
+			</tr>
+		</tfoot>
+	</table>
+</div>

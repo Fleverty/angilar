@@ -1,0 +1,62 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	font-size: 13px;
+	line-height: 16px;
+	max-width: 1249px;
+	margin: 0 auto;
+	padding: 0 50px 26px;
+}
+
+table {
+	cursor: default;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td {
+	padding-bottom: 9px;
+
+	&:first-child {
+		color: rgb(77, 77, 77);
+		font-family: Roboto-Medium;
+		font-weight: 500;
+		width: 228px;
+	}
+
+	&:nth-child(2) {
+		font-family: Roboto-Regular;
+		font-weight: normal;
+	}
+}
+
+tr {
+	&:last-child td {
+		padding-bottom: 0;
+	}
+}
+
+h3 {
+	cursor: default;
+	margin: 23px 0 9px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+	color: rgb(25, 25, 25);
+	font-family: Roboto-Bold;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+.gold {
+	color: #b78e00;
+}
+
+.red {
+	color: red;
+}
+
+.changed {
+	display: inline;
+	background: rgba(255, 228, 0, 0.1);
+}

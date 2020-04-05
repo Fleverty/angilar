@@ -1,0 +1,5 @@
+<ul [style.gridTemplateColumns]="gridTemplateColumns" [style.gridTemplateRows]="gridTemplateRows">
+	<li *ngFor="let item of items; trackBy: itemIdentity">
+		<ng-container *ngTemplateOutlet="itemTemplate; context: {$implicit: item}"></ng-container>
+	</li>
+</ul>

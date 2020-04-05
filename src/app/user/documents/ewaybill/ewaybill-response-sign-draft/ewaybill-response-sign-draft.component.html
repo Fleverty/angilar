@@ -1,0 +1,35 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2 class="text" *ngIf="draftType === 'BLRDLN' || draftType === 'BLRDNR'">Товарная накладная</h2>
+		<h2 class="text" *ngIf="draftType === 'BLRWBL' || draftType === 'BLRWBR'">Товарно-транспортная
+			накладная</h2>
+	</div>
+</header>
+
+<ng-container *ngIf="document">
+	<section>
+		<app-ewaybill-draft-signature [draft]="document"></app-ewaybill-draft-signature>
+		<app-ewaybill-view-main-info [draft]="document.msgEwaybill" [messageType]="draftType" [response]="document">
+		</app-ewaybill-view-main-info>
+		<app-ewaybill-view-products [draft]="document.msgEwaybill" [messageType]="draftType"></app-ewaybill-view-products>
+	</section>
+
+	<footer [attr.disabled]="buttonsDisable ? '' : null">
+		<button appSkin="simple-gray no-shadow bold bordered" type="button"
+			[attr.disabled]="document?.processingStatus === '1' ? '' : null" (click)="send()">Отправить</button>
+		<button appSkin="simple-gray no-shadow bold bordered" type="button" (click)="delete()">Удалить</button>
+		<button appSkin="simple no-shadow bold bordered" type="button" (click)="prevPage()">Закрыть</button>
+	</footer>
+</ng-container>
+
+<template #texts>
+	<dl>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронной накладной?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

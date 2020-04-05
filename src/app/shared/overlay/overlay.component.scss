@@ -1,0 +1,17 @@
+:host {
+	position: fixed;
+
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 10;
+}
+
+:host(.center) {
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	align-items: center;
+}

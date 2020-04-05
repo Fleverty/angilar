@@ -1,0 +1,40 @@
+<header>
+	<h3>С товаром переданы документы</h3>
+	<button appSkin="dots" type="button" *ngIf="showContent" (click)="showContent = false">Свернуть</button>
+	<button appSkin="dots" type="button" *ngIf="!showContent" (click)="showContent = true">Развернуть</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div *ngIf="documents.length === 0">
+			<label></label>
+			<app-button type="button" (click)="addDocument()" skin="add-field" icon="add">С товаром переданы документы
+			</app-button>
+		</div>
+		<div *ngIf="documents.length > 0">
+			<label>
+				<span>С товаром переданы документы:</span>
+				<button type="button" class="pointer" (click)="clearAllDocs(); $event.stopPropagation()">
+					<app-icon>delete</app-icon> Удалить
+				</button></label>
+			<div formArrayName="documents" class="leave" *ngFor="let formGroup of documents.controls; let i = index">
+				<ng-container [formGroupName]="i">
+					<app-datebox formControlName="documentDate" [isDisabled]="i !== documents.length - 1"
+						name="Дата (c товаром переданы документы)">
+					</app-datebox>
+					<app-textbox formControlName="documentName" [isDisabled]="i !== documents.length - 1" maxLength="512"
+						placeholder="Наименование" name="Наименование (c товаром переданы документы)">
+					</app-textbox>
+					<app-numberbox formControlName="documentNumber" [isDisabled]="i !== documents.length - 1" maxLength="9"
+						placeholder="Номер" name="Номер (c товаром переданы документы)">
+					</app-numberbox>
+					<div class="remove" (click)="removeDocument(i)">
+						<app-icon>delete</app-icon>
+					</div>
+					<button type="button" class="add" *ngIf="i === documents.length - 1" (click)="addDocument()">
+						<app-icon>add</app-icon>
+					</button>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</div>

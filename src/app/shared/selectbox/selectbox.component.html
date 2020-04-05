@@ -1,0 +1,16 @@
+<div (appClickOutside)="onClickOutside()">
+	<input type="text" [class.error]="showError" (click)="expand=!expand" [value]="textValue" readonly="readonly"
+		[attr.class]="expand ? 'expand': null" placeholder="{{placeholder}}">
+
+	<app-icon (click)="expand=!expand">unfold_more</app-icon>
+
+	<app-list *ngIf="expand" [data]="list" (appInput)="onInput($event)" (appSelect)="select($event)"
+		[showSearch]="showSearch" (appScrolled)="onScrolled()"></app-list>
+</div>
+
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Нет значения</dd>
+	</dl>
+</template>

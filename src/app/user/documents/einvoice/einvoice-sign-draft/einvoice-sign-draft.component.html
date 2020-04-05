@@ -1,0 +1,33 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2 class="text">Электронный акт</h2>
+	</div>
+</header>
+
+<ng-container *ngIf="document">
+	<section>
+		<app-shared-einvoice-signature [draft]="document"></app-shared-einvoice-signature>
+		<app-einvoice-commom-info-view [draft]="document"></app-einvoice-commom-info-view>
+		<app-einvoice-view-products [draft]="document"></app-einvoice-view-products>
+	</section>
+
+	<footer>
+		<button appSkin="simple-gray no-shadow bold bordered" type="button"
+			[attr.disabled]="buttonsDisable || isDisabledSend(document) ? '': null" (click)="send()">Отправить</button>
+		<button [attr.disabled]="buttonsDisable || isDisabledSend(document) ? '': null"
+			appSkin="simple-gray no-shadow bold bordered" type="button" (click)="delete()">Удалить</button>
+		<button appSkin="simple no-shadow bold bordered" type="button" (click)="prevPage()">Закрыть</button>
+	</footer>
+</ng-container>
+
+<template #texts>
+	<dl>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронного акта?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

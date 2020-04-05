@@ -1,0 +1,172 @@
+<ng-container *ngIf="form" [formGroup]="form">
+	<header *ngIf="draftType === 'BLRWBL'">
+		<h3>Транспортные реквизиты</h3>
+		<button appSkin="dots" type="button" *ngIf="showContent[0]" (click)="showContent[0] = false">Свернуть</button>
+		<button appSkin="dots" type="button" *ngIf="!showContent[0]" (click)="showContent[0] = true">Развернуть</button>
+	</header>
+	<div class="main" *ngIf="showContent[0] && draftType === 'BLRWBL'">
+		<div class="line">
+			<div>
+				<label class="required">Автомобиль:</label>
+				<span class="transport">
+					<app-textbox formControlName="transportNumber" maxLength="35" name="Автомобиль"></app-textbox>
+					<app-textbox formControlName="waybillNumber" maxLength="35" placeholder="К путевому листу №"
+						name="К путевому листу №">
+					</app-textbox>
+				</span>
+			</div>
+			<div>
+				<label class="required">Водитель:</label>
+				<app-textbox formControlName="transportContact" maxLength="150" placeholder="Должность, фамилия, инициалы"
+					name="Водитель"></app-textbox>
+			</div>
+		</div>
+		<div class="line">
+			<div *ngIf="view.trailerNumber || form?.get('trailerNumber')?.value">
+				<label><span>Прицеп:</span>
+					<button type="button" class="pointer" (click)="delete('trailerNumber')">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<app-textbox maxLength="35" formControlName="trailerNumber"></app-textbox>
+			</div>
+			<div *ngIf="view.transportOwnerName || form?.get('transportOwnerName')?.value">
+				<label>
+					<span>Владелец автомобиля:</span>
+					<button type="button" class="pointer" (click)="delete('transportOwnerName')">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<app-textbox formControlName="transportOwnerName" maxLength="175"></app-textbox>
+			</div>
+			<div *ngIf="view.quantityTrip || form?.get('quantityTrip')?.value">
+				<label><span>Количество ездок (заездов):</span>
+					<button type="button" class="pointer" (click)="delete('quantityTrip')">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<app-numberbox formControlName="quantityTrip" maxLength="35"></app-numberbox>
+			</div>
+			<div *ngIf="!view.trailerNumber && !form?.get('trailerNumber')?.value" class="without-label">
+				<label></label>
+				<app-button (click)="view.trailerNumber = true" skin="add-field" icon="add">Прицеп
+				</app-button>
+			</div>
+			<div *ngIf="!view.transportOwnerName && !form?.get('transportOwnerName')?.value" class="without-label">
+				<label></label>
+				<app-button (click)="view.transportOwnerName = true" skin="add-field" icon="add">Владелец автомобиля
+				</app-button>
+			</div>
+			<div *ngIf="!view.quantityTrip && !form?.get('quantityTrip')?.value" class="without-label">
+				<label></label>
+				<app-button (click)="view.quantityTrip = true" skin="add-field" icon="add">Количество ездок (заездов)
+				</app-button>
+			</div>
+		</div>
+	</div>
+
+	<header>
+		<h3>Реквизиты ответственных лиц</h3>
+		<button appSkin="dots" type="button" *ngIf="showContent[1]" (click)="showContent[1] = false">Свернуть</button>
+		<button appSkin="dots" type="button" *ngIf="!showContent[1]" (click)="showContent[1] = true">Развернуть</button>
+	</header>
+	<div class="main" *ngIf="showContent[1]">
+		<div class="line">
+			<div>
+				<label class="required">Отпуск разрешил:</label>
+				<app-textbox formControlName="shipperContact" maxLength="150" placeholder="Должность, фамилия, инициалы"
+					name="Отпуск разрешил"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Товар к доставке принял:</label>
+				<app-textbox formControlName="deliveryContact" maxLength="150" placeholder="Должность, фамилия, инициалы"
+					name="Товар к доставке принял"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Сдал грузоотправитель:</label>
+				<app-textbox formControlName="shipFromContact" maxLength="150" placeholder="Должность, фамилия, инициалы"
+					name="Сдал грузоотправитель"></app-textbox>
+			</div>
+		</div>
+		<div class="line">
+			<div
+				*ngIf="(view.leave || form?.get('baseShippingDocumentName')?.value || form?.get('baseShippingDocumentDate')?.value || form?.get('baseShippingDocumentNumber')?.value) && draftType === 'BLRDLN'">
+				<label><span>Основание доставки:</span>
+					<button type="button" class="pointer"
+						(click)="delete('baseShippingDocumentName'); delete('baseShippingDocumentNumber'); delete('baseShippingDocumentDate'); view.leave = false;">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<div class="leave">
+					<app-datebox formControlName="baseShippingDocumentDate"></app-datebox>
+					<app-textbox formControlName="baseShippingDocumentName" maxLength="70" placeholder="Наименование">
+					</app-textbox>
+					<app-textbox formControlName="baseShippingDocumentNumber" maxLength="70" placeholder="Номер"></app-textbox>
+				</div>
+			</div>
+			<div *ngIf="(view.shipperSealNumber || form?.get('shipperSealNumber')?.value) && draftType !== 'BLRDLN'">
+				<label><span>Номер пломбы:</span>
+					<button type="button" class="pointer" (click)="delete('shipperSealNumber')">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<app-textbox formControlName="shipperSealNumber" maxLength="255"></app-textbox>
+			</div>
+			<div *ngIf="view.proxyDate || form?.get('proxyDate')?.value || form?.get('proxyNumber')?.value">
+				<label><span>Дата и номер по доверенности:</span>
+					<button type="button" class="pointer" (click)="delete('proxyDate'); delete('proxyNumber');">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<div class="leave">
+					<app-datebox formControlName="proxyDate"></app-datebox>
+					<app-textbox formControlName="proxyNumber" maxLength="70" placeholder="Наименование">
+					</app-textbox>
+				</div>
+			</div>
+			<div *ngIf="view.partyIssuingProxyName || form?.get('partyIssuingProxyName')?.value">
+				<label><span>Название организации, выдавшей доверенность:</span>
+					<button type="button" class="pointer" (click)="delete('partyIssuingProxyName')">
+						<app-icon>delete</app-icon>
+						Удалить
+					</button>
+				</label>
+				<app-textbox formControlName="partyIssuingProxyName" maxLength="175"></app-textbox>
+			</div>
+			<div
+				*ngIf="!view.leave && draftType === 'BLRDLN' && !(form?.get('baseShippingDocumentDate')?.value && form?.get('baseShippingDocumentName')?.value && form?.get('baseShippingDocumentNumber')?.value)"
+				class="without-label">
+				<label></label>
+				<app-button type="button" (click)="view.leave = true" skin="add-field" icon="add">Основание доставки
+				</app-button>
+			</div>
+			<div *ngIf="!view.shipperSealNumber && draftType !== 'BLRDLN' && !form?.get('shipperSealNumber')?.value"
+				class="without-label">
+				<label></label>
+				<app-button type="button" (click)="view.shipperSealNumber = true" skin="add-field" icon="add">Номер
+					пломбы
+				</app-button>
+			</div>
+			<div *ngIf="!view.proxyDate && !(form?.get('proxyDate')?.value && form?.get('proxyNumber')?.value)"
+				class="without-label">
+				<label></label>
+				<app-button type="button" (click)="view.proxyDate = true" skin="add-field" icon="add">Дата и номер по
+					доверенности
+				</app-button>
+			</div>
+			<div *ngIf="!view.partyIssuingProxyName && !form?.get('partyIssuingProxyName')?.value" class="without-label">
+				<label></label>
+				<app-button type="button" (click)="view.partyIssuingProxyName = true" skin="add-field" icon="add">
+					Название
+					организации, выдавшей доверенность
+				</app-button>
+			</div>
+		</div>
+	</div>
+</ng-container>

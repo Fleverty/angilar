@@ -1,0 +1,49 @@
+:host {
+	display: flex;
+}
+
+label {
+	font-family: Roboto-Medium;
+	font-size: 13px;
+	font-weight: 500;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 4px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+p {
+	display: flex;
+	margin: 0;
+}
+
+button {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	padding: 0;
+	font-size: 13px;
+	line-height: 16px;
+	color: rgb(252, 121, 95);
+	background: none;
+	border: none;
+	transition: 0.2s;
+	outline: none;
+	padding: 0 0 4px;
+
+	&:hover {
+		color: rgba(252, 121, 95, 0.8);
+	}
+
+	app-icon {
+		font-size: 18px;
+	}
+}
+
+.without-label {
+	display: flex;
+	align-items: flex-end;
+}

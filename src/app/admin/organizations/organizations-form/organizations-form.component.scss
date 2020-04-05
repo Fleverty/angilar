@@ -1,0 +1,33 @@
+:host {
+	width: 100%;
+}
+
+header {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 15px 20px;
+	box-sizing: border-box;
+	align-items: center;
+	background-color: var(--grey-bg);
+	box-shadow: 0px 1px 1px 0px rgba(0, 10, 51, 0.07),
+		0px 0px 3px 0px rgba(0, 10, 51, 0.25);
+
+	h1 {
+		font-size: 20px;
+		font-weight: bold;
+		margin: 0;
+	}
+}
+
+.controls {
+	padding: 20px 20px 14px 20px;
+
+	app-button {
+		margin-right: 6px;
+	}
+}
+
+main {
+	height: 100%;
+}

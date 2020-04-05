@@ -1,0 +1,33 @@
+<header>
+	<h3 [ngSwitch]="currentDocumentTypeId$ | async">
+		<ng-container *ngSwitchCase="'EWAYBILL'">Электронные накладные</ng-container>
+		<ng-container *ngSwitchCase="'ORDERS'">Заказы</ng-container>
+		<ng-container *ngSwitchCase="'DESADV'">Уведомления об отгрузке</ng-container>
+		<ng-container *ngSwitchCase="'EINVOICE'">Электронные акты</ng-container>
+		<ng-container *ngSwitchCase="'EINVOICEPMT'">Электронные счета-фактуры для расчетов</ng-container>
+	</h3>
+
+	<app-tab>
+		<app-tab-item *ngIf="(checkPermission$('_IN') | async)" [routerLink]="documentStatePath.incoming"
+			(click)="switchDocumentState('INCOMING')" queryParamsHandling="preserve"
+			[isActive]="isActive(documentStatePath.incoming)" i18n>
+			Входящие
+		</app-tab-item>
+		<app-tab-item *ngIf="(checkPermission$('_OUT') | async)" [routerLink]="documentStatePath.outgoing"
+			(click)="switchDocumentState('OUTGOING')" queryParamsHandling="preserve"
+			[isActive]="isActive(documentStatePath.outgoing)" i18n>Исходящие
+		</app-tab-item>
+		<app-tab-item [routerLink]="documentStatePath.draft" (click)="switchDocumentState('DRAFT')"
+			queryParamsHandling="preserve" [isActive]="isActive(documentStatePath.draft)" i18n>Черновики
+		</app-tab-item>
+	</app-tab>
+
+	<ng-container [ngSwitch]="currentDocumentTypeId$ | async">
+		<app-ewaybill-action *ngSwitchCase="'EWAYBILL'"></app-ewaybill-action>
+		<app-order-action *ngSwitchCase="'ORDERS'"></app-order-action>
+		<app-shipment-notifications-action *ngSwitchCase="'DESADV'"></app-shipment-notifications-action>
+		<app-einvoice-action *ngSwitchCase="'EINVOICE'"></app-einvoice-action>
+		<app-einvoicepmt-action *ngSwitchCase="'EINVOICEPMT'"></app-einvoicepmt-action>
+	</ng-container>
+</header>
+<router-outlet></router-outlet>

@@ -1,0 +1,33 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	font-size: 13px;
+	line-height: 16px;
+	background-color: #fff;
+
+	> div {
+		padding: 12px 50px 27px;
+
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		td {
+			padding-bottom: 9px;
+
+			&:first-child {
+				width: 228px;
+				font-weight: bold;
+				color: #4d4d4d;
+			}
+		}
+
+		tr {
+			&:last-child td {
+				padding-bottom: 0;
+			}
+		}
+	}
+}

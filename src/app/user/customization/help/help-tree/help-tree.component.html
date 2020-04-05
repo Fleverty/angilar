@@ -1,0 +1,9 @@
+<ng-container *ngIf="nodes">
+	<main *ngFor="let node of nodes">
+		<span [class.primary]="priority === 1" [class.sub-primary]="priority === 2 && node.children && node.children.length"
+			[class.active]="node.id === activeHelpId" (click)="goLink(node.id, $event)"
+			title="{{node.text}}">{{node.text}}</span>
+		<app-help-tree *ngIf="node.children" [nodes]="node.children" [priority]="2" [activeHelpId]="activeHelpId">
+		</app-help-tree>
+	</main>
+</ng-container>

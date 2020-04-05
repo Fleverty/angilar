@@ -1,0 +1,24 @@
+<app-document-filter (appFormValue)="nextFormValue($event, documentType, documentState)"
+	[documentTypeId]="documentType"></app-document-filter>
+<app-grid [highlightId]="openedId$ | async" [items]="documents$ | async" [properties]="documentProperties$ | async"
+		  [selectedItems]="selectedItems$ | async" (itemClick)="openDocument($event)" (showMore)="nextPage()"
+		  (selectItems)="actionSelectItems($event)">
+</app-grid>
+<template #tabsHeaders>
+	<dl>
+		<dt status>status</dt>
+		<dd i18n>Cтатус</dd>
+		<dt date>dateTime</dt>
+		<dd i18n>Дата</dd>
+		<dt>documentNumber</dt>
+		<dd i18n>Номер</dd>
+		<dt date>documentDate</dt>
+		<dd i18n>Дата документа</dd>
+		<dt>sender</dt>
+		<dd i18n>Отправитель</dd>
+		<dt>receiver</dt>
+		<dd i18n>Получатель</dd>
+		<dt>deliveryPlace</dt>
+		<dd i18n>Место доставки</dd>
+	</dl>
+</template>

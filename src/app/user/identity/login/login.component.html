@@ -1,0 +1,44 @@
+<form [formGroup]="form" (submit)="login(form.getRawValue())" (appFormValueChanges)="onFormValueChange()"
+	autocomplete="off">
+	<label>
+		<span>Логин</span>
+		<span class="error" *ngIf="form.get('login')?.hasError('required')">Это обязaтельное поле</span>
+	</label>
+	<app-textbox maxLength="255" [class.error]="form.get('login')?.errors" formControlName="login"
+		placeholder="Введите логин">
+	</app-textbox>
+
+	<label>
+		<span>Пароль</span>
+		<span class="error" *ngIf="form.get('password')?.hasError('required')">Это обязaтельное поле</span>
+	</label>
+	<app-passwordbox [class.error]="form.get('password')?.errors" formControlName="password" placeholder="Введите пароль">
+	</app-passwordbox>
+
+	<div>
+		<div class="save-me" *ngIf="isShowRememberMe$ | async">
+			<app-checkbox (change)="isRememberMe = $event"></app-checkbox>
+			<label>Запомнить меня</label>
+		</div>
+		<a routerLink="/user/restore">Забыли пароль?</a>
+	</div>
+
+	<nav>
+		<button appSkin="action">Войти</button>
+	</nav>
+</form>
+
+<template #errors>
+	<dl>
+		<dt>500</dt>
+		<dd i18n>Произошла ошибка на стороне сервера.</dd>
+		<dt>504</dt>
+		<dd i18n>Время ожидания ответа от сервера вышло.</dd>
+		<dt>401</dt>
+		<dd i18n>Неверный логин или пароль.</dd>
+		<dt>404</dt>
+		<dd i18n>Не найдено. Запрашиваемый ресурс не найден, возможно ресурс изменил свой адрес.</dd>
+		<dt>400</dt>
+		<dd i18n>Пользователь заблокирован.</dd>
+	</dl>
+</template>

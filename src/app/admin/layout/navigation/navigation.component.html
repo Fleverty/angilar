@@ -1,0 +1,12 @@
+<nav>
+	<ul [ngClass]="{'opened': isMenuOpen}">
+		<li (click)="switchMenuState()"><img src="../../../../static/icons/Arrow.svg"/></li>
+		<li routerLink="/admin/organizations" routerLinkActive="active"><img alt="Организация" src="../../../../static/icons/Company.svg"/><p *ngIf="isMenuOpen">Организация</p></li>
+		<li routerLink="/admin/users" routerLinkActive="active"><img alt="Пользователи" src="../../../../static/icons/Users.svg"/><p *ngIf="isMenuOpen">Пользователи</p></li>
+		<li routerLink="/admin/statistics" routerLinkActive="active"><img alt="Статистика" src="../../../../static/icons/Statistics.svg"/><p *ngIf="isMenuOpen">Статистика</p></li>
+		<li routerLink="/admin/materials" routerLinkActive="active"><img alt="Текстовые материалы" src="../../../../static/icons/TextMaterial.svg"/><p *ngIf="isMenuOpen">Текстовые материалы</p></li>
+		<li routerLink="/admin/handbooks" routerLinkActive="active"><img alt="Справочники" src="../../../../static/icons/Handbooks.svg"/><p *ngIf="isMenuOpen">Справочники</p></li>
+		<li routerLink="/admin/settings" routerLinkActive="active"><img alt="Настройки" src="../../../../static/icons/Setting.svg"/><p *ngIf="isMenuOpen">Настройки</p></li>
+		<li routerLink="/admin/administration" routerLinkActive="active"><img alt="Администрирование" src="../../../../static/icons/Admin.svg"/><p *ngIf="isMenuOpen">Администрирование</p></li>
+	</ul>
+</nav>

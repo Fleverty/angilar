@@ -1,0 +1,68 @@
+<div class="product" *ngIf="document">
+	<h3>Товарный раздел</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование товара</th>
+				<th>Един. изм-ия</th>
+				<th>Количество</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+				<th>Примечание</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor=" let item of document.msgEincoicepmtProductList; let i=index">
+				<tr>
+					<td>{{item.position}}</td>
+					<td>{{item.gtin || "-"}}</td>
+					<td>{{item.fullName || "-"}}</td>
+					<td>{{item.uom && item.uom.name || "-"}}</td>
+					<td>{{item.quantityDespatch || 0}}</td>
+					<td>{{item.priceNet || 0}}</td>
+					<td>{{item.amountWithoutVat || 0}}</td>
+					<td>{{item.vatRate || 0}}</td>
+					<td>{{item.amountVat || 0}}</td>
+					<td>{{item.amountWithVat || 0}}</td>
+					<td class="add-info">{{item.addInfo}}</td>
+				</tr>
+				<tr>
+					<td colspan="11" class="note">
+						<div>
+							<p>
+								<ng-container *ngIf="item.codeByBuyer">Код товара присвоенный поку-лем:
+									<span>{{item.codeByBuyer}}</span></ng-container>
+								<ng-container *ngIf="item.codeBySupplier">Код товара присвоенный пост-ком:
+									<span>{{item.codeBySupplier}}</span></ng-container>
+								<ng-container
+									*ngIf="item?.msgEinvoicepmtExtraFieldList && item?.msgEinvoicepmtExtraFieldList.length && isAllIsNotNull(item?.msgEinvoicepmtExtraFieldList)">
+									Доп. поля: <span> {{ getFormatedExtraFieldsList(item?.msgEinvoicepmtExtraFieldList) }}</span>
+								</ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{document?.totalQuantity}}</td>
+				<td></td>
+				<td>{{document?.totalAmountWithoutVat}}</td>
+				<td></td>
+				<td>{{document?.totalAmountVat}}</td>
+				<td>{{document?.totalAmountWithVat}}</td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

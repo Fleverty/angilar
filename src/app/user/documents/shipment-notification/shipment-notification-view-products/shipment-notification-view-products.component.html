@@ -1,0 +1,98 @@
+<header>
+	<label>Товарный раздел</label>
+	<label *ngIf="showContent" (click)="showContent = false">Свернуть</label>
+	<label *ngIf="!showContent" (click)="showContent = true">Развернуть</label>
+</header>
+<main *ngIf="showContent">
+	<table *ngIf="products?.length">
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование товара</th>
+				<th>Един. изм-ия</th>
+				<th>Заказ. кол-во</th>
+				<th>Отгруж. кол-во</th>
+				<th>Кол-во груз. мест</th>
+				<th>Масса груза, т</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let product of products; let i = index">
+				<tr>
+					<td>{{i + 1}}</td>
+					<td>{{product.gtin}}</td>
+					<td>{{product.fullName}}</td>
+					<td>{{product.uom && product.uom.name}}</td>
+					<td>{{product.quantityOrdered}}</td>
+					<td>{{product.quantityDespatch}}</td>
+					<td>{{product.quantityDespatchLu}}</td>
+					<td>{{product.grossWeight}}</td>
+					<td>{{product.priceNet}}</td>
+					<td>{{product.amountWithoutVat}}</td>
+					<td>{{product.vatRate}}</td>
+					<td>{{product.amountVat}}</td>
+					<td>{{product.amountWithVat}}</td>
+				</tr>
+				<tr>
+					<td colspan="14" class="note">
+						<div>
+							<p *ngIf="product.addInfo"><span class="notice">Примечание:</span> {{product.addInfo}}</p>
+							<p>
+								<ng-container *ngIf="product.codeByBuyer">Код товара присвоенный поку-лем:
+									<span>{{product.codeByBuyer}}</span> </ng-container>
+								<ng-container *ngIf="product.codeBySupplier">Код товара присвоенный пост-ком:
+									<span>{{product.codeBySupplier}}</span> </ng-container>
+								<ng-container *ngIf="product.manufacturerName">Наименование производителя:
+									<span>{{product.manufacturerName}}</span> </ng-container>
+								<ng-container *ngIf="product.countryOfOrigin">Страна производителя:
+									<span>{{product.countryOfOrigin.name}}</span> </ng-container>
+								<ng-container *ngIf="product.productionDate">Дата производства:
+									<span>{{product.productionDate  | date: "dd.MM.yyy"}}</span>
+								</ng-container>
+								<ng-container *ngIf="product.expireDate">Cрок реализации:
+									<span>{{product.expireDate  | date: "dd.MM.yyy"}}</span>
+								</ng-container>
+								<ng-container *ngIf="product.priceManufacturer">Цена изготовителя: <span>{{product.priceManufacturer}}
+										Br</span> </ng-container>
+								<ng-container *ngIf="product.type">Тип товара:
+									<span>{{product.type === "CU" ? "Товар" : "Тара"}}</span> </ng-container>
+								<ng-container *ngIf="product.batchNumber">Номер партии: <span>{{product.batchNumber}}</span>
+								</ng-container>
+								<ng-container *ngIf="product.customDeclarationNumber">Номер таможенной декларации (ГТД):
+									<span>{{product.customDeclarationNumber}}</span> </ng-container>
+								<ng-container *ngIf="product.certificateNumber">Сертификат: <span>{{product.certificateNumber}}</span>
+								</ng-container>
+								<ng-container *ngIf="product.addInfo">Примечание: <span>{{product.addInfo}}</span> </ng-container>
+								<ng-container *ngIf="product.ultimateAmountWithoutVat">Стоимость без НДС для конечного покупателя:
+									<span>{{product.ultimateAmountWithoutVat}}</span> </ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr *ngIf="document">
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{document?.totalQuantity || "0"}}</td>
+				<td>{{document?.totalQuantityLu || "0"}}</td>
+				<td>{{document?.totalGrossWeight || "0"}}</td>
+				<td></td>
+				<td>{{document?.totalAmountWithoutVat || "0"}}</td>
+				<td></td>
+				<td>{{document?.totalAmountVat || "0"}}</td>
+				<td>{{document?.totalAmountWithVat || "0"}}</td>
+			</tr>
+		</tfoot>
+	</table>
+</main>

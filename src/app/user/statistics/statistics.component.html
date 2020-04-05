@@ -1,0 +1,45 @@
+<header>
+	<ng-container [ngSwitch]="statisticType">
+		<h1 *ngSwitchCase="'EWAYBILL'">
+			Статистика электронных накладных
+		</h1>
+		<h1 *ngSwitchCase="'ORDERS'">
+			Статистика заказов
+		</h1>
+	</ng-container>
+	<div>
+		<app-button icon="insert_chart" skin="simple-cancel" (click)="getStatisticOnExcel()">Cтатистика в Excel
+		</app-button>
+		<div (appClickOutside)="showExport = false">
+			<app-button icon="arrow_upward" skin="action-save" [disabled]="!selectIds.length"
+				(click)="showExport = !showExport">Экспорт
+				<app-icon>
+					{{showExport ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+				</app-icon>
+			</app-button>
+			<app-drop-list *ngIf="showExport" [tabs]="tabs" (clickTab)="export($event)">
+			</app-drop-list>
+		</div>
+	</div>
+</header>
+
+<app-statistics-ewaybill-filter *ngIf="statisticType === 'EWAYBILL'" (appFormValue)="updateEwaybillFilterValue($event)"
+	(appResetForm)="resetEwaybillFilter($event)">
+</app-statistics-ewaybill-filter>
+<app-statistics-orders-filter *ngIf="statisticType === 'ORDERS'" (appFormValue)="updateOrdersFilterValue($event)"
+	(appResetForm)="resetOrdersFilter($event)">
+</app-statistics-orders-filter>
+
+<app-statistics-grid [properties]="documentProperties$ | async" [items]="documents$ | async"
+	[selectedItems]="selectedItems$ | async" (selectItems)="actionSelectItems($event)" (showMore)="showMore()"
+	(itemClick)="openDocument($event)">
+</app-statistics-grid>
+
+<template #tabsTemplate>
+	<dl>
+		<dt>xml</dt>
+		<dd i18n>XML</dd>
+		<dt>xlsx</dt>
+		<dd i18n>XLSX</dd>
+	</dl>
+</template>

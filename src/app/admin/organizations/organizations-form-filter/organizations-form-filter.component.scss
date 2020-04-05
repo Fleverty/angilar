@@ -1,0 +1,48 @@
+form {
+	display: flex;
+	padding: 12px 20px;
+	box-sizing: border-box;
+	background-color: rgb(245, 247, 250);
+	box-shadow: 0px 0px 2px 0px rgba(0, 10, 51, 0.5);
+
+	label {
+		display: block;
+		font-family: Roboto-Medium;
+		font-size: 13px;
+		margin-bottom: 4px;
+		font-weight: 500;
+		color: #4d4d4d;
+	}
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		padding-right: 15px;
+
+		&:nth-child(1),
+		&:nth-child(2) {
+			app-textbox,
+			app-selectbox {
+				width: 320px;
+			}
+		}
+
+		&:nth-child(3),
+		&:nth-child(4) {
+			app-textbox,
+			app-selectbox {
+				width: 180px;
+			}
+		}
+
+		&:last-child {
+			flex-direction: row;
+			align-items: center;
+			padding-top: 20px;
+
+			app-checkbox {
+				display: block;
+			}
+		}
+	}
+}

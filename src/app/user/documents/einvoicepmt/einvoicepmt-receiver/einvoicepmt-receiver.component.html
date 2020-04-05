@@ -1,0 +1,24 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Грузополучатель</legend>
+	<section class="inline">
+		<div>
+			<label i18n>Грузополучатель:</label>
+			<app-textbox formControlName="receiverName" maxLength="175"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Адрес:</label>
+			<app-textbox formControlName="receiverAddress" maxLength="140"></app-textbox>
+		</div>
+		<div>
+			<label i18n>GLN:</label>
+			<app-numberbox formControlName="receiverGln" name="GLN (покупатель)" maxLength="13"></app-numberbox>
+		</div>
+		<div>
+			<label i18n>УНП:</label>
+			<app-textbox formControlName="receiverUnp" maxLength="70"></app-textbox>
+		</div>
+	</section>
+	<div>
+		<button type="button" i18n (click)="fillWithBuyer.emit()">Покупатель</button>
+	</div>
+</fieldset>

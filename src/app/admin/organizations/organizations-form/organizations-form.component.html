@@ -1,0 +1,17 @@
+<header>
+	<h1>Организации</h1>
+	<app-button icon="add" skin="action">
+		<span>Добавить</span>
+	</app-button>
+</header>
+<main>
+	<app-organizations-form-filter (filterChanged)="filterChanged($event)"></app-organizations-form-filter>
+	<div class="controls">
+		<app-button skin="simple" icon="edit">Редактировать</app-button>
+		<app-button skin="simple" icon="lock">Заблокировать</app-button>
+		<app-button skin="simple" icon="lock_open">Разблокировать</app-button>
+		<app-button skin="simple" icon="delete">Удалить</app-button>
+	</div>
+	<app-organizations-grid [items]="testData" [properties]="testProperties"
+							(selectItems)="documentsSelected($event)"></app-organizations-grid>
+</main>

@@ -1,0 +1,192 @@
+<div *ngIf="draft">
+	<h3 *ngIf="draft?.testIndicator" class="warning">Электронный акт является тестовым</h3>
+	<table>
+		<h3>Общая информация</h3>
+		<tbody>
+			<tr *ngIf="draft?.deliveryError">
+				<td i18n>Текст ошибки при доставке:</td>
+				<td class="warning">{{draft?.deliveryError}}</td>
+			</tr>
+			<tr *ngIf="draft?.processingStatus">
+				<td i18n>Статус обработки:</td>
+				<td>{{texts?.get(draft?.processingStatus?.toString())}}</td>
+			</tr>
+			<tr *ngIf="[6].indexOf(draft?.deliveryStatus) !== -1">
+				<td i18n>Причина изменения:</td>
+				<td>{{draft?.blrapnDesc}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplierData?.dateCreate">
+				<td i18n>Дата создания:</td>
+				<td>{{draft?.supplierData?.dateCreate | date: 'dd.MM.yyy HH:mm:ss'}}</td>
+			</tr>
+			<tr *ngIf="draft?.invoiceNumber">
+				<td i18n>Номер акта:</td>
+				<td>{{draft?.invoiceNumber}}</td>
+			</tr>
+			<tr *ngIf="draft?.invoiceDate">
+				<td i18n>Дата акта:</td>
+				<td>{{draft?.invoiceDate  | date:'dd.MM.yyy'}}</td>
+			</tr>
+			<tr *ngIf="draft?.purport">
+				<td i18n>Текст акта:</td>
+				<td>{{draft?.purport}}</td>
+			</tr>
+			<tr *ngIf="draft?.paymentBeginDate">
+				<td i18n>Дата начала расчетного периода:</td>
+				<td>{{draft?.paymentBeginDate  | date:'dd.MM.yyy'}}</td>
+			</tr>
+			<tr *ngIf="draft?.paymentEndDate">
+				<td i18n>Дата окончания расчетного периода:</td>
+				<td>{{draft?.paymentEndDate  | date:'dd.MM.yyy'}}</td>
+			</tr>
+			<tr *ngIf="draft?.contractNumber">
+				<td i18n>Договор:</td>
+				<td>{{[draft?.contractNumber] | smartJoin}} <ng-container *ngIf="draft?.contractDate"><span>&nbsp;от</span>
+						{{draft?.contractDate | date:'dd.MM.yyy'}}</ng-container>
+				</td>
+			</tr>
+			<!-- <tr *ngIf="draft.contractNumber">
+				<td i18n>Накладная:</td>
+				<td>{{[draft.contractNumber] | smartJoin}} <ng-container *ngIf="draft.contractDate"><span>&nbsp;от</span>
+						{{doc.contractDate | date:'dd.MM.yyy'}}</ng-container>
+				</td>
+			</tr> -->
+			<tr *ngIf="draft?.orderNumber">
+				<td i18n>Номер заказа:</td>
+				<td>{{draft?.orderNumber}}</td>
+			</tr>
+			<tr *ngIf="draft?.currency?.code">
+				<td i18n>Валюта:</td>
+				<td>{{draft?.currency?.code}} ({{draft?.currency?.name}})</td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<h3>Поставщик/Исполнитель</h3>
+		<tbody>
+			<tr *ngIf="draft?.supplier.name">
+				<td>Наименование:</td>
+				<td>{{draft?.supplier.name}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.gln">
+				<td>GLN:</td>
+				<td>{{draft?.supplier.gln}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.unp">
+				<td>УНП:</td>
+				<td>{{draft?.supplier.unp}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.address">
+				<td>Адрес:</td>
+				<td>{{draft?.supplier.address}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.accountNumber">
+				<td>Расчетный счет:</td>
+				<td>{{draft?.supplier.name}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.bankName">
+				<td>Банк:</td>
+				<td>{{draft?.supplier.bankName}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.bankCode">
+				<td>Код банка:</td>
+				<td>{{draft?.supplier.bankCode}}</td>
+			</tr>
+			<tr *ngIf="draft?.supplier.bankAddress">
+				<td>Адрес банка:</td>
+				<td>{{draft?.supplier.bankAddress}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table>
+		<h3>Покупатель/Заказчик</h3>
+		<tbody>
+			<tr *ngIf="draft?.buyer.name">
+				<td>Наименование:</td>
+				<td>{{draft?.buyer.name}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.gln">
+				<td>GLN:</td>
+				<td>{{draft?.buyer.gln}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.unp">
+				<td>УНП:</td>
+				<td>{{draft?.buyer.unp}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.address">
+				<td>Адрес:</td>
+				<td>{{draft?.buyer.address}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.accountNumber">
+				<td>Расчетный счет:</td>
+				<td>{{draft?.buyer.name}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.bankName">
+				<td>Банк:</td>
+				<td>{{draft?.buyer.bankName}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.bankCode">
+				<td>Код банка:</td>
+				<td>{{draft?.buyer.bankCode}}</td>
+			</tr>
+			<tr *ngIf="draft?.buyer.bankAddress">
+				<td>Адрес банка:</td>
+				<td>{{draft?.buyer.bankAddress}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="draft?.extraFieldList?.length">
+		<h3>Дополнительные поля</h3>
+		<tbody>
+			<ng-container *ngFor="let extraField of draft?.extraFieldList">
+				<tr>
+					<td i18n>Наименование:</td>
+					<td>{{extraField?.fieldName}}</td>
+				</tr>
+				<tr>
+					<td i18n>Значение:</td>
+					<td>{{extraField?.fieldValue}}</td>
+				</tr>
+				<tr>
+					<td i18n>Код:</td>
+					<td>{{extraField?.fieldCode}}</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+</div>
+
+<template #statuses>
+	<dl>
+		<dt>0</dt>
+		<dd i18n>Черновик</dd>
+		<dt>98</dt>
+		<dd i18n>Черновик с ЭЦП</dd>
+		<dt>99</dt>
+		<dd i18n>Черновик с ЭЦП</dd>
+		<dt>1</dt>
+		<dd i18n>Отправлена</dd>
+		<dt>2</dt>
+		<dd i18n>Передана</dd>
+		<dt>3</dt>
+		<dd i18n>Получена</dd>
+		<dt>4</dt>
+		<dd i18n>Создана</dd>
+		<dt>5</dt>
+		<dd i18n>Отменена</dd>
+		<dt>6</dt>
+		<dd i18n>Треб. изменений</dd>
+		<dt>7</dt>
+		<dd i18n>Создана и подтверждена</dd>
+		<dt>8</dt>
+		<dd i18n>Отменена не подтверждена</dd>
+		<dt>9</dt>
+		<dd i18n>Треб. изменений не подтверждено</dd>
+		<dt>10</dt>
+		<dd i18n>Создана. Отправлена отмена</dd>
+		<dt>11</dt>
+		<dd i18n>Создана и подтверждена. Отправлена отмена.</dd>
+	</dl>
+</template>

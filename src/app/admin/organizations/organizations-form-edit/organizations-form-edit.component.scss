@@ -1,0 +1,52 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+header {
+	background-color: var(--grey-bg);
+
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 15px 50px;
+	}
+
+	hr {
+		margin: 0;
+		color: gray;
+	}
+
+	h1 {
+		font-size: 20px;
+		margin: auto;
+		font-weight: bold;
+	}
+
+	app-icon {
+		font-weight: bold;
+		font-size: 20px;
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
+
+footer {
+	padding: 30px 50px 30px;
+
+	button {
+		display: inline-block;
+		font-weight: 400;
+		height: 28px;
+		margin-right: 10px;
+	}
+}
+
+main {
+	padding: 0 50px;
+	height: 85%;
+}

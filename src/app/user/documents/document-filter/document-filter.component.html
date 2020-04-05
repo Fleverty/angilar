@@ -1,0 +1,79 @@
+<ng-container *ngIf="form" [formGroup]="form" (appFormValueChanges)="emit($event, true)">
+	<div>
+		<label i18n>Документы</label>
+		<app-tab [tabs]="tabs" [formControl]="form.controls['documentStage']"></app-tab>
+	</div>
+
+	<div>
+		<label i18n>Номер документа</label>
+		<app-textbox [formControl]="form.controls['documentNumber']"></app-textbox>
+	</div>
+
+	<div>
+		<label i18n>Период</label>
+		<app-rangebox [formControl]="form.controls['range']" type="date"></app-rangebox>
+	</div>
+
+	<div>
+		<label i18n>Контрагент</label>
+		<app-selectbox placeholder="Все организации" (appNextPage)="nextPartnerPage()"
+			(appFilterChanges)="onPartnerFilterChange($event)" [data]="partners$ | async"
+			[formControl]="form.controls['partnerId']" (appCollapse)="onPartnerFilterChange({search:''})"
+			[otherEmptyValue]="organization">
+		</app-selectbox>
+	</div>
+
+	<div>
+		<label i18n>Склад</label>
+		<app-selectbox placeholder="Все склады" (appNextPage)="nextStagePage()"
+			(appFilterChanges)="onStageFilterChange($event)" [data]="storages$ | async"
+			[formControl]="form.controls['storageId']"
+			[isDisabled]="documentTypeId && ['EINVOICE','EINVOICEPMT'].indexOf(documentTypeId) !== -1"
+			(appCollapse)="onStageFilterChange({search:''})" [otherEmptyValue]="storages">
+		</app-selectbox>
+	</div>
+
+	<div>
+		<label i18n>Статус</label>
+		<app-selectbox placeholder="Все статусы" [data]="statuses$ | async"
+			[formControl]="form.controls['processingStatusId']" [showSearch]="false"
+			[attr.disabled]="form.controls['processingStatusId'].disabled ? '' : null" [otherEmptyValue]="statuses">
+		</app-selectbox>
+	</div>
+
+	<div class="clean">
+		<app-button skin="simple-cancel" icon="clear" (click)="clear()">Сбросить</app-button>
+	</div>
+</ng-container>
+
+<template #tabsTemplate>
+	<dl>
+		<dt>ALL</dt>
+		<dd i18n>Все</dd>
+		<dt>NEW</dt>
+		<dd i18n>Новые</dd>
+		<dt>INWORK</dt>
+		<dd i18n>В работе</dd>
+		<dt>PROCESSED</dt>
+		<dd i18n>Обработаны</dd>
+	</dl>
+</template>
+
+<template #organization>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Все организации</dd>
+	</dl>
+</template>
+<template #statuses>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Все статусы</dd>
+	</dl>
+</template>
+<template #storages>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Все склады</dd>
+	</dl>
+</template>

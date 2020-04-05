@@ -1,0 +1,127 @@
+:host {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	-webkit-appearance: none;
+	font-weight: normal;
+	border: none;
+	border-radius: 4px;
+	outline: none;
+	cursor: pointer;
+	text-decoration: none;
+	box-sizing: border-box;
+	padding: 2px 8px;
+	box-shadow: 0px 1px 2px 0px rgba(57, 86, 249, 0.18),
+		0px 2px 4px 0px rgba(10, 4, 52, 0.1);
+
+	&:hover {
+		text-decoration: none;
+	}
+
+	&.simple {
+		background-color: white;
+	}
+
+	&.bold {
+		font-size: 14px;
+		font-weight: 700;
+	}
+
+	&.no-shadow {
+		box-shadow: none;
+	}
+
+	&.bordered {
+		border: 1px solid #e2e2e2;
+	}
+
+	&.action {
+		background-color: var(--orange-action);
+		color: white;
+		line-height: 24px;
+		transition: 0.2s;
+	}
+
+	&.add-product {
+		background-color: #0066d1;
+		color: white;
+	}
+
+	&.simple-cancel {
+		background-color: white;
+		color: black;
+		border: 1px solid #c3c7d2;
+		box-shadow: none;
+	}
+
+	&.action-save {
+		background-color: var(--orange-action);
+		color: white;
+	}
+
+	&.simple-blue {
+		color: rgb(56, 86, 249);
+	}
+
+	&.simple-red {
+		color: rgb(252, 121, 95);
+	}
+
+	&.add-field {
+		border-radius: 3px;
+		border: 1px solid rgb(56, 86, 249);
+		background: white;
+		padding: 1px 6px;
+		color: rgb(55, 69, 232);
+	}
+
+	&.blue-action {
+		color: white;
+		background: rgb(55, 69, 232);
+	}
+
+	&.dots {
+		padding: 0;
+		color: rgb(156, 156, 156);
+		background: none;
+		border: none;
+		border-bottom: 1px dotted #9c9c9c;
+		cursor: pointer;
+		transition: 0.2s;
+		border-radius: 0;
+		box-shadow: none;
+
+		&:hover {
+			color: rgba(156, 156, 156, 0.8);
+		}
+	}
+
+	&.simple-gray {
+		color: #191919;
+		background: linear-gradient(-180deg, #f6f6f6, #e2e2e2);
+		border: 1px solid #e2e2e2;
+		box-shadow: none;
+		font-size: 14px;
+		font-weight: 700;
+		line-height: 18px;
+		transition: 0.2s;
+	}
+
+	&.delete {
+		color: #fc795f;
+		align-items: center;
+		font-size: 13px;
+		line-height: 16px;
+		background: none;
+		border: none;
+		transition: 0.2s;
+		outline: none;
+		&:hover {
+			color: rgba(252, 121, 95, 0.8);
+		}
+	}
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

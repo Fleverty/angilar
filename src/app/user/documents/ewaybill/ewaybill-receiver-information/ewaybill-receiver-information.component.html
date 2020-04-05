@@ -1,0 +1,35 @@
+<header>
+	<h3>Грузополучатель</h3>
+	<button appSkin="dots" type="button" *ngIf="showContent" (click)="showContent = false">Свернуть</button>
+	<button appSkin="dots" type="button" *ngIf="!showContent" (click)="showContent = true">Развернуть</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div>
+			<label class="required">Наименование:</label>
+			<app-selectbox
+				formControlName="dictionary" class="naming" [data]="consignees"
+				(appNextPage)="nextConsigneesPage()"
+				(appFilterChanges)="onConsigneesFilterChanges($event)"
+				(appCollapse)="onConsigneesFilterChanges({search: ''})"
+				[valueTransforFn]="transformFn" name="Наименование (грузополучатель)">
+			</app-selectbox>
+		</div>
+		<div>
+			<label class="required">Адрес:</label>
+			<app-textbox formControlName="address"
+						 maxLength="70" isDisabled="true" class="naming" withTitle
+						 name="Адрес (грузополучатель)"></app-textbox>
+		</div>
+		<div>
+			<label class="required">УНП</label>
+			<app-textbox formControlName="unp"
+						 maxLength="70" isDisabled="true" class="unp" name="УНП (грузополучатель)"></app-textbox>
+		</div>
+		<div>
+			<label>GLN</label>
+			<app-numberbox formControlName="gln"
+						   maxLength="13" isDisabled="true" class="unp"></app-numberbox>
+		</div>
+	</div>
+</div>

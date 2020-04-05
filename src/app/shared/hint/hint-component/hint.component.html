@@ -1,0 +1,8 @@
+<div *ngTemplateOutlet="templateRef"></div>
+<div class="hint-wrapper">
+	<app-icon *ngIf="hint" (mouseenter)="switchState()" (mouseout)="switchState()">help_outline</app-icon>
+	<div #hintContainer class="hint-container" *ngIf="hintState">
+		<div class="arrow-up"></div>
+		<div class="hint-content"><ng-container *ngTemplateOutlet="hint"></ng-container></div>
+	</div>
+</div>

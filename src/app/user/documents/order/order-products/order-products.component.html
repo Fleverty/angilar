@@ -1,0 +1,113 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<div class="container">
+		<legend>
+			<span>Товарный раздел</span>
+			<button [appSkin]="'dots'" *ngIf="products.length"
+				(click)="isTableHide = !isTableHide">{{isTableHide ? "Развернуть" : "Свернуть"}}</button>
+		</legend>
+
+		<table *ngIf="!isTableHide && products.length">
+			<thead>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование товара</th>
+				<th>Един. изм-ия</th>
+				<ng-container [ngSwitch]="messageType">
+					<ng-container *ngSwitchCase="'ORDERS'">
+						<th>Количество</th>
+					</ng-container>
+					<ng-container *ngSwitchCase="'ORDRSP'">
+						<th>Заказанное количество</th>
+						<th>Принятое количество</th>
+					</ng-container>
+				</ng-container>
+				<th>Кол-во груз. мест</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+				<th></th>
+				<th></th>
+			</thead>
+			<tbody *ngIf="products as products">
+				<ng-container *ngFor="let product of products.getRawValue(); let i=index">
+					<tr (click)="expandRow(i)" [class.selected]="clickId === i && product.action !== 7"
+						[class.strikeout]="product.action === 7">
+						<td>{{product.position}}</td>
+						<td>{{product.gtin}}</td>
+						<td>{{product.fullName}}</td>
+						<td>{{product.uom && product.uom.name}}</td>
+						<ng-container [ngSwitch]="messageType">
+							<ng-container *ngSwitchCase="'ORDERS'">
+								<td>{{product.quantityOrdered}}</td>
+							</ng-container>
+							<ng-container *ngSwitchCase="'ORDRSP'">
+								<td>{{product.quantityOrdered}}</td>
+								<td>{{product.quantityAccepted}}</td>
+							</ng-container>
+						</ng-container>
+						<td>{{product.quantityOrderedLu}}</td>
+						<td>{{product.priceNet}}</td>
+						<td>{{product.amountWithoutVat}}</td>
+						<td>{{product.vatRate}}</td>
+						<td>{{product.amountVat}}</td>
+						<td>{{product.amountWithVat}}</td>
+						<td>
+							<app-icon *ngIf="product.action !== 7" (click)="editProduct(product, $event)">edit</app-icon>
+						</td>
+						<td>
+							<app-icon *ngIf="product.action !==7" (click)="delete(product, i, $event)">delete</app-icon>
+						</td>
+					</tr>
+					<tr *ngIf="clickId === i && product.action !== 7">
+						<td colspan="14" class="note">
+							<div>
+								<p>
+									<ng-container *ngIf="product.codeByBuyer">Код товара присвоенный поку-лем:
+										<span>{{product.codeByBuyer}}</span> </ng-container>
+									<ng-container *ngIf="product.codeBySupplier">Код товара присвоенный пост-ком:
+										<span>{{product.codeBySupplier}}</span> </ng-container>
+									<ng-container *ngIf="product.type">Тип товара:
+										<span>{{product.type === "CU" ? "Товар" : "Тара"}}</span> </ng-container>
+									<ng-container *ngIf="product.quantityInPack">Количество в упаковке:
+										<span>{{product.quantityInPack}}</span> </ng-container>
+								</p>
+							</div>
+						</td>
+						<td *ngIf="messageType === 'ORDRSP'"></td>
+					</tr>
+				</ng-container>
+			</tbody>
+			<tfoot>
+				<tr *ngIf="products.length && form?.getRawValue() as formValue">
+					<td>Итого</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<ng-container [ngSwitch]="messageType">
+						<ng-container *ngSwitchCase="'ORDERS'">
+							<td>{{formValue.totalQuantity}}</td>
+						</ng-container>
+						<ng-container *ngSwitchCase="'ORDRSP'">
+							<td>{{document?.orderMsgDraftDto?.totalQuantity}}</td> <!-- Taken from the ORDERS (из чистовика) -->
+							<td>{{formValue.totalQuantity}}</td>
+						</ng-container>
+					</ng-container>
+					<td>{{formValue.totalQuantityLu}}</td>
+					<td></td>
+					<td>{{formValue.totalAmountWithoutVat}}</td>
+					<td></td>
+					<td>{{formValue.totalAmountVat}}</td>
+					<td>{{formValue.totalAmountWithVat}}</td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tfoot>
+		</table>
+		<app-button type="button" (click)="addProduct()" [icon]="'add'" [skin]="'blue-action'">Добавить
+		</app-button>
+	</div>
+</fieldset>
+
+<app-overlay #overlay></app-overlay>

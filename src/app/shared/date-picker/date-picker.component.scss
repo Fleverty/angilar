@@ -1,0 +1,102 @@
+:host {
+	background-color: #fff;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #eceef0;
+	padding-bottom: 9px;
+	padding-top: 7px;
+	margin-bottom: 10px;
+	font-size: 14px;
+
+	app-icon {
+		flex: 0 0 auto;
+		opacity: 0.7;
+		cursor: pointer;
+		font-size: 1.2em;
+		font-weight: 600;
+
+		&.left-icon {
+			padding-left: 7px;
+		}
+
+		&.right-icon {
+			padding-right: 7px;
+		}
+	}
+
+	> div {
+		font-weight: 600;
+
+		&.button {
+			cursor: pointer;
+		}
+	}
+}
+
+ul {
+	display: flex;
+	justify-content: space-between;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+
+	> li {
+		cursor: pointer;
+		text-align: center;
+		font-weight: 500;
+		color: black;
+
+		&.isWeekend {
+			color: #c10d0d;
+		}
+	}
+}
+
+div.grid-item {
+	padding: 0 8%;
+	margin: 8% 0;
+	box-sizing: border-box;
+	font-size: 14px;
+	font-weight: 500;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	cursor: pointer;
+
+	&::before {
+		content: "";
+		display: inline-block;
+		width: 1px;
+		height: 0;
+		padding-bottom: 100%;
+	}
+
+	&.outside {
+		opacity: 0.2;
+	}
+
+	&.today {
+		background-color: rgba(158, 158, 158, 0.2);
+		border-radius: 2px;
+	}
+
+	&.weekend {
+		color: #c10d0d;
+		opacity: 0.5;
+	}
+
+	&.selected {
+		color: #fff;
+		background-color: var(--accent-color);
+		border-radius: 3px;
+		opacity: 1;
+	}
+}

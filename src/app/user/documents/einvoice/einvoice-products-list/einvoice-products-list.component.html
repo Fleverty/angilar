@@ -1,0 +1,94 @@
+<main>
+	<h3>Товары/услуги</h3>
+	<table *ngIf="products.length">
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование</th>
+				<th>Един. изм-ия</th>
+				<th>Кол-во</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Сумма акциза</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+				<ng-container *ngIf="messageType === 'BLRWBL'">
+					<th>Кол-во груз. мест</th>
+					<th>Масса груза, т.</th>
+				</ng-container>
+				<th></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor="let product of products.getRawValue(); let i = index">
+				<tr (click)="expandRow(i)" [class.selected]="clickId === i">
+					<td>{{product?.position}}</td>
+					<td>{{product?.gtin || "-"}}</td>
+					<td>{{product?.fullName}}</td>
+					<td>{{product?.uom && product.uom.name}}</td>
+					<td>{{product?.quantity}}</td>
+					<td>{{product?.priceNet}}</td>
+					<td>{{product?.amountWithoutVat || 0}}</td>
+					<td>{{product?.amountExcise || 0}}</td>
+					<td>{{product?.vatRate || 0}}</td>
+					<td>{{product?.amountVat || 0}}</td>
+					<td>{{product?.amountWithVat || 0}}</td>
+					<td>
+						<app-icon (click)="edit(product, $event, i)">edit</app-icon>
+					</td>
+					<td>
+						<app-icon (click)="delete(i, $event)">delete</app-icon>
+					</td>
+				</tr>
+				<tr *ngIf="clickId === i">
+					<td colspan="15" class="note">
+						<div>
+							<p *ngIf="product.addInfo"><span class="notice">Примечание:</span> {{product?.addInfo}}</p>
+							<p>
+								<ng-container *ngIf="product.codeByBuyer">Код товара/услуги присвоенный поку-лем:
+									<span>{{product?.codeByBuyer}}</span> </ng-container>
+								<ng-container *ngIf="product.codeBySupplier">Код товара/услуги присвоенный пост-ком:
+									<span>{{product?.codeBySupplier}}</span> </ng-container>
+								<ng-container *ngIf="product.priceManufacturer">Цена изготовителя:
+									<span>{{product?.priceManufacturer}}
+										Br</span> </ng-container>
+								<ng-container *ngIf="product.discountBulkRate">Оптовая скидка, %: <span>{{product?.discountBulkRate}}
+										Br</span> </ng-container>
+								<ng-container *ngIf="product.discountRate">Скидка, %: <span>{{product?.discountRate}} Br</span>
+								</ng-container>
+								<ng-container *ngIf="product.expireDate">Срок реализации: <span>{{product?.expireDate}}</span>
+								</ng-container>
+								<ng-container *ngIf="product.country && product.country.name">Страна производства:
+									<span>{{product?.country.name}}</span> </ng-container>
+								<ng-container *ngFor="let additionalItem of product?.einvoiceItemExtraFieldList"> Доп. поля:
+									{{additionalItem.fieldName}}: <span>{{additionalItem.fieldValue}}</span> </ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{totalSums?.quantity}}</td>
+				<td></td>
+				<td>{{totalSums?.amountWithoutVat}}</td>
+				<td>{{totalSums?.amountExcise}}</td>
+				<td></td>
+				<td>{{totalSums?.amountVat}}</td>
+				<td>{{totalSums?.amountWithVat}}</td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+	<app-button type="button" (click)="addProduct()" icon="add" skin="blue-action">Добавить товар/услугу</app-button>
+</main>
+<app-overlay #create></app-overlay>

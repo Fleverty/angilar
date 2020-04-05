@@ -1,0 +1,15 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Поставщик</legend>
+	<div>
+		<label>Поставщик</label>
+		<app-textbox formControlName="supplierName"></app-textbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-textbox formControlName="supplierGln"></app-textbox>
+	</div>
+	<div>
+		<label>УНП</label>
+		<app-textbox formControlName="supplierUnp"></app-textbox>
+	</div>
+</fieldset>

@@ -1,0 +1,148 @@
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 800px;
+	width: 100%;
+	max-height: 85vh;
+	background: white;
+	border-radius: 7px;
+}
+
+header {
+	display: flex;
+	background: rgb(249, 249, 249);
+	padding: 13px 26px;
+	border-radius: 7px 7px 0 0;
+}
+
+h3 {
+	font-family: Roboto-Bold;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+	margin: 0;
+}
+
+app-icon {
+	font-size: 24px;
+	margin-left: auto;
+	cursor: pointer;
+}
+
+section {
+	overflow: auto;
+}
+
+section > div {
+	margin-top: 24px;
+
+	label {
+		display: block;
+		font-family: Roboto-Regular;
+		font-size: 12px;
+		font-weight: normal;
+		margin-bottom: 4px;
+		padding: 0 24px;
+
+		> span {
+			padding-left: 5px;
+			color: rgb(255, 0, 0);
+		}
+	}
+}
+
+fieldset {
+	border: 0;
+	margin: 0;
+	padding: 24px;
+}
+
+fieldset > div {
+	display: flex;
+	align-items: center;
+	margin-bottom: 14px;
+}
+
+fieldset label {
+	width: 290px;
+	color: rgb(77, 77, 77);
+	font-family: Roboto-Medium;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+nav {
+	padding: 27px 25px;
+}
+
+nav > button {
+	font-size: 14px;
+	font-weight: 500;
+	margin-right: 10px;
+	padding: 8px 24px;
+}
+
+app-checkbox {
+	font-size: 18px;
+	margin-right: 7px;
+}
+
+h4 {
+	line-height: 25px;
+	margin-right: 100px;
+	margin: 0;
+}
+
+table {
+	width: 100%;
+	font-size: 13px;
+	padding: 12px 20px 16px 20px;
+	border-radius: 3px;
+	height: 116px;
+	background: rgb(144, 153, 165);
+	color: white;
+
+	> tbody {
+		> tr {
+			td:nth-of-type(2) {
+				text-align: end;
+			}
+		}
+	}
+}
+
+table div {
+	display: flex;
+	align-items: center;
+
+	font-family: Roboto-Regular;
+	font-size: 13px;
+	font-weight: normal;
+	height: 18px;
+}
+
+.table-container {
+	border-radius: 3px;
+	margin: 0 25px;
+}
+
+app-selectbox,
+app-textbox,
+app-numberbox {
+	width: 100%;
+	max-width: 350px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	margin-left: 2px;
+}
+
+.super-required:after {
+	content: "**";
+	color: black;
+	font-size: 15px;
+	margin-left: 2px;
+}

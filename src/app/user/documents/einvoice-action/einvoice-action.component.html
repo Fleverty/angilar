@@ -1,0 +1,17 @@
+<div class="expand" (click)="showList()" (appClickOutside)="isShowList = false" *ngIf="activeDocumentState !== 'draft'">
+	<app-button [attr.disabled]="(selectedItems$ | async) ? null : true" skin="simple" icon="arrow_upward" i18n>
+		Экспорт
+		<app-icon>keyboard_arrow_down</app-icon>
+	</app-button>
+	<app-drop-list *ngIf="isShowList" (clickTab)="export($event)" [isTriangle]="false" [tabs]="tabs"></app-drop-list>
+</div>
+<app-button skin="action" icon="add" (click)="create()" i18n>Создать эАкт</app-button>
+
+<template #tabsTemplate>
+	<dl>
+		<dt>xlsx</dt>
+		<dd>Excel</dd>
+		<dt>xml</dt>
+		<dd>XML</dd>
+	</dl>
+</template>

@@ -1,0 +1,18 @@
+<div>
+	<table>
+		<h3>Подписи</h3>
+		<tbody>
+		<tr *ngIf="document?.signature?.certificateUserName || document?.signature?.signatureDate || document?.signature?.signatureTime">
+			<td>Подпись Поставщика:</td>
+			<td>{{[document?.signature?.certificateUserName, document?.signature?.signatureDate | date: 'dd.MM.yyy', document?.signature?.signatureTime] | smartJoin}}
+			</td>
+		</tr>
+		<tr *ngIf="document?.responseDocument?.signature">
+			<td>Подпись Покупателя:</td>
+			<td>
+				{{[document?.responseDocument?.signature?.certificateUserName, document?.responseDocument?.signature?.signatureDate | date: 'dd.MM.yyy', document?.responseDocument?.signature?.signatureTime] | smartJoin}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

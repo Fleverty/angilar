@@ -1,0 +1,20 @@
+<header>
+	<div>
+		<label>Тип подключения:</label>
+		<app-selectbox></app-selectbox>
+	</div>
+	<div>
+		<label>Дата отправки пароля для интеграции:</label>
+		<app-datebox></app-datebox>
+	</div>
+</header>
+<hr>
+<main>
+	<div class="controls">
+		<app-button skin="simple-blue" icon="add" (click)="addConnection()">Добавить</app-button>
+		<app-button icon="edit">Редактировать</app-button>
+		<app-button skin="simple-red" icon="delete">Удалить</app-button>
+	</div>
+	<app-connection-grid [properties]="testProperties" [items]="testData"></app-connection-grid>
+</main>
+<hr>

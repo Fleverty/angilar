@@ -1,0 +1,67 @@
+<div class="grid-container" #container
+	(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+	<table *ngIf="items && listHeaders">
+		<thead>
+			<th></th>
+			<th>
+				<div class="icon">
+					<app-icon *ngIf="selectedItems && selectedItems?.length > 0 && selectedItems?.length < items.length"
+						(click)="selectAllItems(items)">
+						indeterminate_check_box</app-icon>
+					<app-icon *ngIf="!selectedItems || selectedItems?.length === 0" (click)="selectAllItems(items)">
+						check_box_outline_blank</app-icon>
+					<app-icon *ngIf="selectedItems && selectedItems?.length === items.length" (click)="clearSelectedItems()">
+						check_box</app-icon>
+				</div>
+			</th>
+			<th *ngFor="let header of properties">{{header.name}}</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let document of items; let i = index" (click)="clickItem(i)" [class.selected]="clickId === i"
+				[class.checked]="checkedItem(document)">
+				<td>
+					<div class="icon">
+						<app-icon>fiber_manual_record</app-icon>
+					</div>
+				</td>
+				<td>
+					<div class="icon">
+						<app-icon *ngIf="checkedItem(document)" (click)="selectedItem(document)">
+							check_box</app-icon>
+						<app-icon *ngIf="!checkedItem(document)" (click)="selectedItem(document)">
+							check_box_outline_blank</app-icon>
+					</div>
+				</td>
+				<td *ngFor="let header of properties">
+					<ng-container [ngSwitch]="header.type">
+						<div class="icon" *ngSwitchCase="'status'">
+							<!-- <app-icon [ngClass]="{
+							'red': getIcon(document.status) === 'clear',
+							'green1': getIcon(document.status) === 'done',
+							'green2': getIcon(document.status) === 'done_all'
+						}">{{getIcon(document.status)}}</app-icon> -->
+							{{document[header.key].name}}
+						</div>
+						<div *ngSwitchCase="'date'">{{document[header.key] | date: "dd.MM.yyyy HH:mm"}}</div>
+						<div *ngSwitchCase="'boolean'">
+							<app-icon>{{document[header.key] ? "done" : "clear"}}</app-icon>
+						</div>
+						<div *ngSwitchDefault>{{document[header.key]}}</div>
+					</ng-container>
+				</td>
+				<td>
+					<app-icon>edit</app-icon>
+					<app-icon>lock</app-icon>
+					<app-icon>lock_open</app-icon>
+					<app-icon>delete</app-icon>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<footer *ngIf="items && items.length > 0">Выделено
+	{{selectedItems ? selectedItems!.length: 0}} из {{items.length}} уведомления об отгрузке
+</footer>
+
+<app-overlay></app-overlay>

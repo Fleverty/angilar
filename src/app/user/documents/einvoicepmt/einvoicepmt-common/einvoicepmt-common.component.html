@@ -1,0 +1,59 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Общее</legend>
+	<div>
+		<label i18n>Дата создания</label>
+		<app-datebox formControlName="dateCreate"></app-datebox>
+	</div>
+	<div>
+		<label i18n class="required">Номер счета-фактуры:</label>
+		<div class="invoicepmtNumber">
+			<app-textbox formControlName="invoicepmtNumber1"></app-textbox>
+			<span>-</span>
+			<app-textbox formControlName="invoicepmtNumber2"></app-textbox>
+			<app-textbox formControlName="invoicepmtNumber3" name="Номер счета-фактуры"></app-textbox>
+		</div>
+	</div>
+	<div>
+		<label i18n class="required">Дата счета-фактуры:</label>
+		<app-datebox formControlName="invoicepmtDate" name="Дата счета-фактуры"></app-datebox>
+	</div>
+	<div>
+		<label i18n>Номер договора:</label>
+		<app-textbox formControlName="contractNumber" maxLength="13"></app-textbox>
+	</div>
+	<div>
+		<label i18n>Дата договора:</label>
+		<app-datebox formControlName="contractDate"></app-datebox>
+	</div>
+	<div>
+		<label i18n class="required">Валюта:</label>
+		<app-select-box-self-fetch [option]="currencySelectBoxOption" formControlName="currency"
+			placeholder="Выберите валюту" name="Валюта">
+		</app-select-box-self-fetch>
+	</div>
+	<section class="additional">
+		<app-optional-custom-field title="Условие оплаты" [control]="form.controls['paymentTerm']">
+			<app-textbox formControlName="paymentTerm"></app-textbox>
+		</app-optional-custom-field>
+
+		<app-optional-custom-field title="Цель приобретения" [control]="form.controls['purchaseTarget']">
+			<app-textbox formControlName="purchaseTarget"></app-textbox>
+		</app-optional-custom-field>
+
+		<app-optional-custom-field title="Условие доставки" [control]="form.controls['deliveryTerms']">
+			<app-textbox formControlName="deliveryTerms"></app-textbox>
+		</app-optional-custom-field>
+
+		<app-optional-custom-field title="Срок действия" [control]="form.controls['expireDate']">
+			<app-datebox formControlName="expireDate"></app-datebox>
+		</app-optional-custom-field>
+
+		<app-optional-custom-field title="Срок поставки" [control]="form.controls['deliveryTime']">
+			<app-textbox formControlName="deliveryTime"></app-textbox>
+		</app-optional-custom-field>
+	</section>
+	<div class="inline">
+		<app-checkbox formControlName="testIndicator"></app-checkbox>
+		<label i18n>Тестовый документ (не имеет юридической силы)</label>
+	</div>
+</fieldset>

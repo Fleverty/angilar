@@ -1,0 +1,165 @@
+<form [formGroup]="form">
+	<header>
+		<h3 [ngSwitch]="mode">
+			<ng-container *ngSwitchCase="'CREATE'">Добавление товара</ng-container>
+			<ng-container *ngSwitchCase="'EDIT'">Изменение товара</ng-container>
+		</h3>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+
+	<section>
+		<div>
+			<label class="validation"> <span>*</span> Обязательные для заполнения поля</label>
+			<label class="validation">** Должно быть заполнено хотя бы одно из полей отмеченных двумя
+				звездочками</label>
+		</div>
+		<fieldset>
+			<div>
+				<label>№</label>
+				<app-textbox formControlName="position"></app-textbox>
+			</div>
+			<div>
+				<label class="super-required">GTIN</label>
+				<app-numberbox maxLength="14" formControlName="gtin" name="GTIN"></app-numberbox>
+			</div>
+			<div>
+				<label class="super-required">Код товара, присвоенный покупателем</label>
+				<app-textbox maxLength="35" formControlName="codeByBuyer"></app-textbox>
+			</div>
+			<div>
+				<label class="super-required">Код товара, присвоенный поставщиком</label>
+				<app-textbox maxLength="35" formControlName="codeBySupplier"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Наименование товара</label>
+				<app-textbox maxLength="512" formControlName="fullName" name="Наименование товара">
+				</app-textbox>
+			</div>
+			<div>
+				<label class="required">Единица измерения</label>
+				<app-selectbox [data]="unitOfMeasures$ | async" (appNextPage)="updateUnitOfMeasuresFilter()"
+					(appFilterChanges)="updateUnitOfMeasuresFilter($event)"
+					(appCollapse)="updateUnitOfMeasuresFilter({ search: '' })" formControlName="uom"
+					[valueTransforFn]="transformFn" name="Единица измерения">
+				</app-selectbox>
+			</div>
+			<ng-container *ngIf="messageType === 'ORDERS'">
+				<div>
+					<label class="required">Количество</label>
+					<app-numberbox type="float" maxLength="16" decimalMaxLength="5" wholeMaxLength="10"
+						formControlName="quantityOrdered" name="Количество">
+					</app-numberbox>
+				</div>
+			</ng-container>
+			<ng-container *ngIf="messageType === 'ORDRSP'">
+				<ng-container *ngIf="mode === 'CREATE'">
+					<div>
+						<label class="required">Количество</label>
+						<app-numberbox type="float" maxLength="16" decimalMaxLength="5" wholeMaxLength="10"
+							formControlName="quantityAccepted" name="Количество">
+						</app-numberbox>
+					</div>
+				</ng-container>
+
+				<ng-container *ngIf="mode === 'EDIT'">
+					<div>
+						<label>Заказанное количество</label>
+						<app-numberbox formControlName="quantityOrdered"></app-numberbox>
+					</div>
+					<div>
+						<label class="required">Принятое количество</label>
+						<app-numberbox formControlName="quantityAccepted"></app-numberbox>
+					</div>
+				</ng-container>
+			</ng-container>
+			<div>
+				<label>Цена</label>
+				<app-numberbox type="float" maxLength="16" decimalMaxLength="2" wholeMaxLength="13" formControlName="priceNet">
+				</app-numberbox>
+			</div>
+			<div>
+				<label>Ставка НДС</label>
+				<app-numberbox type="float" maxLength="5" decimalMaxLength="2" wholeMaxLength="2" formControlName="vatRate">
+				</app-numberbox>
+			</div>
+			<div>
+				<label>Количество грузовых мест</label>
+				<app-numberbox formControlName="quantityOrderedLu" type="float" maxLength="16" decimalMaxLength="5"
+					wholeMaxLength="10"></app-numberbox>
+			</div>
+			<div>
+				<label>Количество в упаковке</label>
+				<app-numberbox formControlName="quantityInPack" type="float" maxLength="16" decimalMaxLength="5"
+					wholeMaxLength="10"></app-numberbox>
+			</div>
+			<div>
+				<label>Тип товара</label>
+				<app-selectbox formControlName="type" [data]="productTypesTemplate"></app-selectbox>
+			</div>
+		</fieldset>
+		<div class="table-container">
+			<table>
+				<tbody>
+					<tr>
+						<td>Итого:</td>
+						<td>Cтоимость, Br :</td>
+						<td>
+							<app-numberbox type="float" maxLength="36" decimalMaxLength="2" wholeMaxLength="33"
+								formControlName="amountWithoutVat" [isDisabled]="rounding"></app-numberbox>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Cумма с НДС, Br :</td>
+						<td>
+							<app-numberbox type="float" maxLength="36" decimalMaxLength="2" wholeMaxLength="33"
+								formControlName="amountWithVat" [isDisabled]="rounding"></app-numberbox>
+						</td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>Сумма НДС, Br :</td>
+						<td>
+							<app-numberbox type="float" maxLength="36" decimalMaxLength="2" wholeMaxLength="33"
+								formControlName="amountVat" [isDisabled]="rounding"></app-numberbox>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="3">
+							<div>
+								<app-checkbox formControlName="autoSum" (change)="clickRounding()"></app-checkbox>
+								<label>Автоматический расчет сумм с округлением</label>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+
+	<footer>
+		<nav>
+			<button appSkin="action-save" type="button" (click)="mode === 'CREATE' ? create(): edit()">Сохранить
+			</button>
+			<button appSkin="simple-cancel" (click)="close()">Отмена</button>
+		</nav>
+	</footer>
+</form>
+
+<template #productTypesTemplate>
+	<dl>
+		<dt>CU</dt>
+		<dd>Товар</dd>
+		<dt>RC</dt>
+		<dd>Тара</dd>
+	</dl>
+</template>
+
+<template #texts>
+	<dl>
+		<dt>popupMessage</dt>
+		<dd>Должно быть заполнено хотя бы одно из полей, отмеченных двумя звездочками "GTIN", "Код товара, присвоенный
+			покупателем", "Код товара, присвоенный поставщиком"
+		</dd>
+	</dl>
+</template>

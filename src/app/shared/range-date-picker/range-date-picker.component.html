@@ -1,0 +1,12 @@
+<ng-container [ngSwitch]="mode">
+	<app-month-range-picker *ngSwitchCase="'month'" [doubleValue]="value" [date]="date" [now]="now"
+		(doubleValueChange)="setValue($event);" (changePicker)="askYearView($event)">
+	</app-month-range-picker>
+
+	<app-year-picker *ngSwitchCase="'year'" [value]="date" [now]="now" (valueChange)="askMonthView($event);"
+		(changePicker)="askDecadeView($event)">
+	</app-year-picker>
+
+	<app-decade-picker *ngSwitchCase="'decade'" [value]="date" [now]="now" (valueChange)="askYearView($event)">
+	</app-decade-picker>
+</ng-container>

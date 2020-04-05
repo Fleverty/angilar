@@ -1,0 +1,17 @@
+<table>
+	<thead>
+	<h3>Принял грузополучатель</h3>
+	<button appSkin="dots" type="button"
+			(click)="showContent = !showContent">{{showContent ? 'Свернуть' : 'Развернуть'}}</button>
+	</thead>
+	<tbody *ngIf="showContent && form" [formGroup]="form">
+	<tr>
+		<td class="required">Принял грузополучатель:</td>
+		<app-textbox maxLength="150" formControlName="shipToContact" name="Принял грузополучатель"></app-textbox>
+	</tr>
+	<tr *ngIf="showAdditionalFields">
+		<td>№ пломбы:</td>
+		<app-textbox maxLength="255" formControlName="receiverSealNumber"></app-textbox>
+	</tr>
+	</tbody>
+</table>

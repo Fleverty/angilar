@@ -1,0 +1,27 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Транспортные реквизиты</legend>
+	<section>
+		<app-optional-custom-field title="Автомобиль" [control]="form.controls['transportNumber']">
+			<app-textbox formControlName="transportNumber" maxLength="35"></app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Путевой лист №" [control]="form.controls['waybillNumber']">
+			<app-textbox formControlName="waybillNumber" maxLength="35"></app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Водитель" [control]="form.controls['transportContact']">
+			<app-textbox formControlName="transportContact" maxLength="150" placeholder="Должность, фамилия, инициалы">
+			</app-textbox>
+		</app-optional-custom-field>
+	</section>
+
+	<section>
+		<app-optional-custom-field title="Прицеп" [control]="form.controls['trailerNumber']">
+			<app-textbox formControlName="trailerNumber" maxLength="35"></app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Владелец автомобиля" [control]="form.controls['transportOwnerName']">
+			<app-textbox formControlName="transportOwnerName" maxLength="175"></app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Количество ездок" [control]="form.controls['quantityTrip']">
+			<app-numberbox formControlName="quantityTrip" maxLength="35"></app-numberbox>
+		</app-optional-custom-field>
+	</section>
+</fieldset>

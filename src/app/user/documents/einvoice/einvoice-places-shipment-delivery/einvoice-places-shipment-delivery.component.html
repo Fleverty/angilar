@@ -1,0 +1,69 @@
+<header>
+	<h3>Место отгрузки, доставки</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent">
+		<ng-container *ngIf="showContent">Свернуть</ng-container>
+		<ng-container *ngIf="!showContent">Развернуть</ng-container>
+	</button>
+</header>
+
+<fieldset *ngIf="showContent && form" [formGroup]="form">
+	<section formGroupName="loading">
+		<div class="field">
+			<label>Пункт погрузки:</label>
+			<div>
+				<app-select-box-self-fetch [option]="loadingOption"
+					[class.error]="form?.get('loadingPoint')?.errors && form?.touched" formControlName="loadingPoint">
+				</app-select-box-self-fetch>
+				<span class="checkbox-text">
+					<app-checkbox formControlName="isPublicGln"></app-checkbox><label>Общественный
+						GLN</label>
+				</span>
+			</div>
+		</div>
+		<div class="field">
+			<label>Общественный GLN:</label>
+			<app-select-box-self-fetch [option]="GLNOption" formControlName="publicGln">
+			</app-select-box-self-fetch>
+		</div>
+		<div class="field">
+			<label class="required">Адрес:</label>
+			<app-textbox formControlName="address" maxLength="140"
+				[class.error]="form?.get('address')?.errors && form?.touched"></app-textbox>
+		</div>
+		<div class=" field">
+			<label class="required">GLN:</label>
+			<app-textbox formControlName="gln" maxLength="13" [class.error]="form?.get('gln')?.errors && form?.touched">
+			</app-textbox>
+		</div>
+	</section>
+
+	<section formGroupName="unloading">
+		<div class="field">
+			<label>Пункт разгрузки</label>
+			<div class="checkbox">
+				<app-select-box-self-fetch [option]="unloadingOption"
+					[class.error]="form?.get('unloadingPoint')?.errors && form?.touched" formControlName="unloadingPoint">
+				</app-select-box-self-fetch>
+				<span class="checkbox-text">
+					<app-checkbox formControlName="isPublicGln"></app-checkbox><label>Общественный
+						GLN</label>
+				</span>
+			</div>
+		</div>
+		<div class="field">
+			<label>Общественный GLN:</label>
+			<app-select-box-self-fetch [option]="GLNOption" formControlName="publicGln">
+			</app-select-box-self-fetch>
+		</div>
+		<div class="field">
+			<label class="required">Адрес:</label>
+			<app-textbox formControlName="address" maxLength="140"
+				[class.error]="form?.get('address')?.errors && form?.touched"></app-textbox>
+		</div>
+		<div class="field">
+			<label class="required">GLN:</label>
+			<app-textbox formControlName="gln" maxLength="13" [class.error]="form?.get('gln')?.errors && form?.touched">
+			</app-textbox>
+		</div>
+	</section>
+</fieldset>

@@ -1,0 +1,78 @@
+<main [formGroup]="filterForm" (appFormValueChanges)="appFormValue.emit($event)" *ngIf="filterForm">
+	<section>
+		<div>
+			<label>Грузоотправитель</label>
+			<app-multiselect-box placeholder="Не выбрано" [data]="shipper$ | async"
+				[formControl]="filterForm.controls['shipper']" (appNextPage)="updateShipperFilter()"
+				(appFilterChanges)="updateShipperFilter($event)" (appCollapse)="updateShipperFilter({search: ''})"
+				[valueTransformFn]="transformFn">
+			</app-multiselect-box>
+		</div>
+		<div>
+			<label>Грузополучатель</label>
+			<app-multiselect-box placeholder="Не выбрано" [data]="receiver$ | async"
+				[formControl]="filterForm.controls['consignee']" (appNextPage)="updateReceiverFilter()"
+				(appFilterChanges)="updateReceiverFilter($event)" (appCollapse)="updateReceiverFilter({search: ''})"
+				[valueTransformFn]="transformFn">
+			</app-multiselect-box>
+		</div>
+		<div>
+			<label>Пункт погрузки</label>
+			<app-multiselect placeholder="Указать пункт погрузки" title="Выберите склад погрузки"
+				[formControl]="filterForm.controls['loadingPoints']" [organization]="shipper$ | async"
+				[data]="loadingPoints$ | async" [filterValue]="loadingPlaceFilterValue" [valueTransformFn]="pointTransformFn"
+				(organizationFilter)="updateShipperFilter({search: $event})"
+				(appUpdateCriterionsFilter)="updateShipToPlaceFilter($event)" (appOnClosePopup)="closeShipToPopup()"
+				(appOnScroll)="onScrollShipToPlaces()">
+			</app-multiselect>
+		</div>
+		<div>
+			<label>Пункт разгрузки</label>
+			<app-multiselect placeholder="Указать пункт разгрузки" title="Выберите склад разгрузки"
+				[formControl]="filterForm.controls['unloadingPoints']" [organization]="receiver$ | async"
+				[data]="unloadingPoints$ | async" [filterValue]="unloadingPlaceFilterValue"
+				[valueTransformFn]="pointTransformFn" (organizationFilter)="updateReceiverFilter({search: $event})"
+				(appUpdateCriterionsFilter)="updateShipFromPlaceFilter($event)" (appOnClosePopup)="closeShipFromPopup()"
+				(appOnScroll)="onScrollShipFromPlaces()">
+			</app-multiselect>
+		</div>
+	</section>
+	<section>
+		<div>
+			<label>Серия и номер</label>
+			<app-textbox [formControl]="filterForm.controls['seriesAndNumber']"></app-textbox>
+		</div>
+		<div>
+			<label>Дата отправки</label>
+			<app-rangebox type="date" [formControl]="filterForm.controls['deliveryPeriod']"></app-rangebox>
+		</div>
+		<div>
+			<label>Статус накладной</label>
+			<app-multiselect-box [data]="statuses$ | async" [formControl]="filterForm.controls['processingStatus']"
+				[valueTransformFn]="transformFn"></app-multiselect-box>
+		</div>
+		<div>
+			<label>Номер договора</label>
+			<app-textbox [formControl]="filterForm.controls['contractNumber']"></app-textbox>
+		</div>
+		<div>
+			<label></label>
+			<app-radio-button-list [formControl]="filterForm.controls['testIndicator']" [data]="testIndicator">
+			</app-radio-button-list>
+		</div>
+		<div>
+			<app-button skin="simple-cancel" icon="clear" (click)="resetFilter()">Сбросить</app-button>
+		</div>
+	</section>
+</main>
+
+<template #testIndicator>
+	<dl>
+		<dt>all</dt>
+		<dd i18n>Все</dd>
+		<dt>test</dt>
+		<dd i18n>Тестовые</dd>
+		<dt>untest</dt>
+		<dd i18n>Без тестовых</dd>
+	</dl>
+</template>

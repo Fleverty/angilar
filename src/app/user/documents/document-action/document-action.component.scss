@@ -1,0 +1,35 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 44px); // необходимое зло
+}
+
+header {
+	display: flex;
+	align-items: center;
+	// flex: 0 0 56px;
+	flex-wrap: wrap;
+	background: var(--grey-bg);
+	box-shadow: 0px 1px 1px 0px rgba(0, 10, 51, 0.07),
+		0px 0px 2px 0px rgba(0, 10, 51, 0.18);
+	z-index: 3;
+	padding: 0 20px;
+}
+
+h3 {
+	font-size: 20px;
+	height: 24px;
+	margin: 18px 30px 14px 0;
+}
+
+app-tab {
+	margin: 16px 30px 12px 0;
+}
+
+app-ewaybill-action,
+app-shipment-notifications-action,
+app-order-action,
+app-einvoice-action,
+app-einvoicepmt-action {
+	margin-left: auto;
+}

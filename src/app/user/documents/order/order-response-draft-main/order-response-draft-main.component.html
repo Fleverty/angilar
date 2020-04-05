@@ -1,0 +1,147 @@
+<form [formGroup]="form" *ngIf="form && document">
+	<table>
+		<h3>Общая информация</h3>
+		<tbody>
+			<tr class="red" *ngIf="document?.deliveryError && [3, 5].indexOf(document?.deliveryStatus) !== -1">
+				<td>Текст ошибки при доставке:</td>
+				<td>{{document?.deliveryError}}</td>
+			</tr>
+			<tr>
+				<td>Статус обработки:</td>
+				<td>Черновик</td>
+			</tr>
+			<tr *ngIf="!(document?.deliveryStatus && document?.deliveryStatus !== 0)">
+				<td>Статус доставки:</td>
+				<td class="red">{{orderStatusService.getDeliveryStatusById(document?.deliveryStatus)}}</td>
+			</tr>
+			<!-- <tr *ngIf="document?.id">
+				<td>Номер заказа:</td>
+				<td>{{document?.id}}</td>
+			</tr> -->
+			<tr *ngIf="document?.documentNumber">
+				<td>Номер заказа, присвоенный отправителем:</td>
+				<td>{{document?.ordersNumber}}</td>
+			</tr>
+			<tr *ngIf="document?.documentDate">
+				<td>Дата заказа:</td>
+				<td>{{document?.documentDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+			</tr>
+			<tr *ngIf="document?.documentNameCode">
+				<td>Вид заказа:</td>
+				<ng-container [ngSwitch]="document?.documentNameCode">
+					<td *ngSwitchCase="'231'" i18n>Ответ на заказ</td>
+					<td *ngSwitchCase="'71E'" i18n>Подтверждение возврата</td>
+				</ng-container>
+			</tr>
+			<tr *ngIf="document?.contractNumber">
+				<td>Номер договора:</td>
+				<td>{{document?.contractNumber}}</td>
+			</tr>
+			<tr *ngIf="document?.deliveryDate">
+				<td>Дата и время доставки:</td>
+				<td>{{document?.deliveryDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+			</tr>
+			<tr>
+				<td class="required">Принятая дата и время доставки</td>
+				<app-datebox formControlName="responseDate" withTime="true"></app-datebox>
+			</tr>
+			<tr *ngIf="document?.orderMsgDraftDto?.currency?.code && document?.orderMsgDraftDto?.currency?.name">
+				<td i18n>Валюта:</td>
+				<td>({{document?.orderMsgDraftDto?.currency?.code}}) {{document?.orderMsgDraftDto?.currency?.name}}</td>
+			</tr>
+			<tr *ngIf="document?.orderMsgDraftDto?.orderContactName">
+				<td>Автор заказа:</td>
+				<td>{{document?.orderMsgDraftDto?.orderContactName}}</td>
+			</tr>
+			<tr *ngIf="document?.orderMsgDraftDto?.orderContactEmail">
+				<td>Email автора заказа:</td>
+				<td>{{document?.orderMsgDraftDto?.orderContactEmail}}</td>
+			</tr>
+			<tr *ngIf="document?.orderMsgDraftDto?.orderContactPhone">
+				<td>Телефон автора заказа:</td>
+				<td>{{document?.orderMsgDraftDto?.orderContactPhone}}</td>
+			</tr>
+			<tr *ngIf="document?.documentNumber">
+				<td>Номер ответа на заказ:</td>
+				<td>{{document?.documentNumber}}</td>
+			</tr>
+			<tr *ngIf="document?.documentDate">
+				<td>Дата ответа на заказ:</td>
+				<td>{{document?.documentDate | date}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="document.buyerName || document.buyerGln">
+		<h3>Покупатель</h3>
+		<tbody>
+			<tr *ngIf="document?.buyerName">
+				<td>Наименование:</td>
+				<td>{{document?.buyerName}}</td>
+			</tr>
+			<tr *ngIf="document?.buyerGln">
+				<td>GLN:</td>
+				<td>{{document?.buyerGln}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="document?.supplierName || document?.supplierGln">
+		<h3>Поставщик</h3>
+		<tbody>
+			<tr *ngIf="document?.supplierName">
+				<td>Наименование:</td>
+				<td>{{document?.supplierName}}</td>
+			</tr>
+			<tr *ngIf="document?.supplierGln">
+				<td>GLN:</td>
+				<td>{{document?.supplierGln}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="document?.deliveryPointGln || document?.deliveryPointAddress">
+		<h3>Место доставки</h3>
+		<tbody>
+			<tr *ngIf="document?.deliveryPointGln">
+				<td>GLN:</td>
+				<td>{{document?.deliveryPointGln}}</td>
+			</tr>
+			<tr *ngIf="document?.deliveryPointAddress">
+				<td>Адрес:</td>
+				<td>{{document?.deliveryPointAddress}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="document?.ultimateRecipientGln || document?.ultimateRecipientAddress">
+		<h3>Конечный получатель</h3>
+		<tbody>
+			<tr *ngIf="document?.ultimateRecipientGln">
+				<td>GLN:</td>
+				<td>{{document?.ultimateRecipientGln}}</td>
+			</tr>
+			<tr *ngIf="document?.ultimateRecipientAddress">
+				<td>Адрес:</td>
+				<td>{{document?.ultimateRecipientAddress}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<table>
+		<h3>Комментарий</h3>
+		<tbody>
+			<tr *ngIf="document?.orderMsgDraftDto?.orderComment">
+				<td>Комментарий:</td>
+				<td>{{document?.orderMsgDraftDto?.orderComment}}</td>
+			</tr>
+			<tr>
+				<td>Комментарий к ответу:</td>
+				<td>
+					<app-textbox formControlName="orderComment" maxLength="255"></app-textbox>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>

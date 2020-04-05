@@ -1,0 +1,12 @@
+fieldset > div {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0;
+}

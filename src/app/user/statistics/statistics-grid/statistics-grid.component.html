@@ -1,0 +1,115 @@
+<div class="grid-container" #container
+	(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+	<table *ngIf="items && listHeaders">
+		<thead>
+			<tr>
+				<th rowspan="2"></th>
+				<th rowspan="2">
+					<div class="icon">
+						<app-icon *ngIf="selectedItems && selectedItems?.length > 0 && selectedItems?.length < items.length"
+							(click)="selectAllItems(items)">
+							indeterminate_check_box</app-icon>
+						<app-icon *ngIf="!selectedItems || selectedItems?.length === 0" (click)="selectAllItems(items)">
+							check_box_outline_blank</app-icon>
+						<app-icon *ngIf="selectedItems && selectedItems?.length && selectedItems?.length === items.length"
+							(click)="clearSelectedItems()">
+							check_box</app-icon>
+					</div>
+				</th>
+				<ng-container *ngFor="let header of properties">
+					<th [class.text-left]="!header.children" [attr.rowspan]="header.children ? 1 : 2"
+						[attr.colspan]="header.children && header.children.length">
+						{{header.name}}</th>
+				</ng-container>
+			</tr>
+			<tr>
+				<ng-container *ngFor="let header of properties">
+					<ng-container *ngIf="header.children">
+						<th class="center-text" *ngFor="let field of header.children">{{field.name}}</th>
+					</ng-container>
+				</ng-container>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let document of items; let i = index" (click)="clickItem(document)" [class.selected]="clickId === i"
+				[class.checked]="checkedItem(document)">
+				<td>
+					<div class="icon">
+						<app-icon>fiber_manual_record</app-icon>
+					</div>
+				</td>
+				<td>
+					<div class="icon">
+						<app-icon *ngIf="checkedItem(document)" (click)="selectedItem(document); $event.stopPropagation()">
+							check_box</app-icon>
+						<app-icon *ngIf="!checkedItem(document)" (click)="selectedItem(document); $event.stopPropagation()">
+							check_box_outline_blank</app-icon>
+					</div>
+				</td>
+				<ng-container *ngFor="let header of properties">
+					<td class="text-left" *ngIf="!header.children">
+						<ng-container [ngSwitch]="header.type">
+							<div class="icon" *ngSwitchCase="'status'">
+								{{getStatuses(document[header.key])}}
+							</div>
+							<div *ngSwitchCase="'date'">{{document[header.key] | date: "dd.MM.yyyy HH:mm"}}</div>
+							<div *ngSwitchCase="'boolean'">
+								<div *ngIf="document[header.key]">
+									Да
+								</div>
+							</div>
+							<div class="icon" *ngSwitchCase="'person'">
+								{{document[header.key].name}}
+							</div>
+							<div class="icon" *ngSwitchCase="'place'">
+								{{document[header.key].address}} {{document[header.key].gln}}
+							</div>
+							<div class="icon" *ngSwitchCase="'type'">
+								<ng-container [ngSwitch]="document[header.key]">
+									<ng-container *ngSwitchCase="'BLRWBL'">
+										ТТН
+									</ng-container>
+									<ng-container *ngSwitchCase="'BLRDLN'">
+										ТН
+									</ng-container>
+								</ng-container>
+							</div>
+							<div *ngSwitchDefault>{{document[header.key]}}</div>
+						</ng-container>
+					</td>
+					<ng-container *ngIf="header.children">
+						<td *ngFor="let child of header.children">
+							<ng-container *ngIf="document[header.key]">
+								<div *ngIf="child.type === 'date'">
+									<ng-container *ngIf="header.type === 'array'; else simple">
+										<div *ngFor="let doc of document[header.key]">
+											{{doc[child.key] | date: "dd.MM.yyyy HH:mm"}}
+										</div>
+									</ng-container>
+									<ng-template #simple>
+										{{document[header.key][child.key] | date: "dd.MM.yyyy HH:mm"}}
+									</ng-template>
+								</div>
+								<div *ngIf="child.type !== 'date'">
+									<ng-container *ngIf="header.type === 'array'; else simple">
+										<div *ngFor="let doc of document[header.key]">
+											{{doc[child.key]}}
+										</div>
+									</ng-container>
+									<ng-template #simple>
+										{{document[header.key][child.key]}}
+									</ng-template>
+								</div>
+							</ng-container>
+						</td>
+					</ng-container>
+				</ng-container>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<footer *ngIf="items && items.length > 0 && !withoutFooter">
+	Всего записей: {{items.length}}
+</footer>
+
+<app-overlay></app-overlay>

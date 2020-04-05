@@ -1,0 +1,25 @@
+@import "./fonts/roboto/font.css";
+@import "./fonts/material/font.css";
+
+:root {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+
+	--accent-color: rgb(0, 102, 209);
+	--grey-bg: rgb(242, 246, 246);
+	--orange-action: rgb(253, 181, 9);
+	--green-action: rgb(17, 196, 79);
+	--deep-green: rgb(0, 165, 80);
+	--outline-color: #639efe;
+	--error-color: rgb(252, 121, 95);
+	--header-bg: rgb(16, 159, 156);
+}
+
+:disabled {
+	opacity: 0.8;
+}
+
+input:disabled {
+	background: #e8e8e8;
+}

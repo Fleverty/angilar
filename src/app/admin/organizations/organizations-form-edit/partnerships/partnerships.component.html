@@ -1,0 +1,27 @@
+<header>
+	<div>
+		<label>Группа компаний:</label>
+		<app-selectbox placeholder="Введите группу компаний"></app-selectbox>
+	</div>
+	<div>
+		<label>Название организации::</label>
+		<app-textbox></app-textbox>
+	</div>
+	<div>
+		<label>GLN организации:</label>
+		<app-textbox></app-textbox>
+	</div>
+	<div>
+		<label>Тип подключения:</label>
+		<app-selectbox></app-selectbox>
+	</div>
+</header>
+<hr>
+<main>
+	<div class="controls">
+		<app-button skin="simple-blue" icon="add">Добавить</app-button>
+		<app-button skin="simple-red" icon="delete">Удалить</app-button>
+	</div>
+	<app-partnerships-grid [properties]="testProperties" [items]="testData"></app-partnerships-grid>
+</main>
+<hr>

@@ -1,0 +1,26 @@
+.red {
+	> app-textbox {
+		color: red;
+	}
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0;
+}
+
+fieldset > .error > label.red {
+	color: var(--error-color);
+}
+
+fieldset > .error > label {
+	&:first-of-type {
+		margin-right: 5px;
+	}
+
+	display: inline-block;
+	font-size: 15px;
+}

@@ -1,0 +1,4 @@
+<!-- <app-button disabled skin="simple" icon="arrow_downward" i18n>Импорт</app-button> -->
+<app-button [disabled]="!selectIds.length" *ngIf="(documentState$ | async) !== 'DRAFT'" skin="simple"
+	icon="arrow_upward" (click)="export()" i18n>Экспорт</app-button>
+<app-button skin="action" icon="add" (click)="create()" i18n>Создать заказ</app-button>

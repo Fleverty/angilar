@@ -1,0 +1,13 @@
+{
+	"defaults": {
+		"styleExt": "scss",
+		"component": {
+			"spec": true,
+			"inlineStyle": false,
+			"inlineTemplate": false,
+			"flat": false,
+			"changeDetection": "OnPush",
+			"viewEncapsulation": "Emulated"
+		}
+	}
+}

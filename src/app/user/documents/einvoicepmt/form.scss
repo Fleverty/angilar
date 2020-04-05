@@ -1,0 +1,61 @@
+:host {
+	> div:first-of-type {
+		margin-top: 8px;
+	}
+}
+
+legend {
+	font-family: Roboto-Bold;
+	font-size: 16px;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+}
+
+fieldset {
+	padding: 0;
+	border: none;
+
+	label {
+		display: flex;
+		padding-bottom: 4px;
+		color: #555;
+		font-size: 13px;
+		line-height: 22px;
+		font-weight: 500;
+	}
+
+	> div,
+	> section > div {
+		margin-bottom: 15px;
+	}
+}
+
+app-numberbox,
+app-textbox,
+app-selectbox,
+app-datebox,
+app-select-box-self-fetch {
+	width: 350px;
+}
+
+app-selectbox {
+	display: flex;
+}
+
+app-datebox,
+app-select-box-self-fetch {
+	display: block;
+}
+
+.inline > * {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+}

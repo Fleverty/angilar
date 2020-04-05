@@ -1,0 +1,47 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<h2>Заказ на поставку</h2>
+	</div>
+</header>
+
+<app-pending *ngIf="(sendingStatus$ | async) === 'PENDING'">Отправка</app-pending>
+<app-pending *ngIf="(sendingStatus$ | async) === 'SAVE'">Сохранение</app-pending>
+
+<form *ngIf="(form$ | async) as form" [formGroup]="form">
+	<main>
+		<section>
+			<app-order-common [form]="form.get('common')"></app-order-common>
+			<ng-container [ngSwitch]="kind">
+				<ng-container *ngSwitchCase="220">
+					<app-order-buyer [form]="form.get('buyer')"></app-order-buyer>
+					<app-order-supplier (filterChanged)="supplierFilterChanged($event)" [suppliers]="suppliers$ | async"
+						[form]="form.get('supplier')"></app-order-supplier>
+				</ng-container>
+			</ng-container>
+			<app-order-supply-point [storages]="deliveryStorages$ | async"
+				(filterChanged)="deliveryStoragesFilterChanged($event)" [form]="form.get('supplyPoint')">
+			</app-order-supply-point>
+			<app-order-final-recipient [form]="form.get('finalRecipient')"></app-order-final-recipient>
+			<app-order-comment [form]="form.get('comment')"></app-order-comment>
+		</section>
+		<app-order-products [form]="form.get('product')" [messageType]="type"></app-order-products>
+	</main>
+	<footer>
+		<div>
+			<button type="button" appSkin="action no-shadow bold bordered" (click)="sendOrder(form)">Отправить</button>
+			<button type="button" appSkin="action no-shadow bold bordered" (click)="save(form)">Сохранить</button>
+			<button type="button" appSkin="simple-gray no-shadow bold" *ngIf="id" (click)="delete()">Удалить</button>
+			<button type="button" appSkin="simple-gray no-shadow bold" class="change-total-sums"
+				(click)="changeTotalSums(form)">Изменить итоговые суммы</button>
+			<button type="button" appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+		</div>
+	</footer>
+</form>
+
+<template #textsTemplate>
+	<dl>
+		<dt>emptyProducts</dt>
+		<dd>Добавьте товары</dd>
+	</dl>
+</template>

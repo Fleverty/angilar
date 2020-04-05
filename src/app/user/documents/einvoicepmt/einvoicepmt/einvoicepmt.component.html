@@ -1,0 +1,54 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<h2 class="text">Счет-фактура для расчетов</h2>
+	</div>
+</header>
+
+<app-pending *ngIf="(signingStatus$ | async) === 'PENDING'">Подписание</app-pending>
+
+<form *ngIf="(form$ | async) as form" [appSrollToFirstIvalidDerictive]="mainRef" (ngSubmit)="submit(form)"
+	[formGroup]="form">
+	<main #mainRef>
+		<app-einvoicepmt-common [form]="form.get('common')"></app-einvoicepmt-common>
+		<app-einvoicepmt-supplier [form]="form.get('supplier')"></app-einvoicepmt-supplier>
+		<app-einvoicepmt-buyer [form]="form.get('buyer')"></app-einvoicepmt-buyer>
+		<app-einvoicepmt-shipper [form]="form.get('shipper')" (fillWithSupplier)="fillWithSupplierHandler(form)">
+		</app-einvoicepmt-shipper>
+		<app-einvoicepmt-receiver [form]="form.get('receiver')" (fillWithBuyer)="fillWithBuyerHandler(form)">
+		</app-einvoicepmt-receiver>
+		<app-einvoicepmt-additional-fields [form]="form.get('additionalFields')"></app-einvoicepmt-additional-fields>
+		<app-einvoicepmt-products-list [form]="form.get('products')"></app-einvoicepmt-products-list>
+	</main>
+
+	<footer>
+		<nav>
+			<button type="submit" appSkin="action no-shadow bold bordered">Подписать</button>
+			<!-- <button type="button" appSkin="action no-shadow bold bordered">Button</button> -->
+			<button type="button" appSkin="action no-shadow bold bordered" (click)="save(form)">Сохранить</button>
+			<button type="button" appSkin="simple-gray no-shadow bold" *ngIf="id" (click)="delete()">Удалить</button>
+			<button type="button" appSkin="simple-gray no-shadow bold" class="change-sum" (click)="changeSum(form)">Изменить
+				итоговые суммы</button>
+			<button type="button" appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+		</nav>
+	</footer>
+</form>
+
+<template #popupMessage>
+	<dl>
+		<dt>productsError</dt>
+		<dd>Добавьте товары</dd>
+		<dt>saveSuccess</dt>
+		<dd>Черновик сохранён</dd>
+		<dt>invalid</dt>
+		<dd>Невозможно подписать невалидную форму</dd>
+		<dt>proxyUnavailable</dt>
+		<dd>Не удалось подключиться к EDS Proxy</dd>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронного счета-фактуры?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

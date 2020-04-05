@@ -1,0 +1,28 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2>Ответ на заказ</h2>
+	</div>
+</header>
+
+<app-pending *ngIf="(status$ | async) === 'PENDING'">Отправка</app-pending>
+<app-pending *ngIf="(status$ | async) === 'SAVE'">Сохранение</app-pending>
+
+<ng-container *ngIf="(form$ | async) as form">
+	<ng-container *ngIf="(orderResponse$ | async) as document">
+		<section>
+			<app-order-response-draft-main [form]="form" [document]="document"></app-order-response-draft-main>
+			<app-order-products [form]="form.get('product')" [document]="document"
+				[responseProducts]="currentProducts$ | async" [messageType]="'ORDRSP'"></app-order-products>
+		</section>
+
+		<footer>
+			<button appSkin="simple-gray" (click)="accept(form, document)">Принять</button>
+			<button appSkin="simple-gray" (click)="cancel(document)">Отклонить</button>
+			<button appSkin="simple-gray" (click)="save(form, document)">Сохранить</button>
+			<button appSkin="simple-gray" (click)="delete()">Удалить</button>
+			<button appSkin="simple-gray" (click)="changeTotalSums(form)">Изменить итоговые суммы</button>
+			<button appSkin="simple no-shadow bold bordered" (click)="prevPage()">Закрыть</button>
+		</footer>
+	</ng-container>
+</ng-container>

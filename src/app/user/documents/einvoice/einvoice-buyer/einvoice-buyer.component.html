@@ -1,0 +1,51 @@
+<header>
+	<h3>Покупатель/Заказчик</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent" [ngSwitch]="showContent">
+		<ng-container *ngSwitchCase="false">Развернуть</ng-container>
+		<ng-container *ngSwitchCase="true">Свернуть</ng-container>
+	</button>
+</header>
+
+<fieldset *ngIf="showContent && form" [formGroup]="form">
+	<section class="two-row">
+		<div class="field">
+			<label class="required">Наименование:</label>
+			<app-select-box-self-fetch [option]="buyerSelectBoxOption" formControlName="buyerName"
+				name="Наименование (покупателя/заказчика)">
+			</app-select-box-self-fetch>
+		</div>
+		<div class="field">
+			<label class="required">GLN:</label>
+			<app-textbox class="small" formControlName="buyerGln" maxLength="13" name="GLN (покупателя/заказчика)">
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label class="required">УНП:</label>
+			<app-textbox class="small" formControlName="buyerUnp" maxLength="70" name="УНП (покупателя/заказчика)">
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label class="required">Адрес:</label>
+			<app-textbox formControlName="buyerAddress" maxLength="140" name="Адрес (покупателя/заказчика)" withTitle>
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label>Расчетный счет:</label>
+			<app-textbox formControlName="buyerAccountNumber" maxLength="35" name="Расчетный счет (покупателя/заказчика)">
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label>Банк:</label>
+			<app-textbox formControlName="buyerBankName" maxLength="140" name="Банк (покупателя/заказчика)"></app-textbox>
+		</div>
+		<div class="field">
+			<label>Код банка:</label>
+			<app-textbox formControlName="buyerBankCode" maxLength="17" name="Код банка (покупателя/заказчика)"></app-textbox>
+		</div>
+		<div class="field">
+			<label>Адрес банка:</label>
+			<app-textbox formControlName="buyerBankAddress" maxLength="140" name="Адрес банка (покупателя/заказчика)">
+			</app-textbox>
+		</div>
+	</section>
+</fieldset>

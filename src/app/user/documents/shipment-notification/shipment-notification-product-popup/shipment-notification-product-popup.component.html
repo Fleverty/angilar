@@ -1,0 +1,187 @@
+<div class="popup" *ngIf="form" [formGroup]="form">
+	<header>
+		<label i18n>Добавление товара</label>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<main>
+		<label class="validation"> <span>*</span> Обязательные для заполнения поля</label>
+		<label class="validation">** Должно быть заполнено хотя бы одно из полей отмеченных двумя
+			звездочками</label>
+		<section>
+			<label>№</label>
+			<app-textbox formControlName="position"></app-textbox>
+		</section>
+		<section>
+			<label class="super-required">GTIN:</label>
+			<app-numberbox formControlName="gtin" maxLength="14"></app-numberbox>
+		</section>
+		<section>
+			<label class="super-required">Код товара, присвоенный покупателем:</label>
+			<app-textbox formControlName="codeByBuyer" maxLength="35"></app-textbox>
+		</section>
+		<section>
+			<label class="super-required">Код товара, присвоенный поставщиком:</label>
+			<app-textbox formControlName="codeBySupplier" maxLength="35"></app-textbox>
+		</section>
+		<section>
+			<label>Наименование товара:</label>
+			<app-textbox formControlName="fullName" maxLength="512"></app-textbox>
+		</section>
+		<section>
+			<label>Единица измерения:</label>
+			<app-selectbox [data]="unitOfMeasures$ | async" (appNextPage)="updateUnitOfMeasuresFilter()"
+				(appFilterChanges)="updateUnitOfMeasuresFilter($event)"
+				(appCollapse)="updateUnitOfMeasuresFilter({ search: '' })" formControlName="uom" [valueTransforFn]="tranformFn">
+			</app-selectbox>
+		</section>
+		<section>
+			<label>Заказанное количество:</label>
+			<app-numberbox type="float" wholeMaxLength="10" decimalMaxLength="5" maxLength="16"
+				formControlName="quantityOrdered">
+			</app-numberbox>
+		</section>
+		<section>
+			<label class="required">Отгруженное количество:</label>
+			<app-numberbox type="float" wholeMaxLength="10" decimalMaxLength="5" maxLength="16"
+				formControlName="quantityDespatch" name="Отгруженное количество">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Количество грузовых мест:</label>
+			<app-numberbox type="float" wholeMaxLength="10" decimalMaxLength="5" maxLength="16"
+				formControlName="quantityDespatchLu">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Наименование производителя:</label>
+			<app-textbox formControlName="manufacturerName" maxLength="512"></app-textbox>
+		</section>
+		<section>
+			<label>Страна производителя:</label>
+			<app-selectbox [data]="countries$ | async" (appNextPage)="updateCountriesFilter()"
+				(appCollapse)="updateCountriesFilter({ search: '' })" (appFilterChanges)="updateCountriesFilter($event)"
+				formControlName="countryOfOrigin" [valueTransforFn]="tranformFn"></app-selectbox>
+		</section>
+		<section>
+			<label>Дата производства:</label>
+			<app-datebox formControlName="productionDate"></app-datebox>
+		</section>
+		<section>
+			<label>Срок реализации:</label>
+			<app-datebox formControlName="expireDate"></app-datebox>
+		</section>
+		<section>
+			<label>Цена изготовителя:</label>
+			<app-numberbox type="float" wholeMaxLength="13" decimalMaxLength="2" maxLength="16"
+				formControlName="priceManufacturer">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Цена без НДС:</label>
+			<app-numberbox type="float" wholeMaxLength="13" decimalMaxLength="2" maxLength="16" formControlName="priceNet">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Ставка НДС, %:</label>
+			<app-numberbox type="float" wholeMaxLength="2" decimalMaxLength="2" maxLength="5" formControlName="vatRate">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Стоимость без НДС для конечного покупателя:</label>
+			<app-numberbox type="float" wholeMaxLength="33" decimalMaxLength="2" maxLength="36"
+				formControlName="ultimateAmountWithoutVat">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Сумма НДС для конечного покупателя:</label>
+			<app-numberbox type="float" wholeMaxLength="33" decimalMaxLength="2" maxLength="36"
+				formControlName="ultimateAmountVat">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Масса груза, тонны:</label>
+			<app-numberbox type="float" wholeMaxLength="12" decimalMaxLength="6" maxLength="19" formControlName="grossWeight">
+			</app-numberbox>
+		</section>
+		<section>
+			<label>Тип товара:</label>
+			<app-selectbox [data]="productTypesTemplate" formControlName="type">
+			</app-selectbox>
+		</section>
+		<section>
+			<label>Номер партии:</label>
+			<app-textbox formControlName="batchNumber" maxLength="70">
+			</app-textbox>
+		</section>
+		<section>
+			<label>Номер таможенной декларации (ГТД):</label>
+			<app-textbox formControlName="customDeclarationNumber" maxLength="70">
+			</app-textbox>
+		</section>
+		<section>
+			<label>Сертификат (номер и дата):</label>
+			<app-textbox formControlName="certificateNumber" maxLength="70">
+			</app-textbox>
+		</section>
+		<section>
+			<label>Примечание:</label>
+			<app-textbox formControlName="addInfo" maxLength="512"></app-textbox>
+		</section>
+	</main>
+	<footer>
+		<main>
+			<div>
+				<span><b>Итого:</b></span>
+				<div [attr.class]="!rounding ? 'sum column' : 'sum'">
+					<div>
+						<span class="sum-text">Cтоимость, Br : * </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountWithoutVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountWithoutVat" type="float"
+							wholeMaxLength="33" decimalMaxLength="2" maxLength="36"></app-numberbox>
+					</div>
+					<div>
+						<span class="sum-text">Сумма НДС, Br : </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountVat" type="float"
+							wholeMaxLength="33" decimalMaxLength="2" maxLength="36"></app-numberbox>
+					</div>
+					<div>
+						<span class="sum-text">Сумма с НДС, Br : * </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountWithVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountWithVat" type="float"
+							wholeMaxLength="33" decimalMaxLength="2" maxLength="36"></app-numberbox>
+					</div>
+				</div>
+			</div>
+			<div class="check">
+				<app-checkbox formControlName="autoSum" (change)="clickRounding($event, form)"></app-checkbox>
+				<span class="sum-text">Автоматический расчет сумм с округлением</span>
+			</div>
+		</main>
+		<nav>
+			<button appSkin="action-save" (click)="mode === 'CREATE' ? save(form) : edit(form)">Сохранить</button>
+			<button appSkin="simple-cancel" (click)="cancel()">Отмена</button>
+		</nav>
+	</footer>
+</div>
+
+<app-overlay #notification></app-overlay>
+
+<template #popupMessage>
+	<dl>
+		<dt>text</dt>
+		<dd>Должно быть заполнено хотя бы одно из полей, отмеченных двумя звездочками "GTIN", "Код товара, присвоенный
+			покупателем", "Код товара, присвоенный поставщиком"</dd>
+		<dt>invalid</dt>
+		<dd>Невозможно сохранить невалидную форму</dd>
+	</dl>
+</template>
+
+<template #productTypesTemplate>
+	<dl>
+		<dt>CU</dt>
+		<dd>Товар</dd>
+		<dt>RC</dt>
+		<dd>Тара</dd>
+	</dl>
+</template>

@@ -1,0 +1,28 @@
+<section *ngIf="form">
+	<header>
+		<label>Изменение</label>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<main [formGroup]="form">
+		<div>
+			<label class="required">Причина изменения: </label>
+			<app-textarea formControlName="changeReason"></app-textarea>
+		</div>
+	</main>
+	<footer>
+		<button appSkin="action no-shadow bordered" (click)="signAndSave(form)" type="button">Подписать и
+			отправить</button>
+		<button appSkin="simple no-shadow bold bordered" type="button" (click)="close()">Закрыть</button>
+	</footer>
+</section>
+
+<app-pending *ngIf="(signingStatus$ | async) === 'PENDING'">Подписание</app-pending>
+
+<template #texts>
+	<dl>
+		<dt>proxyUnavailable</dt>
+		<dd>Не удалось подключиться к EDS Proxy</dd>
+		<dt>requiredChangeReason</dt>
+		<dd>Не заполнено обязательное поле "Причина изменения".</dd>
+	</dl>
+</template>

@@ -1,0 +1,87 @@
+# executor shell
+# shell powershell
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  tags:
+    - kip-edi
+  image: node:latest
+  variables:
+    FAIL_ON_WARNING: "true"
+  cache:
+    key: npm
+    paths:
+      - .npm/
+  stage: test
+  before_script:
+    - npm install
+  script:
+    - npm run build.polyfills
+    - npm run build.vendors
+    - npm run build.app -- --env.bail
+
+build:
+  tags:
+    - kip-edi
+  image: node:latest
+  variables:
+    NODE_ENV: "production"
+#    CI_DEBUG_TRACE: "true"
+  cache:
+    key: npm
+    paths:
+      - .npm/
+  stage: build
+  before_script:
+    - npm install
+  script:
+    - npm run build.aot
+  artifacts:
+    paths:
+    - build
+
+deploy:
+  tags:
+    - kip-edi
+  image: bash:latest
+  stage: deploy
+  dependencies:
+    - test
+    - build
+  variables:
+    # CI_DEBUG_TRACE: "true"
+    # SSH_AUTH_SOCK: "null"
+    # SSH_AGENT_PID: "null"
+  before_script:
+    - Set-Service -Name ssh-agent -StartupType Manual
+    - Start-Service ssh-agent
+    # - echo "$STAGING_PRIVATE_KEY" > id_rsa
+    - echo "$STAGING_PRIVATE_KEY" | ssh-add -
+    - ssh-add -l
+    # - start-ssh-agent.cmd
+    - echo "Added"
+    - $i = whoami
+    - icacls C:/Windows/System32/config/systemprofile/.ssh/config /c /t /inheritance:d
+    - icacls C:/Windows/System32/config/systemprofile/.ssh/config  /c /t /remove Administrator BUILTIN\Administrators BUILTIN Everyone System Users
+    - icacls C:/Windows/System32/config/systemprofile/.ssh/config  /c /t /remove "NT AUTHORITY\Authenticated Users"
+    - icacls C:/Windows/System32/config/systemprofile/.ssh/config /c /t /grant `"$i`":F
+    - icacls C:/Windows/System32/config/systemprofile/.ssh/config
+  artifacts:
+    paths:
+      - build/
+  script:
+    # - ssh -f root@192.168.190.14 mkdir -p /usr/share/nginx/temp-angular
+    # - scp -P22 -r build/. root@192.168.190.14:/usr/share/nginx/temp-angular
+    # - ssh -f root@192.168.190.14 "rm -r /usr/share/nginx/html/."
+    # - scp -P22 -r root@192.168.190.14:/usr/share/nginx/temp-angular/. root@192.168.190.14:/usr/share/nginx/html
+    # - ssh -f root@192.168.190.14 "rm -r /usr/share/nginx/temp-angular/."
+    - scp -P22 -r build/. root@192.168.190.14:/usr/share/nginx/html
+  after_script:
+    - Invoke-WebRequest 'http://192.168.246.104:8090/deploy' -Method 'GET'
+  only:
+    - test
+ 

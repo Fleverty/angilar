@@ -1,0 +1,190 @@
+:host {
+	width: 100%;
+	padding: 0;
+	display: block;
+	box-sizing: border-box;
+	padding: 0 50px;
+	max-width: 1349px;
+	margin: 0 auto;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 14px 0 8px;
+}
+
+h3 {
+	margin: 0;
+	margin-right: 12px;
+	color: rgb(25, 25, 25);
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+button[appSkin="dots"] {
+	margin-bottom: -2px;
+	padding: 0;
+	font-size: 16px;
+	color: rgb(156, 156, 156);
+	background: none;
+	border: none;
+	border-bottom: 1px dotted #9c9c9c;
+	cursor: pointer;
+	transition: 0.2s;
+
+	&:hover {
+		color: rgba(156, 156, 156, 0.8);
+	}
+}
+
+app-button[icon="delete"] {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	padding: 0;
+	font-size: 13px;
+	line-height: 16px;
+	color: rgb(252, 121, 95);
+	background: none;
+	border: none;
+	transition: 0.2s;
+	outline: none;
+	padding: 0 0 4px;
+
+	&:hover {
+		color: rgba(252, 121, 95, 0.8);
+	}
+
+	app-icon {
+		font-size: 18px;
+	}
+}
+
+.main {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: space-between;
+	width: 100%;
+	box-sizing: border-box;
+
+	label {
+		display: flex;
+		padding-bottom: 4px;
+		color: #555;
+		font-size: 13px;
+		line-height: 22px;
+		font-weight: 500;
+
+		.required::after {
+			content: "*";
+			display: inline-block;
+			margin-left: 2px;
+			color: rgb(255, 0, 0);
+		}
+
+		.super-required::after {
+			content: "**";
+			display: inline-block;
+			margin-left: 2px;
+			color: black;
+		}
+	}
+
+	.without-label {
+		justify-content: flex-end;
+	}
+
+	.required:after {
+		content: "*";
+		display: inline-block;
+		margin-left: 2px;
+		color: rgb(255, 0, 0);
+		font-size: 15px;
+	}
+}
+
+.line {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin-top: 4px;
+	box-sizing: border-box;
+
+	&:first-of-type {
+		margin-top: 0;
+	}
+
+	> div {
+		margin-right: 10px;
+		margin-bottom: 8px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	div {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+	display: flex;
+}
+
+.status {
+	width: 350px;
+}
+
+.line div.leave {
+	flex-direction: row;
+	align-items: center;
+
+	app-datebox {
+		width: 180px;
+	}
+	:nth-child(2) {
+		width: 350px;
+	}
+	:nth-child(3) {
+		width: 350px;
+	}
+}
+
+.date {
+	width: 180px;
+}
+
+button {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	padding: 0;
+	font-size: 13px;
+	line-height: 16px;
+	color: rgb(252, 121, 95);
+	background: none;
+	border: none;
+	transition: 0.2s;
+	outline: none;
+	padding: 0 0 4px;
+
+	&:hover {
+		color: rgba(252, 121, 95, 0.8);
+	}
+
+	app-icon {
+		font-size: 18px;
+	}
+}
+
+p {
+	// display: flex;
+	margin: 0;
+}

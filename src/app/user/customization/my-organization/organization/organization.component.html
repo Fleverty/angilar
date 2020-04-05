@@ -1,0 +1,135 @@
+<section [formGroup]="form">
+
+	<div>
+		<h4>Общая информация</h4>
+		<div class="average-length">
+			<label i18n>GLN:</label>
+			<app-textbox formControlName="gln" withTitle></app-textbox>
+		</div>
+
+		<div class="row">
+			<div>
+				<label i18n>Группа компаний:</label>
+				<app-textbox formControlName="groupPartyName" withTitle></app-textbox>
+			</div>
+			<div>
+				<label i18n>Юридическое наименование:</label>
+				<app-textbox formControlName="legalName" withTitle></app-textbox>
+			</div>
+			<div>
+				<label i18n>Наименование:</label>
+				<app-textbox formControlName="name" withTitle></app-textbox>
+			</div>
+			<div>
+				<label i18n>Адрес:</label>
+				<app-textbox formControlName="addressFull" withTitle></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>УНП:</label>
+				<app-textbox formControlName="unp" withTitle></app-textbox>
+			</div>
+		</div>
+
+		<div class="row">
+			<div>
+				<label i18n>Инспекция МНС:</label>
+				<app-textbox formControlName="nsiMnsName" withTitle></app-textbox>
+			</div>
+			<div>
+				<label i18n>Структурная принадлежность:</label>
+				<app-textbox formControlName="structureBelonging"></app-textbox>
+			</div>
+			<div>
+				<label i18n>Руководитель (ФИО):</label>
+				<app-textbox formControlName="directorFullName"></app-textbox>
+			</div>
+			<div>
+				<label i18n>На основании чего действует:</label>
+				<app-textbox formControlName="directorBase"></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>Код в своей УС:</label>
+				<app-textbox formControlName="partyCodeInErp"></app-textbox>
+			</div>
+		</div>
+
+		<div>
+			<label i18n>Описание:</label>
+			<app-textbox formControlName="description"></app-textbox>
+		</div>
+	</div>
+
+	<div>
+		<h4>Банковские реквизиты</h4>
+
+		<div class="row">
+			<div>
+				<label i18n>Наименование банка:</label>
+				<app-textbox formControlName="bankName" withTitle></app-textbox>
+			</div>
+			<div>
+				<label i18n>Адрес банка:</label>
+				<app-textbox formControlName="bankAddress" withTitle></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>Расчетный счет:</label>
+				<app-textbox formControlName="accountNumber" withTitle></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>Код банка:</label>
+				<app-textbox formControlName="bankCode" withTitle></app-textbox>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<h4>Контактная информация</h4>
+		<div class="row">
+			<div class="average-length">
+				<label class="required" i18n>Фамилия:</label>
+				<app-textbox formControlName="contactLastName"></app-textbox>
+			</div>
+			<div class="average-length">
+				<label class="required" i18n>Имя:</label>
+				<app-textbox formControlName="contactFirstName"></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>Отчество:</label>
+				<app-textbox formControlName="contactMiddleName"></app-textbox>
+			</div>
+			<div>
+				<label i18n>Должность:</label>
+				<app-textbox formControlName="contactJobPost"></app-textbox>
+			</div>
+		</div>
+		<div class="row">
+			<div class="average-length">
+				<label i18n>Контактный телефон:</label>
+				<app-textbox formControlName="contactPhone"></app-textbox>
+			</div>
+			<div class="average-length">
+				<label class="required" i18n>Email:</label>
+				<app-textbox formControlName="contactEmail"></app-textbox>
+			</div>
+			<div class="average-length">
+				<label i18n>Дата обновления данных:</label>
+				<app-datebox formControlName="dateUpdate" [withTime]="true"></app-datebox>
+			</div>
+		</div>
+	</div>
+
+	<span class="text">Поля, помеченные знаком<span class="red">*</span>, являются обязательными для заполнения.
+		<br>Если Вам необходимо внести изменения в нередактируемые поля, обратитесь к специалистам технической поддержки
+		Информационной системы Электронный бланк телефон: +375 17 388-18-77, email: supportprod@bbv.by</span>
+
+</section>
+<app-overlay></app-overlay>
+
+<template #popupMessage>
+	<dl>
+		<dt>ask</dt>
+		<dd i18n>Сохранить изменения в организации?</dd>
+		<dt>agreeButtonText</dt>
+		<dd i18n>Сохранить</dd>
+	</dl>
+</template>

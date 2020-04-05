@@ -1,0 +1,13 @@
+<div (appClickOutside)="onClickOutside()">
+	<input type="text" [class.error]="showError" (click)="expand=!expand" readonly="readonly"
+		[attr.disabled]="isDisabled ? isDisabled : null" [attr.class]="expand ? 'expand': null"
+		[placeholder]="placeholder ? placeholder : 'Не выбрано'"
+		[value]="withTime && value ? (value | date : 'short') : value ? (value | date : 'shortDate') : null">
+
+	<app-icon (click)="expand=!expand">insert_invitation</app-icon>
+
+	<app-select-date *ngIf="expand && !isDisabled" [value]="value" [withTime]="withTime"
+		(appSetNewDate)="setNewDate($event)" (appClear)="clear()" (appSetTime)="setTime($event)"
+		(appEnter)="selectDate($event)">
+	</app-select-date>
+</div>

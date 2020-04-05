@@ -1,0 +1,7 @@
+[[runners]]
+  name = "shell executor runner"
+  executor = "shell"
+  shell = "powershell"
+  [runners.cache]
+    type = "s3"
+    shared = true

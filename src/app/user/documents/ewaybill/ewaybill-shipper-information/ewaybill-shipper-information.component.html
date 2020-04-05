@@ -1,0 +1,31 @@
+<header>
+	<h3 i18n>Грузоотправитель</h3>
+	<button appSkin="dots" type="button" *ngIf="showContent" (click)="showContent = false">Свернуть</button>
+	<button appSkin="dots" type="button" *ngIf="!showContent" (click)="showContent = true">Развернуть</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div>
+			<label class="required">Наименование:</label>
+			<app-textbox maxLength="175"
+						 [formControl]="form?.get('name')" class="naming"
+						 isDisabled="true" name="Наименование (грузоотправитель)"></app-textbox>
+		</div>
+		<div>
+			<label class="required">Адрес:</label>
+			<app-textbox [formControl]="form?.get('address')"
+						 maxLength="70" isDisabled="true" class="naming" withTitle
+						 name="Адрес (грузоотправитель)"></app-textbox>
+		</div>
+		<div>
+			<label class="required">УНП</label>
+			<app-textbox [formControl]="form?.get('unp')"
+						 maxLength="70" isDisabled="true" class="unp" name="УНП (грузоотправитель)"></app-textbox>
+		</div>
+		<div>
+			<label>GLN</label>
+			<app-numberbox [formControl]="form?.get('gln')"
+						   maxLength="13" isDisabled="true" class="unp"></app-numberbox>
+		</div>
+	</div>
+</div>

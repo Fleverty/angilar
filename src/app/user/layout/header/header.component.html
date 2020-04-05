@@ -1,0 +1,55 @@
+<h1><img src="../../../../static/images/logo.svg" alt=""></h1>
+<ul>
+	<li [class.active]="router.isActive(router.createUrlTree(['/user/documents']), false)">
+		<a [routerLink]="['documents']" i18n>Документы</a>
+	</li>
+	<li [class.active]="router.isActive(router.createUrlTree(['/user/statistics']), false)"
+		(click)="isShowStatisticList = !isShowStatisticList" (appClickOutside)="isShowStatisticList = false">
+		<div>
+			<a i18n>Статистика</a>
+			<app-icon *ngIf="isShowStatisticList">keyboard_arrow_up</app-icon>
+			<app-icon *ngIf="!isShowStatisticList">keyboard_arrow_down</app-icon>
+		</div>
+		<app-drop-list *ngIf="isShowStatisticList" (clickTab)="goLink($event)" [tabs]="statisticTabs"
+			(click)="setTitle('Статистика')"></app-drop-list>
+		<!-- <a [routerLink]="['statistics']" i18n>Статистика</a> -->
+	</li>
+	<li [class.active]="router.isActive(router.createUrlTree(['/user/customization']), false)"
+		(click)="isShowList = !isShowList" (appClickOutside)="isShowList = false">
+		<div>
+			<a i18n>Настройка</a>
+			<app-icon *ngIf="isShowList">keyboard_arrow_up</app-icon>
+			<app-icon *ngIf="!isShowList">keyboard_arrow_down</app-icon>
+		</div>
+		<app-drop-list *ngIf="isShowList" (clickTab)="goLink($event)" [tabs]="tabs" (click)="setTitle('Настройка')">
+		</app-drop-list>
+	</li>
+</ul>
+<nav>
+	<app-icon *ngIf="!(hasNewInboxDocuments$ | async)">notifications_none</app-icon>
+	<app-icon *ngIf="hasNewInboxDocuments$ | async" (click)="openFirstUnreadDocument()">notifications_active</app-icon>
+	<app-icon [routerLink]="['customization/help']">help_outline</app-icon>
+	<div class="profile" [routerLink]="['customization/profile']" placeholder="(organization$ | async)?.name">
+		<div>{{(userProfile$ | async)?.lastName}} {{(userProfile$ | async)?.firstName}}</div>
+		<div>{{(organization$ | async)?.name}}</div>
+	</div>
+	<app-icon [routerLink]="['logout']">exit_to_app</app-icon>
+</nav>
+
+<template #tabsTemplate>
+	<dl>
+		<dt>/user/customization/organization</dt>
+		<dd i18n>Моя организация</dd>
+		<dt>/user/customization/profile</dt>
+		<dd i18n>Мой профиль</dd>
+	</dl>
+</template>
+
+<template #statisticTabsTemplate>
+	<dl>
+		<dt>/user/statistics/EWAYBILL</dt>
+		<dd i18n>По эНакладным</dd>
+		<dt>/user/statistics/ORDERS</dt>
+		<dd i18n>По Заказам</dd>
+	</dl>
+</template>

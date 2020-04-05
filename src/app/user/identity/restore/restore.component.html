@@ -1,0 +1,23 @@
+<section>
+	<app-logo></app-logo>
+	<header>
+		<app-icon routerLink="/user/login" routerLinkActive="router-link-active">arrow_back</app-icon>
+		<h3>Восстановление пароля</h3>
+	</header>
+	<form [formGroup]="form">
+		<label>Email</label>
+		<app-textbox formControlName="email" placeholder="Введите Email" name="Email"></app-textbox>
+		<nav>
+			<button appSkin="action" (click)="restore()">Восстановить</button>
+		</nav>
+	</form>
+</section>
+
+<template #errors>
+	<dl>
+		<dt>restorePasswordSuccess</dt>
+		<dd i18n>Новый пароль отправлен на email.</dd>
+		<dt>restorePasswordError</dt>
+		<dd i18n>Некорректно указан email, не найден пользователь с указанным email.</dd>
+	</dl>
+</template>

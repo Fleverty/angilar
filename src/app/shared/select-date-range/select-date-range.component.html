@@ -1,0 +1,27 @@
+<div class="input">
+	<input #start (input)="onInputStart($event.target.value)" (keyup.enter)="tryClose(start.value, end.value)"
+		(click)="$event.preventDefault();" type="date">
+	<span>—</span>
+	<input #end (keyup.enter)="tryClose(start.value, end.value)" (click)="$event.preventDefault();" type="date">
+</div>
+<button class="icon" (click)="appClose.emit()">
+	<app-icon>close</app-icon>
+</button>
+<div class="date-pickers">
+	<app-range-date-picker [value]="value" (valueChange)="onValueChange($event, 1)" (keyup.enter)="onEnter($event)">
+	</app-range-date-picker>
+	<app-range-date-picker [value]="value" (valueChange)="onValueChange($event, 2)" (keyup.enter)="onEnter($event)"
+		[date]="nextMonth">
+	</app-range-date-picker>
+</div>
+
+<div class="button-grid">
+	<button appSkin="simple" (click)="setToday()" i18n>Сегодня</button>
+	<button appSkin="simple" (click)="setThisWeek()" i18n>Эта неделя</button>
+	<button appSkin="simple" (click)="setThisMonth()" i18n>Этот месяц</button>
+	<button appSkin="simple" (click)="setThisYear()" i18n>Этот год</button>
+	<button appSkin="simple" (click)="setYesterday()" i18n>Вчера</button>
+	<button appSkin="simple" (click)="setLastWeek()" i18n>Прошл. нед.</button>
+	<button appSkin="simple" (click)="setLastMonth()" i18n>Прошл. мес.</button>
+	<button appSkin="simple" (click)="setLastYear()" i18n>Прошл. год</button>
+</div>

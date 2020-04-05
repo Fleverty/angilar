@@ -1,0 +1,45 @@
+:host {
+	display: inline-block;
+	position: relative;
+}
+
+input {
+	width: 100%;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 1px solid rgb(195, 199, 210);
+	padding: 5px 22px 5px 5px;
+	margin: 0;
+	line-height: 16px;
+	outline: none;
+}
+
+.expand {
+	cursor: default;
+	background-color: #f7f7f7;
+	border: 1px solid #9cb9fc;
+}
+
+app-icon {
+	color: var(--accent-color);
+	cursor: pointer;
+	font-size: 24px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+app-select-date-range {
+	position: absolute;
+	left: 0;
+	top: 100%;
+	z-index: 1;
+}
+
+div {
+	display: flex;
+	width: 100%;
+}

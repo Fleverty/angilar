@@ -1,0 +1,21 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2>
+			<app-order-header [supplierGLN]="order.supplierGln" [status]="documentStatePath.outgoing"></app-order-header>
+		</h2>
+	</div>
+</header>
+
+<section>
+	<app-order-view-main-info [order]="order"></app-order-view-main-info>
+	<app-order-view-products [order]="order" [status]="documentStatePath.outgoing"></app-order-view-products>
+</section>
+
+<footer>
+	<button appSkin="minor" (click)="createEwaybill()">Создать эНакладную</button>
+	<button appSkin="minor" (click)="createDesadv()">Создать уведомление об отгрузке</button>
+	<button appSkin="minor" (click)="exportXML()">Экспорт XML</button>
+	<button appSkin="minor" (click)="exportXSLX()">Экспорт XSLX</button>
+	<button appSkin="simple" (click)="prevPage()">Закрыть</button>
+</footer>

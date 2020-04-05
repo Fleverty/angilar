@@ -1,0 +1,31 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<h2 class="text">Электронный акт</h2>
+	</div>
+</header>
+
+<app-pending *ngIf="(confirmationStatus$ | async) === 'PENDING'">Подтверждение получения</app-pending>
+
+<section class="main-part">
+	<app-shared-einvoice-signature [draft]="einvoice"></app-shared-einvoice-signature>
+	<app-einvoice-commom-info-view [draft]="einvoice"></app-einvoice-commom-info-view>
+	<app-einvoice-view-products [draft]="einvoice"></app-einvoice-view-products>
+	<app-einvoice-view-confirmation></app-einvoice-view-confirmation>
+</section>
+
+<footer>
+	<button *ngIf="status ==='NOT_CONFIRMED_CANCEL'" appSkin="simple-gray no-shadow bold bordered"
+		(click)="confirmCancel()">Подвердить получение</button>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="checkEDS()">Проверить ЭЦП</button>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="exportXSLX()">Экспорт XSLX</button>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="exportXML()">Экспорт XML</button>
+	<button appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+</footer>
+
+<template #texts>
+	<dl>
+		<dt>proxyUnavailable</dt>
+		<dd>Не удалось подключиться к EDS Proxy</dd>
+	</dl>
+</template>

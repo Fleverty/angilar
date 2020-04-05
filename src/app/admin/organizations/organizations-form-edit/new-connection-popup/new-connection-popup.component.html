@@ -1,0 +1,24 @@
+<div class="container">
+	<header>
+		<h1>Добавить</h1>
+		<app-icon (click)="close$.next()">close</app-icon>
+	</header>
+	<main>
+		<div>
+			<label class="required">Тип сообщения:</label>
+			<app-selectbox></app-selectbox>
+		</div>
+		<div>
+			<label class="required">Коннектор получения:</label>
+			<app-selectbox></app-selectbox>
+		</div>
+		<div>
+			<label>GLN коннектора получения:</label>
+			<app-textbox></app-textbox>
+		</div>
+		<div>
+			<button appSkin="action">Создать</button>
+			<button appSkin="simple-cancel" (click)="close$.next()">Закрыть</button>
+		</div>
+	</main>
+</div>

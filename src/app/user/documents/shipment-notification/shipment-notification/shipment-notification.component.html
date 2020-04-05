@@ -1,0 +1,59 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<h2>Уведомление об отгрузке</h2>
+	</div>
+</header>
+
+<form *ngIf="(form$ | async) as form" [formGroup]="form">
+	<main>
+		<app-shipment-notification-common [form]="form.get('common')">
+		</app-shipment-notification-common>
+		<app-shipment-notification-supplier [form]="form.get('supplier')">
+		</app-shipment-notification-supplier>
+		<app-shipment-notification-buyer [form]="form.get('buyer')" [partners]="buyers$ | async"
+			(filterChanged)="buyersFilterChanged($event)" (appBuyerIdChanged)="onBuyerFormValueChanges($event, form)">
+		</app-shipment-notification-buyer>
+		<app-shipment-notification-shipment-place [form]="form.get('shipmentPlace')"
+			[shipmentPlaces]="shipmentPlaces$ | async" (filterChanged)="shipmentPlacesFilterChanged($event)">
+		</app-shipment-notification-shipment-place>
+		<app-shipment-notification-delivery-place [form]="form.get('deliveryPlace')" [storages]="deliveryStorages$ | async"
+			(filterChanged)="deliveryPlacesFilterChanged($event)">
+		</app-shipment-notification-delivery-place>
+		<app-shipment-notification-customer [form]="form.get('transportationCustomer')"
+			(fillWith)="fillRecipientHandler($event, form)">
+		</app-shipment-notification-customer>
+		<app-shipment-notification-recipient [form]="form.get('finalRecipient')">
+		</app-shipment-notification-recipient>
+		<app-shipment-notification-transport-details [form]="form.get('transportDetails')">
+		</app-shipment-notification-transport-details>
+		<app-shipment-notification-responsible-persons-details [form]="form.get('detailsResponsiblePersons')">
+		</app-shipment-notification-responsible-persons-details>
+		<app-shipment-notification-products-list [form]="form.get('products')">
+		</app-shipment-notification-products-list>
+	</main>
+
+	<footer>
+		<nav>
+			<button appSkin="action no-shadow bold bordered" (click)="send(form)">Отправить</button>
+			<button appSkin="action no-shadow bold bordered" (click)="save(form)">Сохранить</button>
+			<button appSkin="simple-gray no-shadow bold" *ngIf="draftId" (click)="delete()">Удалить</button>
+			<button appSkin="simple-gray no-shadow bold" class="change-total-sums" (click)="changeTotalSums(form)">Изменить
+				итоговые суммы</button>
+			<button appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+		</nav>
+	</footer>
+</form>
+
+<template #textsTemplate>
+	<dl>
+		<dt>emptyProducts</dt>
+		<dd>Добавьте товары</dd>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить уведомление об отгрузке?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

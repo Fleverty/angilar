@@ -1,0 +1,80 @@
+<header>
+	<app-button skin="action-save" icon="add" (click)="openPopup()" i18n>Добавить</app-button>
+	<app-button skin="simple" icon="delete" (click)="deleteSelectedStoragesHandler()" i18n>Удалить</app-button>
+</header>
+<app-storages-grid (selectItems)="selectStoragesHandler($event)" [items]="storages$ | async"
+	[properties]="headProperties" (appDeleteStorages)="deleteSingleStorageHandler($event)" (showMore)="nextPage()">
+</app-storages-grid>
+<footer *ngIf="(storages$ | async)?.length">Всего записей: {{(storages$ | async)?.length}}</footer>
+
+<template #headerProperties>
+	<dl>
+		<dt>status</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>status</dd>
+				<dt>name</dt>
+				<dd i18n>Статус</dd>
+			</dl>
+		</dd>
+		<dt>gln</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>gln</dd>
+				<dt>name</dt>
+				<dd i18n>GLN склада</dd>
+			</dl>
+		</dd>
+		<dt>address</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>addressFull</dd>
+				<dt>name</dt>
+				<dd i18n>Адрес</dd>
+			</dl>
+		</dd>
+		<dt>name</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>storageName</dd>
+				<dt>name</dt>
+				<dd i18n>Наименование</dd>
+			</dl>
+		</dd>
+		<dt>verified</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>verified</dd>
+				<dt>name</dt>
+				<dd i18n>Запрос на добавление</dd>
+			</dl>
+		</dd>
+		<dt>removalRequest</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>removalRequest</dd>
+				<dt>name</dt>
+				<dd i18n>Запрос на удаление</dd>
+			</dl>
+		</dd>
+	</dl>
+</template>
+
+<template #texts>
+	<dl>
+		<dt>msgFirstPart</dt>
+		<dd i18n>К складу с GLN</dd>
+		<dt>msgSecondPart</dt>
+		<dd i18n>привязаны пользователи. Вы действительно хотите удалить склад?</dd>
+		<dt>confirmText</dt>
+		<dd i18n>Продолжить</dd>
+		<dt>deleteError</dt>
+		<dd i18n>Вы не выбрали запись(и) для удаления.</dd>
+	</dl>
+</template>

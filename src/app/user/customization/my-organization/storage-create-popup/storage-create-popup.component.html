@@ -1,0 +1,126 @@
+<section>
+	<header>
+		<label i18n>Добавить</label>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<form [formGroup]="form">
+		<div>
+			<label class="required" i18n>GLN:</label>
+			<div class="control-box">
+				<app-numberbox formControlName="gln" maxLength="13"
+					[class.error]="form?.get('gln')?.errors  || (errorMessages && errorMessages['gln'])"></app-numberbox>
+				<ng-template *ngIf="form?.get('gln')?.errors || (errorMessages && errorMessages['gln'])"
+					[ngTemplateOutlet]="errorHandler" [ngTemplateOutletContext]="{ $implicit: getFirstErrorKey()}">
+				</ng-template>
+			</div>
+		</div>
+		<div>
+			<label i18n>Наименование:</label>
+			<app-textbox formControlName="storageName" maxLength="255" [class.error]="form?.get('storageName')?.errors">
+			</app-textbox>
+		</div>
+		<div>
+			<label i18n>Код склада в своей ERP системе:</label>
+			<app-textbox formControlName="storageCodeInErp" maxLength="35"
+				[class.error]="form?.get('storageCodeInErp')?.errors"></app-textbox>
+		</div>
+		<h3 i18n>Юридический адрес склада</h3>
+		<div>
+			<label class="required" i18n>Почтовый индекс:</label>
+			<app-textbox formControlName="postalCode" maxLength="36" [class.error]="form?.get('postalCode')?.errors">
+			</app-textbox>
+		</div>
+		<div>
+			<label class="required" i18n>Страна:</label>
+			<app-selectbox class="small-height" [data]="countries$ | async" formControlName="country"
+				(appNextPage)="updateCountriesFilter()" (appFilterChanges)="updateCountriesFilter($event.search)"
+				(appCollapse)="updateCountriesFilter('')" [class.error]="form?.get('countryId')?.errors"
+				[valueTransforFn]="transformFn">
+			</app-selectbox>
+		</div>
+		<div>
+			<label i18n>Регион:</label>
+			<app-selectbox class="small-height" [data]="regions$ | async" formControlName="region"
+				(appNextPage)="updateRegionsFilter()" (appFilterChanges)="updateRegionsFilter($event.search)"
+				(appCollapse)="updateRegionsFilter('')">
+			</app-selectbox>
+		</div>
+		<div>
+			<label i18n>Населенный пункт:</label>
+			<app-textbox formControlName="city" maxLength="255" [class.error]="form?.get('city')?.errors"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Адрес:</label>
+			<div class="custom-input" [class.error]="form?.get('address')?.errors">
+				<app-selectbox class="without-border small-height" [data]="streets$ | async" formControlName="addressStreetType"
+					(appNextPage)="updateStreetsFilter()" (appFilterChanges)="updateStreetsFilter($event.search)"
+					(appCollapse)="updateStreetsFilter('')">
+				</app-selectbox>
+				<app-textbox class="without-border" formControlName="address" maxLength="255">
+				</app-textbox>
+			</div>
+		</div>
+		<div>
+			<label i18n>№ дома, корпуса, офиса:</label>
+			<div class="custom-input"
+				[class.error-input]="form?.get('addressNumHouse')?.errors || form?.get('addressNumHousing')?.errors || form?.get('addressNumOffice')?.errors">
+				<app-textbox class="without-border" placeholder="№ дома" formControlName="addressNumHouse" maxLength="255">
+				</app-textbox>
+				<app-textbox class="without-border" placeholder="№ корпуса" formControlName="addressNumHousing" maxLength="255">
+				</app-textbox>
+				<app-textbox class="without-border" placeholder="№ офиса" formControlName="addressNumOffice" maxLength="255">
+				</app-textbox>
+			</div>
+		</div>
+	</form>
+	<footer>
+		<button [appSkin]="'action-save'" (click)="save()">Сохранить</button>
+		<button [appSkin]="'simple-cancel'" (click)="close()">Закрыть</button>
+	</footer>
+</section>
+
+<app-overlay #notification></app-overlay>
+
+<template #messagesErrors>
+	<dl>
+		<dt>FE-6-13</dt>
+		<dd i18n>Значение поля должно быть ровно 13 символов.</dd>
+		<dt>LE-2</dt>
+		<dd i18n>Значение не является GLN. Некорректное контрольное число.</dd>
+		<dt>LE-6</dt>
+		<dd i18n>Поле не соответствует формату.</dd>
+		<dt>LE-17</dt>
+		<dd i18n>Заполнените поле.</dd>
+		<dt>UK-1</dt>
+		<dd i18n>Для выбранной организации уже существует склад с указанным GLN/LLN.</dd>
+		<dt>UK-2</dt>
+		<dd i18n>Уже есть активный склад с таким GLN.</dd>
+		<dt>unknown</dt>
+		<dd i18n>Неизвестная ошибка.</dd>
+		<dt>serverErr</dt>
+		<dd i18n>Ошибка сервера.</dd>
+	</dl>
+</template>
+
+<ng-template #errorHandler let-errorKey>
+	<ng-container [ngSwitch]="errorKey">
+		<span class="error-text" *ngSwitchCase="'notGLN'" title="{{getMessage('LE-2')}}">
+			{{getMessage('LE-2')}}
+		</span>
+		<span class="error-text" *ngSwitchCase="'minlength'" title="{{getMessage('FE-6-13')}}">
+			{{getMessage('FE-6-13')}}
+		</span>
+		<span class="error-text" *ngSwitchCase="'maxlength'" title="{{getMessage('FE-6-13')}}">
+			{{getMessage('FE-6-13')}}
+		</span>
+		<ng-container *ngSwitchCase="'required'"></ng-container>
+		<ng-container *ngSwitchCase="'back'">
+			<ng-container *ngIf="errorMessages && errorMessages['gln']">
+				<span class="error-text" *ngFor="let err of errorMessages['gln']" title="{{getMessage(err)}}">
+					{{getMessage(err)}}
+				</span>
+			</ng-container>
+		</ng-container>
+		<span class="error-text" *ngSwitchDefault>Unknown message</span>
+	</ng-container>
+</ng-template>

@@ -1,0 +1,22 @@
+:host {
+	display: block;
+	padding: 4px 12px;
+	background: #fff;
+	outline: none;
+	transition: 0.2s;
+
+	cursor: pointer;
+
+	&:hover {
+		color: rgba(0, 0, 0, 0.8);
+	}
+
+	&.active {
+		color: #fff;
+		background: var(--accent-color);
+
+		&:hover {
+			color: #fff;
+		}
+	}
+}

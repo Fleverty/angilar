@@ -1,0 +1,11 @@
+app-button {
+	margin: 16px 0 12px 0;
+
+	&:first-of-type {
+		margin-left: auto;
+	}
+
+	&:not(:last-of-type) {
+		margin-right: 6px;
+	}
+}

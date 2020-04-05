@@ -1,0 +1,6 @@
+<button #button [appSkin]="skin" [ngClass]="{ 'disabled': isDisabled }" [type]="type">
+	<app-icon>{{icon}}</app-icon>
+	<span>
+		<ng-content></ng-content>
+	</span>
+</button>

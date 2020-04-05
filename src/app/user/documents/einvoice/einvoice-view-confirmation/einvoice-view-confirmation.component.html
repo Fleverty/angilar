@@ -1,0 +1,33 @@
+<ng-container *ngIf="providerConfirmation$ | async as providerConfirmation">
+	<div class="head">
+		<h3 i18n>Подтверждение операций провайдером</h3>
+		<button appSkin="dots" type="button" *ngIf="operationsBlockOpened" (click)="operationsBlockOpened = false"
+			i18n>Свернуть
+		</button>
+		<button appSkin="dots" type="button" *ngIf="!operationsBlockOpened" (click)="operationsBlockOpened = true"
+			i18n>Развернуть
+		</button>
+	</div>
+
+	<ng-container *ngIf="operationsBlockOpened">
+		<ng-container *ngFor="let operationList of providerConfirmation.operationList">
+			<h3>{{operationList.operationName}}</h3>
+			<table>
+				<tbody>
+					<tr *ngIf="operationList.operationDate">
+						<td i18n>Дата операции:</td>
+						<td>{{operationList.operationDate | date:'dd.MM.yyy HH:mm:ss'}}</td>
+					</tr>
+					<tr *ngIf="operationList.confirmDateReceived">
+						<td i18n>Подтверждение о получении:</td>
+						<td>{{operationList.confirmDateReceived | date:'dd.MM.yyy HH:mm:ss'}}</td>
+					</tr>
+					<tr *ngIf="operationList.confirmDateSent">
+						<td i18n>Подтверждение об отправке:</td>
+						<td>{{operationList.confirmDateSent | date:'dd.MM.yyy HH:mm:ss'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</ng-container>
+	</ng-container>
+</ng-container>

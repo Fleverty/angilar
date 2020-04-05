@@ -1,0 +1,52 @@
+main {
+	padding-top: 30px;
+	height: 100%;
+	box-sizing: border-box;
+
+	> div {
+		display: flex;
+		align-items: center;
+		margin-bottom: 10px;
+
+		> label {
+			margin-left: 5px;
+		}
+	}
+
+	> div:last-child {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		margin-top: 30px;
+
+		> div:first-child {
+			display: flex;
+			align-items: center;
+		}
+
+		> div:nth-child(2) {
+			> label {
+				display: block;
+				height: 16px;
+				color: rgb(85, 85, 85);
+				margin: 5px 0;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
+hr {
+	margin: 0;
+}
+
+label {
+	color: rgb(25, 25, 25);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+app-checkbox {
+	color: var(--accent-color);
+	font-size: 18px;
+}

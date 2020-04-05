@@ -1,0 +1,35 @@
+table {
+	width: 100%;
+	max-width: 1349px;
+	padding: 0 50px 26px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+thead > * {
+	display: inline-block;
+
+	&:first-child {
+		margin-right: 10px;
+	}
+}
+
+tbody > tr {
+	td:first-child {
+		width: 228px;
+	}
+
+	> * {
+		display: inline-block;
+	}
+}
+
+thead > button {
+	font-size: 16px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	margin-left: 2px;
+}

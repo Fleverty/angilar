@@ -1,0 +1,27 @@
+<header>
+	<div>
+		<label>Партнер:</label>
+		<app-selectbox placeholder="Выберите организацию"></app-selectbox>
+	</div>
+	<div>
+		<label>GLN партнера:</label>
+		<app-textbox></app-textbox>
+	</div>
+	<div>
+		<label>GLN склада партнера:</label>
+		<app-textbox></app-textbox>
+	</div>
+	<div>
+		<label>GLN склада организации:</label>
+		<app-textbox></app-textbox>
+	</div>
+</header>
+<hr>
+<main>
+	<div class="controls">
+		<app-button skin="simple-blue" icon="add">Добавить</app-button>
+		<app-button skin="simple-red" icon="delete">Удалить</app-button>
+	</div>
+	<app-grid [items]="testData" [properties]="testProperties" withoutFooter="true"></app-grid>
+</main>
+<hr>

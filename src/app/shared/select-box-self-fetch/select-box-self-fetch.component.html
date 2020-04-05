@@ -1,0 +1,18 @@
+{{ textValue }}
+<div (appClickOutside)="onClickOutside()">
+	<input type="text" [class.error]="showError" (click)="expand ? collapse() : unfold()"
+		[value]="(selected && selected[1]) || presetData[0][1]" readonly="readonly" [attr.class]="expand ? 'expand': null"
+		placeholder="{{placeholder}}">
+
+	<app-icon (click)="expand ? collapse() : unfold()">unfold_more</app-icon>
+
+	<app-list *ngIf="expand" [data]="data" (appInput)="input$$.next($event)" (appSelect)="select($event)"
+		[showSearch]="showSearch" (appScrolled)="onScrolled()"></app-list>
+</div>
+
+<template #preset>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Нет значения</dd>
+	</dl>
+</template>

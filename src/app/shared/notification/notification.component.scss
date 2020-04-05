@@ -1,0 +1,56 @@
+:host {
+	width: 100%;
+
+	&.success section {
+		background: rgb(255, 255, 255);
+		border-radius: 0px;
+		border: 2px solid var(--green-action);
+		box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.5);
+		app-icon {
+			color: var(--green-action);
+		}
+	}
+
+	&.error section {
+		background: rgb(255, 224, 218);
+		border-radius: 0px;
+		border: 1px solid var(--error-color);
+
+		color: var(--error-color);
+	}
+}
+
+section {
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+
+app-icon,
+label {
+	white-space: pre-wrap;
+	margin-top: 11px;
+	margin-bottom: 10px;
+}
+
+app-icon {
+	margin-right: 8px;
+}
+
+app-icon:last-of-type {
+	margin-left: auto;
+	margin-right: 0;
+	cursor: pointer;
+}
+
+label {
+	font-family: Roboto-Regular;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+:host-context(app-overlay) {
+	&:not(:first-of-type) {
+		margin-top: -1px;
+	}
+}

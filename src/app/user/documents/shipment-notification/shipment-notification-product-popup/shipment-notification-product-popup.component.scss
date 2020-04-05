@@ -1,0 +1,182 @@
+:host {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+	width: 800px;
+	height: 85%;
+	background: white;
+	z-index: 2;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+header {
+	line-height: 50px;
+	background: rgb(249, 249, 249);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px 0 26px;
+	margin-bottom: 26px;
+	border-radius: 7px 7px 0px 0px;
+
+	label {
+		font-family: Roboto-Bold;
+		line-height: 24px;
+	}
+
+	app-icon {
+		font-size: 24px;
+		cursor: pointer;
+	}
+}
+
+main {
+	padding: 0 0 0 26px;
+	overflow-x: hidden;
+
+	app-numberbox,
+	app-textbox,
+	app-selectbox {
+		width: 350px;
+	}
+
+	> section {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+
+		label {
+			width: 290px;
+			color: rgb(77, 77, 77);
+			font-family: Roboto-Medium;
+			font-size: 13px;
+			font-weight: 500;
+		}
+	}
+}
+
+.validation {
+	display: block;
+	font-family: Roboto-Regular;
+	font-size: 12px;
+	font-weight: normal;
+	margin-bottom: 4px;
+
+	> span {
+		padding-left: 5px;
+		color: rgb(255, 0, 0);
+	}
+
+	&:nth-child(2) {
+		margin-bottom: 12px;
+	}
+}
+
+footer {
+	display: flex;
+	flex-flow: column;
+	padding: 26px;
+
+	app-checkbox {
+		font-size: 18px;
+		margin-right: 7px;
+	}
+
+	button:first-child {
+		margin-right: 10px;
+	}
+
+	main {
+		margin-bottom: 26px;
+		padding: 12px 20px 16px 20px;
+		background: rgb(144, 153, 165);
+		border-radius: 3px;
+		height: 116px;
+		justify-content: space-between;
+		display: flex;
+		flex-direction: column;
+
+		div {
+			display: flex;
+			color: rgb(255, 255, 255);
+			font-family: Roboto-Regular;
+			font-size: 13px;
+			font-weight: normal;
+			cursor: default;
+		}
+
+		.check {
+			align-items: center;
+		}
+
+		div:first-child {
+			span {
+				line-height: 25px;
+				margin-right: 100px;
+			}
+		}
+
+		b {
+			font-family: Roboto-Medium;
+			font-weight: 500;
+		}
+	}
+}
+
+.sum {
+	flex-direction: column;
+
+	div {
+		align-items: center;
+		margin-bottom: 6px;
+	}
+
+	span {
+		margin-right: 10px;
+		width: 120px;
+	}
+
+	.sum-item {
+		font-family: Roboto-Medium;
+	}
+
+	app-numberbox {
+		margin-right: 180px;
+	}
+}
+
+.sum-text {
+	font-family: Roboto-Regular;
+	opacity: 0.8;
+}
+
+button {
+	line-height: 18px;
+	font-family: Roboto-Medium;
+	padding: 8px 25px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	margin-left: 2px;
+}
+
+.super-required:after {
+	content: "**";
+	color: black;
+	font-size: 15px;
+	margin-left: 2px;
+}

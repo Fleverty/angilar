@@ -1,0 +1,53 @@
+:host {
+	display: inline-block;
+	font-weight: normal;
+	height: 28px;
+}
+
+app-icon {
+	font-size: 24px;
+	margin-right: 2px;
+}
+
+span {
+	display: flex;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+button {
+	height: 100%;
+	padding: 0 8px;
+	transition: 0.2s;
+}
+
+:host-context(.save) button {
+	height: 40px;
+	width: 100%;
+
+	span {
+		font-size: 1.2em;
+	}
+}
+
+:host-context(.action-save) button {
+	border-radius: 3px;
+	box-shadow: none;
+	padding: 8px 22px;
+
+	font-family: Roboto-Medium;
+	font-size: 14px;
+	font-weight: 500;
+}
+
+:host-context([disabled]) button {
+	cursor: auto;
+	opacity: 0.8;
+	color: gray;
+}
+
+button.disabled {
+	cursor: auto;
+	opacity: 0.8;
+	color: gray;
+}

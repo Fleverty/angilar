@@ -1,0 +1,41 @@
+{
+	"compileOnSave": false,
+	"compilerOptions": {
+		"alwaysStrict": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"dom",
+			"es2016",
+			"dom.iterable",
+			"scripthost"
+		],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"typeRoots": [
+			"./node_modules/@types"
+		],
+		"types": [
+			"jasmine"
+		],
+		"rootDir": ".",
+		"baseUrl": "./src",
+		"paths": {
+			"@helper/*": [
+				"app/helper/*"
+			],
+			"@shared/*": [
+				"app/shared/*"
+			],
+			"@core/*": [
+				"app/core/*"
+			],
+			"@app/*": [
+				"app/*"
+			]
+		},
+		"skipLibCheck": true,
+		"strict": true,
+		"target": "es2016"
+	}
+}

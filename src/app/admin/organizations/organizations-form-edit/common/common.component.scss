@@ -1,0 +1,72 @@
+main {
+	h1 {
+		font-size: 16px;
+		font-weight: bold;
+	}
+}
+
+app-selectbox {
+	width: 320px;
+}
+
+label {
+	color: rgb(85, 85, 85);
+	font-size: 13px;
+	font-weight: 500;
+	margin-bottom: 4px;
+}
+
+section {
+	> div {
+		display: flex;
+		align-items: center;
+		margin-bottom: 12px;
+
+		> label {
+			margin: 0;
+		}
+
+		> div {
+			display: flex;
+			flex-direction: column;
+			margin-right: 12px;
+			align-items: flex-start;
+		}
+
+		> div > div {
+			display: flex;
+
+			> button {
+				margin-left: 4px;
+			}
+		}
+	}
+}
+
+.long {
+	width: 320px;
+}
+
+.short {
+	width: 180px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0px;
+}
+
+.description {
+	height: 50px;
+}
+
+.address {
+	app-textbox:nth-child(3),
+	app-textbox:nth-child(4),
+	app-textbox:nth-child(5) {
+		width: 100px;
+	}
+}

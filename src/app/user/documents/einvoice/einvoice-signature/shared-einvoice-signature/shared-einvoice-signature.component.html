@@ -1,0 +1,33 @@
+<div>
+	<table>
+		<h3>Подписи</h3>
+		<tbody>
+			<tr
+				*ngIf="draft?.supplierSignature?.certificateUserName || draft?.supplierSignature?.signatureDate || draft?.supplierSignature?.signatureTime">
+				<td>Подпись Поставщика/Исполнителя:</td>
+				<td>
+					{{[draft?.supplierSignature?.certificateUserName, draft?.supplierSignature?.signatureDate | date: 'dd.MM.yyy', draft?.supplierSignature?.signatureTime] | smartJoin}}
+				</td>
+			</tr>
+			<tr
+				*ngIf="draft?.buyerSignature?.certificateUserName || draft?.buyerSignature?.signatureDate || draft?.buyerSignature?.signatureTime">
+				<td>Подпись Покупателя/Заказчика:</td>
+				<td>
+					{{[draft?.buyerSignature?.certificateUserName, draft?.buyerSignature?.signatureDate | date: 'dd.MM.yyy', draft?.buyerSignature?.signatureTime] | smartJoin}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="draft?.cancelDocument?.signature">
+		<h3 class="red">Акт отменён:</h3>
+		<tbody>
+			<tr>
+				<td>Подпись Поставщика/Исполнителя:</td>
+				<td>
+					{{[draft?.cancelDocument?.signature.certificateUserName, draft?.cancelDocument?.signature.signatureDate | date: 'dd.MM.yyy', draft?.cancelDocument?.signature.signatureTime] | smartJoin}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

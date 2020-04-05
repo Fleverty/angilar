@@ -1,0 +1,4 @@
+<div *ngIf="isTriangle" class="triangle"></div>
+<ul>
+	<li *ngFor="let tab of tabs" (click)="emit(tab[0])">{{tab[1]}}</li>
+</ul>

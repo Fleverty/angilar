@@ -1,0 +1,4 @@
+<app-document-type routerLink="{{dt.id}}" (click)="switchDocumentType(dt.id)" *ngFor="let dt of documentTypes"
+	routerLinkActive="active" skipLocationChange=true [newInboxDocuments]="getInboxDocumentCount(dt.id)">
+	{{dt.name}}
+</app-document-type>

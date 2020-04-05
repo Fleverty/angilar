@@ -1,0 +1,89 @@
+:host {
+	display: inline-flex;
+	position: relative;
+}
+
+input {
+	width: 100%;
+	margin: 0;
+	padding: 6px 22px 6px 7px;
+	font-size: 13px;
+	line-height: 14px;
+	border-radius: 3px;
+	border: 1px solid rgb(195, 199, 210);
+	outline: none;
+	cursor: pointer;
+}
+
+div > .expand {
+	cursor: default;
+	background-color: #f7f7f7;
+	border: 1px solid rgb(156, 185, 252);
+}
+
+input:disabled {
+	color: black;
+	background-color: white;
+}
+
+app-list {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 100%;
+	z-index: 1;
+	margin-top: 4px;
+}
+
+app-icon {
+	color: var(--accent-color);
+	cursor: pointer;
+	font-size: 24px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	top: 0;
+	bottom: 0;
+	right: 0;
+}
+
+:host([disabled]) {
+	pointer-events: none;
+	input {
+		color: rgb(84, 84, 84);
+		opacity: 0.8;
+		background: #e8e8e8;
+	}
+}
+
+:host-context(.without-border) input {
+	border-radius: 0;
+	border: 1px solid transparent;
+}
+
+:host-context(.without-radius) input {
+	border-radius: 0;
+}
+
+div {
+	display: flex;
+	width: 100%;
+}
+
+:host-context(.red) {
+	input {
+		color: red;
+	}
+}
+
+:host-context(.error) input {
+	border: 1px solid var(--error-color);
+}
+
+:host-context(.small-height) app-list {
+	margin-bottom: 18px;
+}
+
+.error {
+	border: 1px solid var(--error-color);
+}

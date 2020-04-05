@@ -1,0 +1,6 @@
+<div class="container">
+	<input *ngIf="showSearch" #input type="text" (input)="onInput(input.value)">
+</div>
+<ul #ul (scroll)="onScroll(ul.scrollHeight, ul.scrollTop, ul.clientHeight)">
+	<li *ngFor="let item of list" (click)="select(item)">{{item[1]}}</li>
+</ul>

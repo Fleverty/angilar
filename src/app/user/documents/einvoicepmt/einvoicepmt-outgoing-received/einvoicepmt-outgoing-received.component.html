@@ -1,0 +1,20 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2 class="text">Счет-фактура для расчетов</h2>
+	</div>
+</header>
+
+<main *ngIf="document">
+	<app-shared-einvoicepmt-signature [document]="document"></app-shared-einvoicepmt-signature>
+	<app-einvoicepmt-view-main-info [document]="document"></app-einvoicepmt-view-main-info>
+	<app-einvoicepmt-view-products-list [document]="document"></app-einvoicepmt-view-products-list>
+	<app-einvoicepmt-view-confirmation></app-einvoicepmt-view-confirmation>
+</main>
+
+<footer>
+	<button type="button" appSkin="simple-gray no-shadow bold" (click)="checkSign(this.id)">Проверить ЭЦП</button>
+	<button appSkin="simple-gray no-shadow bold" (click)="export({ id: this.id, type: 'XSLX' })">Экспорт XSLX</button>
+	<button appSkin="simple-gray no-shadow bold" (click)="export({ id: this.id, type: 'XML' })">Экспорт XML</button>
+	<button type="button" appSkin="simple no-shadow bold bordered" (click)="prevPage()">Закрыть</button>
+</footer>

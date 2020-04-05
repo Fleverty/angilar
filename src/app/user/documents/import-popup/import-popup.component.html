@@ -1,0 +1,37 @@
+<header>
+	<h2>Импорт документов</h2>
+	<app-icon (click)="close()">close</app-icon>
+</header>
+
+<main>
+	<section>
+		<label>Файл для импорта: </label>
+		<input class="input-file" type="file" id="file" (change)="addFile($event)" />
+		<label class="custom-input" for="file" appDragAndDrop (fileDropped)="fileDropped($event)">
+			<div class="button">Выбрать файл</div>
+			<ng-container *ngIf="file">
+				{{file?.name}} {{size}}Мб
+			</ng-container>
+		</label>
+	</section>
+
+	<h4>Файл для импорта может быть только ZIP архивом.<br />Документы должны быть в формате XML. Максимальный размер
+		архива 5 Мб.</h4>
+</main>
+
+<footer>
+	<button type="button" [attr.disabled]="file ? null : '' " appSkin="action no-shadow bordered"
+		(click)="import(file)">Импортировать</button>
+	<button appSkin="simple no-shadow bold bordered" type="button" (click)="close()">Отмена</button>
+</footer>
+
+<template #texts>
+	<dl>
+		<dt>notOneFile</dt>
+		<dd>Выберите один файл.</dd>
+		<dt>no5MB</dt>
+		<dd>Размер файла превышает допустимый.</dd>
+		<dt>noZip</dt>
+		<dd>Формат файла не соответствует допустимому.</dd>
+	</dl>
+</template>

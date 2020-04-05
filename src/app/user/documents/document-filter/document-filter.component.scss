@@ -1,0 +1,37 @@
+:host {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	background: var(--grey-bg);
+	box-shadow: 0px 0px 2px 0px rgba(0, 10, 51, 0.22);
+	padding: 0 8px;
+
+	> div {
+		margin: 8px 0 12px 12px;
+	}
+}
+
+label {
+	display: block;
+	font-family: "Roboto-Medium";
+	font-size: 13px;
+	margin-bottom: 4px;
+	font-weight: 500;
+	color: rgb(77, 77, 77);
+}
+
+app-textbox,
+app-rangebox {
+	width: 11em;
+}
+
+app-selectbox {
+	width: 320px;
+}
+
+.clean {
+	display: flex;
+	align-items: flex-end;
+}

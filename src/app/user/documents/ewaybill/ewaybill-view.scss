@@ -1,0 +1,170 @@
+:host {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	font-size: 13px;
+	line-height: 16px;
+}
+
+.main-part {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 10;
+	background-color: white;
+	width: 100%;
+}
+
+main {
+	overflow-x: hidden;
+	overflow-y: auto;
+	box-shadow: 0 0 3px 0 rgba(0, 10, 51, 0.36);
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100%;
+
+	> div {
+		max-width: 1366px;
+		width: 100%;
+		margin: 0 auto;
+	}
+}
+
+header {
+	background-color: rgba(240, 240, 240, 0.76);
+	cursor: default;
+
+	> div {
+		display: flex;
+		padding: 23px 50px;
+		align-items: center;
+		max-width: 1266px;
+		margin: 0 auto;
+	}
+
+	h2 {
+		margin: 0 auto;
+		font-size: 24px;
+		font-weight: bold;
+		line-height: 24px;
+		color: #191919;
+	}
+
+	button {
+		display: flex;
+		align-items: center;
+		height: 24px;
+		padding: 0;
+		font-size: 24px;
+		color: #191919;
+		background: none;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		transition: 0.2s;
+
+		&:hover {
+			height: 32px;
+			margin: -4px;
+			padding: 4px;
+			color: rgba(25, 25, 25, 0.8);
+			background-color: #fff;
+			border-radius: 50%;
+		}
+	}
+
+	app-icon {
+		display: block;
+	}
+}
+
+h3 {
+	margin: 23px 0 9px;
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+div.info {
+	padding: 12px 50px 27px;
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	td {
+		padding-bottom: 9px;
+
+		&:first-child {
+			width: 228px;
+			font-weight: bold;
+			color: #4d4d4d;
+		}
+	}
+
+	tr {
+		&:last-child td {
+			padding-bottom: 0;
+		}
+	}
+}
+
+footer {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 26px 50px 27px 50px;
+}
+
+div.wrap-buttons {
+	max-width: 1266px;
+	margin: 0 auto;
+	width: 100%;
+
+	button {
+		margin-right: 10px;
+		padding: 9px 19px;
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 18px;
+		color: #191919;
+		border: 1px solid #e2e2e2;
+		border-radius: 3px;
+		cursor: pointer;
+		outline: none;
+		transition: 0.2s;
+
+		&:hover {
+			color: #4d4d4d;
+		}
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	.gray {
+		background: linear-gradient(
+			-180deg,
+			rgb(246, 246, 246) 0%,
+			rgb(226, 226, 226) 100%
+		);
+	}
+
+	.white {
+		background-color: #fff;
+	}
+}
+
+.warning {
+	color: var(--error-color);
+}
+
+app-pending {
+	z-index: 10;
+}

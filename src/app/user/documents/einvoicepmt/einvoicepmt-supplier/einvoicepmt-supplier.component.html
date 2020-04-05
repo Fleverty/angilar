@@ -1,0 +1,40 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Поставщик</legend>
+	<section class="inline">
+		<div>
+			<label i18n class="required">Поставщик:</label>
+			<app-selectbox formControlName="supplierName" name="Поставщик"></app-selectbox>
+		</div>
+		<div>
+			<label i18n class="required">Адрес:</label>
+			<app-textbox formControlName="supplierAddress" name="Адрес (поставщик)"></app-textbox>
+		</div>
+		<div>
+			<label i18n class="required">GLN:</label>
+			<app-textbox formControlName="supplierGln" name="GLN (поставщик)"></app-textbox>
+		</div>
+		<div>
+			<label i18n class="required">УНП:</label>
+			<app-textbox formControlName="supplierUnp" name="УНП (поставщик)"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Расчетный счет:</label>
+			<app-textbox formControlName="supplierAccountNumber"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Банк:</label>
+			<app-textbox formControlName="supplierBankName"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Адрес банка:</label>
+			<app-textbox formControlName="supplierBankAddress"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Код банка:</label>
+			<app-textbox formControlName="supplierBankCode"></app-textbox>
+		</div>
+	</section>
+	<app-optional-custom-field title="ОКПО" [control]="form.controls['supplierOkpo']">
+		<app-textbox formControlName="supplierOkpo" maxLength="12"></app-textbox>
+	</app-optional-custom-field>
+</fieldset>

@@ -1,0 +1,44 @@
+<div class="container">
+	<header>
+		<h3>Массовая отправка документов</h3>
+	</header>
+	<main>
+		<section>
+			<table>
+				<tbody>
+				<tr>
+					<td i18n>Всего:</td>
+					<td>{{ report?.failedCount + report?.successCount }}</td>
+				</tr>
+				<tr>
+					<td i18n>Успешно отправлены:</td>
+					<td>{{ report?.successCount }}</td>
+				</tr>
+				<tr>
+					<td i18n>Некорректные документы:</td>
+					<td>{{ report?.failedCount }}</td>
+				</tr>
+				</tbody>
+			</table>
+		</section>
+		<section class="additional">
+			<button (click)="showAdditional = !showAdditional">Подробнее</button>
+			<table *ngIf="showAdditional">
+				<thead>
+					<th>Номер документа</th>
+					<th>Ошибки</th>
+				</thead>
+				<tbody>
+					<tr *ngFor="let error of report?.errorReports">
+						<td>{{ error?.documentNumber }}</td>
+						<td>{{ error?.errorMessage }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<hr>
+	<footer>
+		<button i18n type="button" appSkin="simple-gray no-shadow bold bordered" (click)="close()">Закрыть</button>
+	</footer>
+</div>

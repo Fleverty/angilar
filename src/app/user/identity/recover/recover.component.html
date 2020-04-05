@@ -1,0 +1,43 @@
+<form [formGroup]="form" autocomplete="off" (submit)="submit(form.getRawValue())" novalidate>
+	<div class="field">
+		<label for="new-password">
+			<span>Пароль</span>
+			<ng-container *ngIf="form.touched && form.get('password') as pwd">
+				<span class="error" *ngIf="pwd.hasError('required')">Это обязaтельное поле</span>
+				<span *ngIf="pwd.hasError('minlength'); else maxlength" class="error">
+					Пароль должен содержать не менее 8 символов
+				</span>
+				<ng-template #maxlength>
+					<span class="error" *ngIf="pwd.hasError('maxlength'); else onlyLatin">
+						Пароль должен содержать не более 255 символов
+					</span>
+				</ng-template>
+				<ng-template #onlyLatin>
+					<span class="error" *ngIf="pwd.hasError('onlyLatinOrSpecialCharactersAllowed'); else specialCharacters">
+						Недопустимый символ в пароле
+					</span>
+				</ng-template>
+				<ng-template #specialCharacters>
+					<span class="error"
+						*ngIf="pwd.hasError('noOneSpecialCharacters') || pwd.hasError('noOneUppercaseLatinCharacters') || pwd.hasError('noOneLowercaseLatinCharacters')">
+						Пароль должен содержать латинские буквы в верхнем и нижнем регистрах и спецсимволы
+						[!@#$%^&*()]
+					</span>
+				</ng-template>
+			</ng-container>
+		</label>
+		<input name="new-password" autocomplete="new-password" type="password" formControlName="password">
+	</div>
+	<div class="field">
+		<label for="new-password-confirmation">
+			<span>Повторите пароль</span>
+			<span class="error" *ngIf="form.hasError('doNotMatch')">Пароли не совпадают</span>
+		</label>
+		<input name="new-password-confirmation" autocomplete="new-password" type="password"
+			formControlName="passwordConfirmation">
+	</div>
+	<nav>
+		<button type="submit" appSkin="action" [disabled]="form.invalid">Создать пароль</button>
+		<button type="button" appSkin="simple-cancel" routerLink="/user/login">Выйти</button>
+	</nav>
+</form>

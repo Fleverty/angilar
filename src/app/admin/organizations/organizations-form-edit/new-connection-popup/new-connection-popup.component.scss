@@ -1,0 +1,83 @@
+:host {
+	display: flex;
+	height: 100vh;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	background: rgba(0, 0, 0, 0.75);
+}
+
+.container {
+	height: 270px;
+	width: 600px;
+	background: rgb(255, 255, 255);
+	border-radius: 7px;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	padding: 13px 20px 13px 20px;
+	background: rgb(249, 249, 249);
+	justify-content: space-between;
+	border-radius: inherit;
+	height: 50px;
+	box-sizing: border-box;
+
+	> h1 {
+		margin: 0;
+		font-size: 16px;
+		font-weight: bold;
+	}
+}
+
+main {
+	padding: 26px 83px 26px 26px;
+	height: calc(100% - 50px);
+	box-sizing: border-box;
+
+	> div {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 12px;
+
+		&:last-child {
+			margin-top: 26px;
+			justify-content: flex-start;
+		}
+	}
+}
+
+label {
+	color: rgb(77, 77, 77);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0px;
+}
+
+app-selectbox,
+app-textbox {
+	width: 300px;
+}
+
+button {
+	height: 34px;
+	width: 100px;
+	margin-right: 10px;
+}
+
+app-icon {
+	font-size: 25px;
+
+	&:hover {
+		cursor: pointer;
+	}
+}

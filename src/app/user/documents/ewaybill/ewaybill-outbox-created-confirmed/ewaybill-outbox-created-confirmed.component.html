@@ -1,0 +1,22 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<h2 class="text" *ngIf="type === 'BLRDLN' || type === 'BLRDNR'">Товарная накладная</h2>
+		<h2 class="text" *ngIf="type === 'BLRWBL' || type === 'BLRWBR'">Товарно-транспортная накладная</h2>
+	</div>
+</header>
+
+<section>
+	<app-shared-ewaybill-signature [draft]="ewaybill"></app-shared-ewaybill-signature>
+	<app-ewaybill-view-main-info [draft]="ewaybill" [response]="ewaybill.responseDocument" [messageType]="type">
+	</app-ewaybill-view-main-info>
+	<app-ewaybill-view-products [draft]="ewaybill" [messageType]="type"></app-ewaybill-view-products>
+	<app-ewaybill-view-confirmation></app-ewaybill-view-confirmation>
+</section>
+
+<footer>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="check()">Проверить ЭЦП</button>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="exportXSLX()">Экспорт XSLX</button>
+	<button appSkin="simple-gray no-shadow bold bordered" (click)="exportXML()">Экспорт XML</button>
+	<button appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+</footer>

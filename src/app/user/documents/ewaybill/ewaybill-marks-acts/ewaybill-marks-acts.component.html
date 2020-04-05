@@ -1,0 +1,43 @@
+<header>
+	<h3>Составленные акты</h3>
+	<button appSkin="dots" type="button"
+		(click)="showContent = !showContent">{{showContent ? 'Свернуть' : 'Развернуть' }}</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div *ngIf="!documents?.length">
+			<label></label>
+			<app-button type="button" (click)="appAddDocument.emit()" skin="add-field" icon="add">Добавить акт</app-button>
+		</div>
+		<div *ngIf="documents?.length">
+			<p><button type="button" class="pointer" (click)="clearAllDocs()">
+					<app-icon>delete</app-icon> Удалить
+				</button></p>
+			<div formArrayName="documents" class="leave" *ngFor="let formGroup of documents?.controls; let i = index">
+				<ng-container [formGroupName]="i">
+					<app-datebox formControlName="actDate" [isDisabled]="i !== documents?.length - 1" name="Дата акта">
+					</app-datebox>
+					<app-textbox formControlName="actNumber" [isDisabled]="i !== documents?.length - 1" maxLength="70"
+						placeholder="Номер акта" name="Номер акта">
+					</app-textbox>
+					<app-textbox formControlName="actName" [isDisabled]="i !== documents?.length - 1" maxLength="512"
+						placeholder="Наименование" name="Наименование акта">
+					</app-textbox>
+					<div class="remove" (click)="removeDocument(i)">
+						<app-icon>delete</app-icon>
+					</div>
+					<button type="button" class="add" *ngIf="i === documents?.length - 1" (click)="appAddDocument.emit()">
+						<app-icon>add</app-icon>
+					</button>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</div>
+
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Свое</dd>
+	</dl>
+</template>

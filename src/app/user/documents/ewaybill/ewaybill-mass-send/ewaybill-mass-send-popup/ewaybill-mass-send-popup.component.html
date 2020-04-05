@@ -1,0 +1,29 @@
+<div class="container">
+	<header>
+		<h3>Массовая отправка документов</h3>
+	</header>
+	<main>
+		<section>
+			<table>
+				<tbody>
+					<tr>
+						<td i18n>Всего выбрано:</td>
+						<td>{{ selectedItems }}</td>
+					</tr>
+					<tr>
+						<td i18n>Доступно для отправки:</td>
+						<td>{{ maxSelected }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+		<section *ngIf="selectedItems > maxSelected">
+			<p>Одновременно можно отправить не более {{ maxSelected }} документов. При нажатии на "Продолжить" будет отправлена первые 1000 документов из выбранных.</p>
+		</section>
+	</main>
+	<hr>
+	<footer>
+		<button i18n type="button" appSkin="simple-gray no-shadow bold bordered" (click)="send.next()">Продолжить</button>
+		<button i18n type="button" appSkin="simple-gray no-shadow bold bordered" (click)="close()">Закрыть</button>
+	</footer>
+</div>

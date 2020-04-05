@@ -1,0 +1,19 @@
+<div *ngIf="draft?.cancelDocument?.signature.certificateUserName || draft?.cancelDocument?.signature.signatureDate || draft?.cancelDocument?.signature.signatureTime">
+	<table>
+		<h3 class="red">Накладная отменена</h3>
+		<tbody>
+		<tr>
+			<td>Подпись Грузоотправителя:</td>
+			<td>
+				{{[draft?.cancelDocument?.signature.certificateUserName, draft?.cancelDocument?.signature.signatureDate | date: 'dd.MM.yyy', draft?.cancelDocument?.signature.signatureTime] | smartJoin}}
+			</td>
+		</tr>
+		<tr *ngIf="draft?.cancelDocument && draft?.cancelDocument?.confirmation && draft?.cancelDocument?.confirmation?.signature as signature">
+			<td>Подпись Грузополучателя:</td>
+			<td>
+				{{[signature.certificateUserName, signature.signatureDate | date: 'dd.MM.yyy', signature.signatureTime] | smartJoin}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</div>

@@ -1,0 +1,6 @@
+<input type="file" #file (change)="addFiles(file.files);" />
+<div class="area">
+	<app-button class="save" [skin]="'simple'" (click)="file.value = null; file.click();">Выбрать файл</app-button>
+	<span *ngIf="!value">Файл не выбран</span>
+	<span *ngIf="value" class="file">{{value.name}} {{sizeToString(value.size)}}</span>
+</div>

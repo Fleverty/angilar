@@ -1,0 +1,65 @@
+<div class="grid-container" #container
+	(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+	<table *ngIf="items && listHeaders">
+		<thead>
+			<th></th>
+			<th>
+				<div class="icon">
+					<app-icon *ngIf="selectedItems && selectedItems?.length > 0 && selectedItems?.length < items.length"
+						(click)="selectAllItems(items)">
+						indeterminate_check_box</app-icon>
+					<app-icon *ngIf="!selectedItems || selectedItems?.length === 0" (click)="selectAllItems(items)">
+						check_box_outline_blank</app-icon>
+					<app-icon *ngIf="selectedItems && selectedItems?.length === items.length" (click)="clearSelectedItems()">
+						check_box</app-icon>
+				</div>
+			</th>
+			<th *ngFor="let header of properties">{{header.name}}</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let document of items; let i = index" (click)="clickItem(i)"
+				[class.selected]="clickedItem && clickedItem!.id === i" [class.checked]="checkedItem(document)">
+				<td></td>
+				<td>
+					<div class="icon">
+						<app-icon *ngIf="checkedItem(document)" (click)="selectedItem(document)">
+							check_box</app-icon>
+						<app-icon *ngIf="!checkedItem(document)" (click)="selectedItem(document)">
+							check_box_outline_blank</app-icon>
+					</div>
+				</td>
+				<td class="state">
+					<app-icon [style.color]="document.state ? 'green' : 'red'">{{document.state ? 'done_all' : 'close'}}
+					</app-icon>
+					<span>{{document.state ? "Активен" : "Не активен"}}</span>
+				</td>
+				<td>{{document.gln}}</td>
+				<td>{{document.addressFull}} </td>
+				<td>{{document.storageName}}</td>
+				<td>
+					<div class="icon">
+						<ng-container *ngIf="!document.verified">
+							Обрабатывается
+						</ng-container>
+					</div>
+				</td>
+				<td>
+					<div class="icon">
+						<ng-container *ngIf="document.removalRequest">
+							Обрабатывается
+						</ng-container>
+					</div>
+				</td>
+				<td>
+					<div class="icon">
+						<app-icon *ngIf="!document.removalRequest" (click)="deleteStorageHandler($event, document)">delete
+						</app-icon>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<app-overlay></app-overlay>

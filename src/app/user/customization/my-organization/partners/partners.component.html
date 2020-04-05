@@ -1,0 +1,26 @@
+<app-partners-grid [items]="partners$ | async" [properties]="headProperties" (showMore)="nextPage()">
+</app-partners-grid>
+<footer *ngIf="(partners$ | async)?.length">Всего записей: {{(partners$ | async)?.length}}</footer>
+
+<template #headerProperties>
+	<dl>
+		<dt>name</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>name</dd>
+				<dt>name</dt>
+				<dd i18n>Название</dd>
+			</dl>
+		</dd>
+		<dt>gln</dt>
+		<dd>
+			<dl>
+				<dt>key</dt>
+				<dd>gln</dd>
+				<dt>name</dt>
+				<dd i18n>GLN</dd>
+			</dl>
+		</dd>
+	</dl>
+</template>

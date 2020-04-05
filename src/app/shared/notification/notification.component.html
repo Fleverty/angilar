@@ -1,0 +1,7 @@
+<section [ngSwitch]="type">
+	<app-icon *ngSwitchCase="'success'">check_circle</app-icon>
+	<app-icon *ngSwitchCase="'error'">report_problem</app-icon>
+
+	<label>{{message}}</label>
+	<app-icon (click)="close$.next()">close</app-icon>
+</section>

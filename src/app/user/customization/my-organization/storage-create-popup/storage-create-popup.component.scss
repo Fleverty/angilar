@@ -1,0 +1,151 @@
+:host {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+button {
+	line-height: 24px;
+	font-size: 14px;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	width: 600px;
+	background: white;
+	border-radius: 7px;
+	max-height: 85vh;
+}
+
+header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	line-height: 50px;
+	background: rgb(249, 249, 249);
+	padding: 0 16px 0 26px;
+	margin-bottom: 26px;
+	border-radius: 7px 7px 0px 0px;
+
+	label {
+		font-family: Roboto-Bold;
+		line-height: 24px;
+	}
+
+	app-icon {
+		font-size: 24px;
+		cursor: pointer;
+	}
+}
+
+h3 {
+	font-family: Roboto-Bold;
+	font-size: 13px;
+	font-weight: bold;
+	margin: 26px 0 12px 0;
+}
+
+form {
+	padding: 0 0 0 26px;
+	overflow-x: hidden;
+
+	app-numberbox,
+	app-textbox,
+	app-selectbox {
+		width: 290px;
+	}
+
+	app-selectbox {
+		height: 28px;
+	}
+
+	div:last-child {
+		margin-bottom: 0;
+	}
+
+	div:first-child {
+		height: 43px;
+		margin-bottom: 0;
+	}
+}
+
+.custom-input {
+	display: flex;
+	flex-direction: row;
+	width: 290px;
+	border-radius: 3px;
+	border: 1px solid #c3c7d2;
+	margin: 0;
+	height: 28px;
+
+	app-selectbox {
+		width: 177px;
+		border-right: 1px solid #c3c7d2;
+	}
+
+	app-textbox {
+		border-right: 1px solid #c3c7d2;
+	}
+
+	app-textbox:last-child {
+		border-right: none;
+	}
+}
+
+.error-input {
+	border: 1px solid var(--error-color);
+}
+
+div {
+	display: flex;
+	margin-bottom: 15px;
+
+	label {
+		width: 220px;
+		color: rgb(77, 77, 77);
+		font-family: Roboto-Medium;
+		font-size: 13px;
+		line-height: 28px;
+	}
+}
+
+footer {
+	display: flex;
+	flex-flow: row;
+	height: 34px;
+	padding: 26px 0 29px 26px;
+
+	button {
+		height: 34px;
+		width: 100px;
+		font-size: 14px;
+		margin-right: 10px;
+	}
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0;
+}
+
+.control-box {
+	flex-direction: column;
+	width: 290px;
+}
+
+.error-text {
+	cursor: default;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: rgb(252, 121, 95);
+	font-size: 12px;
+	line-height: 16px;
+}

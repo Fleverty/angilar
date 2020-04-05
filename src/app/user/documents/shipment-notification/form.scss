@@ -1,0 +1,51 @@
+legend {
+	font-family: Roboto-Bold;
+	font-size: 16px;
+	font-weight: bold;
+	height: 24px;
+	line-height: 24px;
+}
+
+fieldset {
+	padding: 0;
+	border: none;
+}
+
+label {
+	font-family: Roboto-Medium;
+	font-size: 13px;
+	font-weight: 500;
+	height: 16px;
+	line-height: 16px;
+	margin-bottom: 4px;
+}
+
+app-numberbox,
+app-textbox,
+app-selectbox,
+app-datebox {
+	width: 350px;
+}
+
+app-selectbox {
+	display: flex;
+}
+
+app-datebox {
+	display: block;
+}
+
+div:first-of-type {
+	margin-top: 8px;
+}
+
+div {
+	margin-bottom: 15px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+}

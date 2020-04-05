@@ -1,0 +1,47 @@
+<main [formGroup]="filterForm" (appFormValueChanges)="appFormValue.emit($event)" *ngIf="filterForm">
+	<section>
+		<div>
+			<label>Контрагент</label>
+			<app-multiselect-box placeholder="Не выбрано" [formControl]="filterForm.controls['parties']"
+				[data]="parties$ | async" (appNextPage)="updatePartiesFilter()" (appFilterChanges)="updatePartiesFilter($event)"
+				(appCollapse)="updatePartiesFilter({search: ''})" [valueTransformFn]="transformFn">
+			</app-multiselect-box>
+		</div>
+		<div>
+			<label>Место доставки</label>
+			<app-multiselect placeholder="Указать место доставки" title="Выберите место доставки"
+				[formControl]="filterForm.controls['deliveryPoints']" [organization]="parties$ | async"
+				[data]="deliveryPoints$ | async" [filterValue]="deliveryPlaceFilterValue"
+				(organizationFilter)="updatePartiesFilter({search: $event})"
+				(appUpdateCriterionsFilter)="updateDeliveryPlaceFilter($event)" (appOnClosePopup)="closeDeliveryPointsPopup()"
+				(appOnScroll)="onScrollDeliveryPlaces()" [valueTransformFn]="pointTransformFn"></app-multiselect>
+		</div>
+		<div>
+			<label>Номер заказа</label>
+			<app-textbox [formControl]="filterForm.controls['documentNumber']"></app-textbox>
+		</div>
+		<div>
+			<label>Дата отправки</label>
+			<app-rangebox [formControl]="filterForm.controls['deliveryPeriod']" type="date">
+			</app-rangebox>
+		</div>
+		<div>
+			<app-radio-button-list [formControl]="filterForm.controls['orderDirection']" [data]="orderDirection">
+			</app-radio-button-list>
+		</div>
+		<div>
+			<app-button skin="simple-cancel" icon="clear" (click)="resetFilter()">Сбросить</app-button>
+		</div>
+	</section>
+</main>
+
+<template #orderDirection>
+	<dl>
+		<dt>all</dt>
+		<dd i18n>Все</dd>
+		<dt>1</dt>
+		<dd i18n>Исходящие</dd>
+		<dt>0</dt>
+		<dd i18n>Входящие</dd>
+	</dl>
+</template>

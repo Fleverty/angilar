@@ -1,0 +1,36 @@
+:host {
+	display: contents;
+}
+
+div.grid-item {
+	&.part {
+		&:not(.weekend) {
+			color: #fff;
+		}
+		background-color: var(--accent-color);
+		border-radius: 0;
+		opacity: 1;
+	}
+
+	&.end {
+		&:not(.weekend) {
+			color: #fff;
+		}
+		background-color: var(--accent-color);
+		border-radius: 0 3px 3px 0;
+		opacity: 1;
+	}
+
+	&.start {
+		&:not(.weekend) {
+			color: #fff;
+		}
+		background-color: var(--accent-color);
+		border-radius: 3px 0 0 3px;
+		opacity: 1;
+	}
+
+	&.start.end {
+		border-radius: 3px;
+	}
+}

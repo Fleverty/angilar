@@ -1,0 +1,11 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend class="required">Покупатель</legend>
+	<div>
+		<label>Покупатель</label>
+		<app-selectbox formControlName="buyerName" name="Покупатель" isDisabled></app-selectbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-textbox formControlName="buyerGln" name="Покупатель GLN" isDisabled="true"></app-textbox>
+	</div>
+</fieldset>

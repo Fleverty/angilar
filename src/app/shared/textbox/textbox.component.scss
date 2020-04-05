@@ -1,0 +1,48 @@
+:host {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline: none;
+}
+
+input {
+	width: 100%;
+	margin: 0;
+	padding: 6px 7px;
+	font-size: 13px;
+	line-height: 14px;
+	border-radius: 3px;
+	border: 1px solid rgb(195, 199, 210);
+	outline: none;
+	text-overflow: ellipsis;
+
+	&:focus {
+		border-color: var(--outline-color);
+	}
+
+	&:disabled {
+		color: #676767;
+		background-color: #efefef;
+	}
+
+	&::-webkit-input-placeholder {
+		color: rgba(84, 84, 84, 0.8);
+	}
+}
+
+:host-context(.without-border) input {
+	border-radius: 0;
+	border: 1px solid transparent;
+}
+
+:host-context(.without-radius) input {
+	border-radius: 0;
+}
+
+:host-context(.error) input {
+	border: 1px solid var(--error-color);
+}
+
+.error {
+	border: 1px solid var(--error-color);
+}

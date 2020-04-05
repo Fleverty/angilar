@@ -1,0 +1,74 @@
+:host {
+	height: 43%;
+	width: 44%;
+	background: white;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+	margin-top: 360px;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 18%;
+	padding: 0 16px 0 20px;
+	background: rgb(249, 249, 249);
+	border-radius: 7px 7px 0px 0px;
+	color: rgb(25, 25, 25);
+	font-size: 25px;
+	font-weight: bold;
+
+	label {
+		font-family: Roboto-Bold;
+	}
+
+	app-icon {
+		cursor: pointer;
+	}
+}
+
+main {
+	height: 52%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 30px 26px 0 26px;
+
+	:nth-child(1) {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		label {
+			color: rgb(77, 77, 77);
+			font-family: Roboto-Medium;
+			font-size: 16px;
+			font-weight: 500;
+		}
+
+		app-file-upload {
+			width: 68%;
+		}
+	}
+
+	:nth-child(2) {
+		color: rgb(103, 103, 103);
+		font-family: Roboto-Regular;
+		font-size: 12px;
+		font-weight: normal;
+	}
+}
+
+footer {
+	height: 30%;
+	padding: 26px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	app-button {
+		padding-right: 10px;
+	}
+}

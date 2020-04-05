@@ -1,0 +1,21 @@
+<div (appClickOutside)="isShowList = false">
+	<app-button *ngIf="(documentState$ | async) !== 'DRAFT'" icon="arrow_upward" skin="simple"
+				[disabled]="!selectIds.length" (click)="isShowList = !isShowList">
+		Экспорт
+		<app-icon>
+			{{isShowList ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}}
+		</app-icon>
+	</app-button>
+	<app-drop-list *ngIf="isShowList" [tabs]="tabs" (clickTab)="export($event)">
+	</app-drop-list>
+</div>
+<app-button skin="action" icon="add" (click)="create()" i18n>Создать счет-фактуру</app-button>
+
+<template #tabsTemplate>
+	<dl>
+		<dt>xlsx</dt>
+		<dd>Excel</dd>
+		<dt>xml</dt>
+		<dd>XML</dd>
+	</dl>
+</template>

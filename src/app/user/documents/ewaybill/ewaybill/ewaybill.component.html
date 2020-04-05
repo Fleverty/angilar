@@ -1,0 +1,82 @@
+<header>
+	<div>
+		<app-icon (click)="goBack()">arrow_back</app-icon>
+		<ng-container [ngSwitch]="draftType">
+			<h2 class="text" *ngSwitchCase="'BLRDLN'">
+				Товарная накладная
+			</h2>
+			<h2 class="text" *ngSwitchCase="'BLRWBL'">
+				Товарно-транспортная накладная
+			</h2>
+		</ng-container>
+	</div>
+	<div class="test" *ngIf="testIndicator">
+		Электронная накладная является тестовой или электронной копией ТТН/ТН
+	</div>
+</header>
+
+<app-pending *ngIf="(signingStatus$ | async) === 'PENDING'">Подписание</app-pending>
+
+<form *ngIf="(form$ | async) as form" [appSrollToFirstIvalidDerictive]="mainRef" (ngSubmit)="submit(form)"
+	[formGroup]="form">
+	<main #mainRef>
+		<section>
+			<app-ewaybill-common-information [form]="form.get('common')" [currencies]="currencies$ | async"
+				(appCurrencyFilterChanges)="updateCurrencyFilter($event)">
+			</app-ewaybill-common-information>
+			<app-ewaybill-shipper-information [form]="form.get('shipper')">
+			</app-ewaybill-shipper-information>
+			<app-ewaybill-receiver-information [form]="form.get('сonsignee')" [consignees]="consignees$ | async"
+				(appConsigneesFilterChanges)="updateConsigneeFilter($event)"
+				(appReceiverFormValueChanges)="onReceiverFormValueChanges($event, form)">
+			</app-ewaybill-receiver-information>
+			<app-ewaybill-freight-payer-information *ngIf="draftType === 'BLRWBL'" [form]="form.get('customer')"
+				(fillWith)="fillWithHandler(form, $event)">
+			</app-ewaybill-freight-payer-information>
+			<app-ewaybill-places-shipment-delivery [form]="form.get('places')" [generalGLNs]="generalGLNs$ | async"
+				(appGlnFilterChanges)="updateGeneralGLNsFilter($event)" [loadingPoints]="loadingPoints$ | async"
+				(appLoadingPointFilterChanges)="updateLoadingPointsFilter($event)" [unloadingPoints]="unloadingPoints$ | async"
+				(appUnloadingPointFilterChanges)="updateUnloadingPointsFilter($event)">
+			</app-ewaybill-places-shipment-delivery>
+			<app-other-details [form]="form.get('details')" [draftType]="draftType">
+			</app-other-details>
+			<app-ewaybill-attached-documents #documents [form]="form.get('attached')">
+			</app-ewaybill-attached-documents>
+			<app-ewaybill-extra-information #extraInfo [form]="form.get('extras')" [extraFieldsList]="extraFields$ | async"
+				(appExtraFieldsFilterChanges)="updateExtraFieldsFilter($event)">
+			</app-ewaybill-extra-information>
+		</section>
+		<app-ewaybill-products-list [form]="form.get('products')" [messageType]="draftType"></app-ewaybill-products-list>
+	</main>
+
+	<footer>
+		<nav>
+			<button appSkin="action no-shadow bold bordered" type="submit">Подписать</button>
+			<button type="button" appSkin="action no-shadow bold bordered" (click)="save(form)">Сохранить</button>
+			<button *ngIf="mode === 'edit'" type="button" appSkin="simple-gray no-shadow bold" (click)="delete()">Удалить
+			</button>
+			<button type="button" appSkin="simple-gray no-shadow bold" class="change-sum" (click)="changeSum(form)">Изменить
+				итоговые суммы</button>
+			<button type="button" appSkin="simple no-shadow bold bordered" (click)="goBack()">Закрыть</button>
+		</nav>
+	</footer>
+</form>
+
+<template #popupMessage>
+	<dl>
+		<dt>productsError</dt>
+		<dd>Добавьте товары</dd>
+		<dt>saveSuccess</dt>
+		<dd>Черновик сохранён</dd>
+		<dt>invalid</dt>
+		<dd>Невозможно подписать невалидную форму</dd>
+		<dt>proxyUnavailable</dt>
+		<dd>Не удалось подключиться к EDS Proxy</dd>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронной накладной?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

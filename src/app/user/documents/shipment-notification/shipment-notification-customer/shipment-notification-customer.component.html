@@ -1,0 +1,19 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Заказчик перевозки</legend>
+	<div>
+		<label>Заказчик</label>
+		<app-textbox formControlName="freightPayerName" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-numberbox maxLength="13" formControlName="freightPayerGln"></app-numberbox>
+	</div>
+	<div>
+		<label>УНП</label>
+		<app-textbox maxLength="70" formControlName="freightPayerUnp"></app-textbox>
+	</div>
+	<nav>
+		<button appSkin="simple" (click)="fillWith.emit('PROVIDER')">Поставщик</button>
+		<button appSkin="simple" (click)="fillWith.emit('CUSTOMER')">Покупатель</button>
+	</nav>
+</fieldset>

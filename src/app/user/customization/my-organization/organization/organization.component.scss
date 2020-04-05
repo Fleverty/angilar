@@ -1,0 +1,82 @@
+:host {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow-y: auto;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	margin: 25px 0 35px 50px;
+
+	div:first-child {
+		div {
+			&:first-of-type,
+			&:last-child {
+				margin-bottom: 12px;
+			}
+		}
+	}
+}
+
+h4 {
+	margin: 0;
+	font-family: Roboto-Bold;
+	line-height: 24px;
+	margin-bottom: 9px;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin: 0;
+
+	> div {
+		margin: 0 12px 12px 0;
+	}
+}
+
+label {
+	display: block;
+	font-family: "Roboto-Medium";
+	font-size: 13px;
+	margin-bottom: 4px;
+	font-weight: 500;
+	color: rgb(77, 77, 77);
+}
+
+.average-length {
+	app-textbox,
+	app-selectbox,
+	app-numberbox {
+		width: 200px;
+	}
+}
+
+app-textbox,
+app-selectbox {
+	width: 350px;
+}
+
+.red {
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0;
+}
+
+.text {
+	max-width: 686px;
+	font-size: 12px;
+	line-height: 16px;
+	margin-top: 16px;
+}

@@ -1,0 +1,22 @@
+<header>
+	<label>Добавление товара</label>
+	<app-icon (click)="close()">close</app-icon>
+</header>
+<main>
+	<div>
+		<label>Файл для импорта</label>
+		<app-file-upload></app-file-upload>
+	</div>
+	<div>
+		<p>
+			Файл для импорта может быть только ZIP архивом.
+		</p>
+		<p>
+			Документы должны быть в формате XML. Максимальный размер архива 5 Мб.
+		</p>
+	</div>
+</main>
+<footer>
+	<app-button class="save" [skin]="'action'" (click)="close()">Импортировать</app-button>
+	<app-button class="save" (click)="close()">Закрыть</app-button>
+</footer>

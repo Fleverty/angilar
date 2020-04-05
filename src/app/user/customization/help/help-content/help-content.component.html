@@ -1,0 +1,4 @@
+<markdown *ngIf="!(activeHelpContent$ | async); else content" [data]="'## Page not found!'"></markdown>
+<ng-template #content>
+	<markdown [data]="activeHelpContent$ | async"></markdown>
+</ng-template>

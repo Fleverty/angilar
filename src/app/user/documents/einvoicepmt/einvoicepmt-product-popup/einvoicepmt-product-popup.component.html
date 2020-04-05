@@ -1,0 +1,102 @@
+<div class="popup" *ngIf="form" [formGroup]="form">
+	<header>
+		<label i18n>Добавление товара</label>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<main>
+		<label class="validation"> <span>*</span> Обязательные для заполнения поля</label>
+		<label class="validation">** Должно быть заполнено хотя бы одно из полей отмеченных двумя
+			звездочками</label>
+		<section>
+			<label>№</label>
+			<app-textbox formControlName="position"></app-textbox>
+		</section>
+		<section>
+			<label class="super-required">GTIN:</label>
+			<app-numberbox formControlName="gtin" maxLength="14"></app-numberbox>
+		</section>
+		<section>
+			<label class="super-required">Код товара, присвоенный покупателем:</label>
+			<app-textbox formControlName="codeByBuyer" maxLength="35"></app-textbox>
+		</section>
+		<section>
+			<label class="super-required">Код товара, присвоенный поставщиком:</label>
+			<app-textbox formControlName="codeBySupplier" maxLength="35"></app-textbox>
+		</section>
+		<section>
+			<label class="required">Наименование товара:</label>
+			<app-textbox formControlName="fullName" maxLength="512" name="Наименование товара"></app-textbox>
+		</section>
+		<section>
+			<label class="required">Единица измерения:</label>
+			<app-select-box-self-fetch formControlName="uom" [option]="unitsOfMeasureSelectBoxOption" name="Единица измерения"></app-select-box-self-fetch>
+		</section>
+		<section>
+			<label class="required">Количество:</label>
+			<app-numberbox type="float" wholeMaxLength="10" decimalMaxLength="5" maxLength="15" formControlName="quantityDespatch" name="Количество">
+			</app-numberbox>
+		</section>
+		<section>
+			<label class="required">Цена:</label>
+			<app-numberbox type="float" wholeMaxLength="11" decimalMaxLength="4" maxLength="15"
+						   formControlName="priceNet" name="Цена"></app-numberbox>
+		</section>
+		<section>
+			<label>Ставка НДС, %:</label>
+			<app-numberbox type="float" wholeMaxLength="2" decimalMaxLength="4" maxLength="6"
+						   formControlName="vatRate" [withEmptyNull]="true"></app-numberbox>
+		</section>
+		<section>
+			<label>Примечание:</label>
+			<app-textbox formControlName="addInfo" maxLength="512"></app-textbox>
+		</section>
+		<app-einvoicepmt-product-additional-fields [formArray]="form.get('msgEinvoicepmtExtraFieldList')"></app-einvoicepmt-product-additional-fields>
+	</main>
+	<footer>
+		<main>
+			<div>
+				<span><b>Итого:</b></span>
+				<div [attr.class]="!rounding ? 'sum column' : 'sum'">
+					<div>
+						<span class="sum-text">Cтоимость, Br : * </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountWithoutVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountWithoutVat"
+									   type="float"
+									   wholeMaxLength="33" decimalMaxLength="2"></app-numberbox>
+					</div>
+					<div>
+						<span class="sum-text">Сумма НДС, Br : </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountVat" type="float"
+									   wholeMaxLength="33" decimalMaxLength="2"></app-numberbox>
+					</div>
+					<div>
+						<span class="sum-text">Сумма с НДС, Br : * </span>
+						<span class="sum-item" *ngIf="rounding">{{form?.value.amountWithVat || 0}}</span>
+						<app-numberbox *ngIf="!rounding" class="sum-item" formControlName="amountWithVat" type="float"
+									   wholeMaxLength="33" decimalMaxLength="2"></app-numberbox>
+					</div>
+				</div>
+			</div>
+			<div class="check">
+				<app-checkbox formControlName="autoSum" (change)="clickRounding($event, form)"></app-checkbox>
+				<span class="sum-text">Автоматический расчет сумм с округлением</span>
+			</div>
+		</main>
+		<nav>
+			<button appSkin="action-save" type="button" (click)="mode === 'CREATE' ? save(form) : edit(form)">Сохранить</button>
+			<button appSkin="simple-cancel" type="button" (click)="cancel()">Отмена</button>
+		</nav>
+	</footer>
+</div>
+
+<app-overlay #notification></app-overlay>
+
+<template #popupMessage>
+	<dl>
+		<dt>text</dt>
+		<dd>Должно быть заполнено хотя бы одно из полей, отмеченных двумя звездочками "GTIN", "Код товара, присвоенный покупателем", "Код товара, присвоенный поставщиком"</dd>
+		<dt>invalid</dt>
+		<dd>Невозможно сохранить невалидную форму</dd>
+	</dl>
+</template>

@@ -1,0 +1,18 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Покупатель</legend>
+	<div>
+		<label class="required">Покупатель/Заказчик</label>
+		<app-selectbox formControlName="buyerName" [data]="partners" (appNextPage)="filterChangeHandler()"
+			(appCollapse)="filterChangeHandler({ search: '' })" (appFilterChanges)="filterChangeHandler($event)"
+			name="Покупатель/Заказчик">
+		</app-selectbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-textbox formControlName="buyerGln" name="GLN покупателя"></app-textbox>
+	</div>
+	<div>
+		<label>УНП</label>
+		<app-textbox formControlName="buyerUnp" name="УНП покупателя"></app-textbox>
+	</div>
+</fieldset>

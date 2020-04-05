@@ -1,0 +1,88 @@
+:host {
+	margin-top: 4px;
+	position: relative;
+	display: block;
+	background: white;
+	padding: 6px 12px 12px;
+	border-radius: 3px;
+	box-shadow: 0px 0px 2px 0px rgba(46, 49, 66, 0.3),
+		0px 4px 12px 0px rgba(46, 49, 66, 0.3);
+}
+
+input {
+	border: 0;
+	outline: none;
+}
+
+input[type="date"] {
+	clip-path: inset(0px 17px 0px 0px);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="date"]::-webkit-clear-button,
+input[type="date"]::-webkit-inner-spin-button {
+	display: none;
+}
+
+.input {
+	display: flex;
+	margin-right: 24px;
+
+	> span {
+		margin: 0 12px;
+	}
+}
+
+app-icon {
+	font-size: 14px;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	height: 18px;
+	width: 18px;
+	color: white;
+	background: rgb(236, 238, 240);
+	border-radius: 9px;
+
+	user-select: none;
+	cursor: pointer;
+	border: 0;
+	outline: none;
+}
+
+.button-grid {
+	margin: -3px;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+button {
+	font-size: 12px;
+	font-family: Roboto-Medium;
+	margin: 3px;
+	height: 24px;
+	width: 89px;
+	background: white;
+}
+
+.date-pickers {
+	margin-top: 11px;
+	margin-bottom: 21px;
+	display: flex;
+
+	> * {
+		flex-grow: 1;
+		width: 100%;
+	}
+}
+
+app-range-date-picker:first-of-type {
+	margin-right: 24px;
+}

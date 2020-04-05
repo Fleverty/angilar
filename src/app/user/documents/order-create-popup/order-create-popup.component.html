@@ -1,0 +1,49 @@
+<section>
+	<header>
+		<h2>Создание нового документа</h2>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<form [formGroup]="form">
+		<div>
+			<b>Тип документа: </b>
+			<span class="with-error">
+				Заказ
+				<!-- <app-selectbox formControlName="type" placeholder="Выберите тип документа" [data]="type">
+				</app-selectbox> -->
+				<label *ngIf="form.get('type')?.hasError('required')" class="error">Тип документа не выбран</label>
+			</span>
+		</div>
+		<div>
+			<b>Вид документа: </b>
+			<span class="with-error">
+				Заказ на поставку
+				<!-- <app-selectbox formControlName="kind" placeholder="Выберите вид документа" [data]="orderKinds">
+				</app-selectbox> -->
+				<label *ngIf="form.get('kind')?.hasError('required')" class="error">Тип документа не выбран</label>
+			</span>
+		</div>
+	</form>
+	<footer>
+		<button [attr.disabled]="form.invalid ? '' : null" class="save" appSkin="action-save"
+			(click)="create(form.getRawValue())">Создать</button>
+		<button class="save" appSkin="simpleCancel" (click)="close()">Закрыть</button>
+	</footer>
+</section>
+
+<template #type>
+	<dl>
+		<dt>order</dt>
+		<dd i18n>Заказ</dd>
+	</dl>
+</template>
+
+<template #orderKinds>
+	<dl>
+		<dt>220</dt>
+		<dd i18n>Заказ на поставку</dd>
+		<dt>22E</dt>
+		<dd i18n>Инициативный заказ, сформированный поставщиком</dd>
+		<dt>70E</dt>
+		<dd i18n>Заказ на возврат товара</dd>
+	</dl>
+</template>

@@ -1,0 +1,54 @@
+<header>
+	<h3>Дополнительные поля</h3>
+	<button appSkin="dots" type="button"
+			(click)="showContent = !showContent">{{showContent ? 'Свернуть' : 'Развернуть'}}</button>
+</header>
+<main *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div *ngIf="!documents.length">
+			<app-button type="button" (click)="addExtraField()" skin="add-field" icon="add">Добавить дополнительное
+				поле
+			</app-button>
+		</div>
+		<div *ngIf="documents.length">
+			<div class="inline">
+				<label>Справочник полей:</label>
+				<button type="button" class="pointer" (click)="clearAllDocs()">
+					<app-icon>delete</app-icon>
+					Удалить
+				</button>
+			</div>
+			<div formArrayName="fields" class="leave line" *ngFor="let formGroup of documents.controls; let i = index">
+				<ng-container [formGroupName]="i">
+					<app-select-box-self-fetch formControlName="dictionary"
+											   [option]="additionalFieldsSelectBoxOption"
+											   [otherEmptyValue]="emptyValue"
+											   [attr.disabled]="i !== documents.length - 1">
+					</app-select-box-self-fetch>
+					<app-textbox formControlName="fieldName" placeholder="Наименование" maxLength="256"
+								 [isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary"
+								 name="Наименование (дополнительные поля)">
+					</app-textbox>
+					<app-textbox formControlName="fieldValue" placeholder="Значение" maxLength="2560"
+								 [isDisabled]="i !== documents.length - 1" name="Значение (дополнительные поля)">
+					</app-textbox>
+					<app-textbox formControlName="fieldCode" placeholder="Код" maxLength="6"
+								 [isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary">
+					</app-textbox>
+					<div class="remove" (click)="removeDocument(i)">
+						<app-icon>delete</app-icon>
+					</div>
+					<button type="button" class="add" *ngIf="i === documents.length - 1" (click)="addExtraField()">
+						<app-icon>add</app-icon>
+					</button>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</main>
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Свое</dd>
+	</dl>
+</template>

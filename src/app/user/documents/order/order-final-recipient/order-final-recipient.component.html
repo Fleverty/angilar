@@ -1,0 +1,11 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Конечный получатель</legend>
+	<div>
+		<label>Адрес</label>
+		<app-textbox formControlName="ultimateRecipientAddress" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-numberbox formControlName="ultimateRecipientGln" name="Конечный получатель GLN"></app-numberbox>
+	</div>
+</fieldset>

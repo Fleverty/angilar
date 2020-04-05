@@ -1,0 +1,27 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Реквизиты ответственных лиц</legend>
+	<section>
+		<app-optional-custom-field title="Отпуск разрешил" [control]="form.controls['shipperContact']">
+			<app-textbox formControlName="shipperContact" maxLength="150" placeholder="Должность, фамилия, инициалы">
+			</app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Товар к доставке принял" [control]="form.controls['deliveryContact']">
+			<app-textbox formControlName="deliveryContact" maxLength="150" placeholder="Должность, фамилия, инициалы">
+			</app-textbox>
+		</app-optional-custom-field>
+		<app-optional-custom-field title="Товар сдал" [control]="form.controls['shipFromContact']">
+			<app-textbox formControlName="shipFromContact" maxLength="150" placeholder="Должность, фамилия, инициалы">
+			</app-textbox>
+		</app-optional-custom-field>
+	</section>
+	<section>
+		<app-optional-custom-field title="Дата и номер доверенности" [control]="form.get('proxy')">
+			<section formGroupName="proxy">
+				<app-textbox formControlName="proxyNumber" maxLength="70" placeholder="Номер"></app-textbox>
+				<app-datebox formControlName="proxyDate" placeholder="Дата"></app-datebox>
+				<app-textbox formControlName="partyIssuingProxyName" maxLength="175"
+					placeholder="Наименование организации выдавшей доверенность"></app-textbox>
+			</section>
+		</app-optional-custom-field>
+	</section>
+</fieldset>

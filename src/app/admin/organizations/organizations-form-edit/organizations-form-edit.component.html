@@ -1,0 +1,28 @@
+<header>
+	<div>
+		<app-icon routerLink="../../../">keyboard_backspace</app-icon>
+		<h1>Редактировать</h1>
+	</div>
+	<hr>
+	<div>
+		<app-tab>
+			<app-tab-item routerLink="./" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active">Общее</app-tab-item>
+			<app-tab-item routerLink="./connection" routerLinkActive="active">Подключение</app-tab-item>
+			<app-tab-item routerLink="./partnerships" routerLinkActive="active">Партнерские связи</app-tab-item>
+			<app-tab-item routerLink="./rights" routerLinkActive="active">Права</app-tab-item>
+			<app-tab-item routerLink="./storage" routerLinkActive="active">Настройка складов</app-tab-item>
+			<app-tab-item routerLink="./additional" routerLinkActive="active">Дополнительные параметры</app-tab-item>
+			<app-tab-item routerLink="./third-parties" routerLinkActive="active">Третьи лица</app-tab-item>
+		</app-tab>
+	</div>
+</header>
+<main>
+	<router-outlet></router-outlet>
+</main>
+<footer>
+	<button appSkin="action-save">Отправить</button>
+	<button appSkin="simple-edit">Добавить пользователя</button>
+	<button appSkin="simple-edit">Добавить склад</button>
+	<button appSkin="simple-edit">Получить пароль для интеграции</button>
+	<button appSkin="simple-cancel" routerLink="../../../">Отмена</button>
+</footer>

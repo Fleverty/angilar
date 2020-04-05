@@ -1,0 +1,65 @@
+main {
+	display: flex;
+	flex-direction: column;
+	padding: 12px 20px;
+	background: rgb(245, 247, 250);
+	box-shadow: 0px 0px 2px 0px rgba(0, 10, 51, 0.5);
+}
+
+section {
+	display: flex;
+
+	> div {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		margin-right: 12px;
+		width: 200px;
+	}
+
+	&:last-child() {
+		width: auto;
+	}
+
+	.checkbox {
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		margin-top: auto;
+		margin-bottom: 7px;
+		width: auto;
+
+		> app-checkbox {
+			margin-right: 4px;
+		}
+
+		> label {
+			margin: 0;
+		}
+	}
+
+	&:first-child {
+		margin-bottom: 12px;
+
+		> div {
+			width: 320px;
+		}
+	}
+
+	&:last-child {
+		:last-child {
+			width: auto;
+		}
+	}
+}
+
+label {
+	color: rgb(77, 77, 77);
+	font-size: 13px;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.short {
+	width: 180px;
+}

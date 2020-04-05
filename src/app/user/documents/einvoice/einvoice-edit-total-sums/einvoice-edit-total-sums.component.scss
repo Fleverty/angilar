@@ -1,0 +1,96 @@
+:host {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+}
+
+section {
+	height: auto;
+	width: 44%;
+	background: white;
+	border-radius: 7px;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 50px;
+	padding: 0 16px 0 20px;
+	background: rgb(249, 249, 249);
+	border-radius: 7px 7px 0px 0px;
+	color: rgb(25, 25, 25);
+	font-size: 24px;
+	font-weight: bold;
+
+	label {
+		font-family: Roboto-Bold;
+	}
+
+	app-icon {
+		cursor: pointer;
+	}
+}
+
+main {
+	.sums {
+		display: flex;
+		flex-direction: column;
+		padding: 26px 26px 0 26px;
+
+		div {
+			display: flex;
+			align-items: center;
+			padding-bottom: 12px;
+			width: 490px;
+			justify-content: space-between;
+
+			label {
+				padding-right: 10px;
+				color: rgb(77, 77, 77);
+				font-family: Roboto-Medium;
+				font-size: 13px;
+			}
+
+			app-numberbox {
+				width: 300px;
+			}
+		}
+	}
+
+	.checkbox {
+		padding-left: 218px;
+		display: flex;
+		align-items: center;
+
+		app-checkbox {
+			color: blue;
+			font-size: 20px;
+			padding-right: 5px;
+		}
+
+		label {
+			color: rgb(25, 25, 25);
+			font-family: Roboto-Regular;
+			font-size: 12px;
+		}
+	}
+}
+
+footer {
+	padding: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	button {
+		height: 34px;
+		width: 100px;
+		font-size: 14px;
+		margin-right: 10px;
+	}
+}

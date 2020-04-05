@@ -1,0 +1,33 @@
+:host {
+	display: block;
+	padding-top: 35px;
+}
+
+.invoicepmtNumber {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	margin-top: 0;
+
+	app-textbox:first-of-type {
+		width: 50px;
+	}
+
+	app-textbox:nth-of-type(2) {
+		width: 150px;
+	}
+}
+
+app-checkbox {
+	vertical-align: middle;
+}
+
+.additional {
+	display: flex;
+	align-items: flex-end;
+	flex-wrap: wrap;
+
+	> * {
+		margin-right: 10px;
+	}
+}

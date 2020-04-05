@@ -1,0 +1,53 @@
+<header>
+	<h3>Дополнительные поля</h3>
+	<button appSkin="dots" type="button"
+		(click)="showContent = !showContent">{{showContent ? 'Свернуть' : 'Развернуть'}}</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line">
+		<div *ngIf="!documents.length">
+			<label></label>
+			<app-button type="button" (click)="addExtraField()" skin="add-field" icon="add">Добавить дополнительное
+				поле
+			</app-button>
+		</div>
+		<div *ngIf="documents.length">
+			<label><span>Справочник полей:</span>
+				<button type="button" class="pointer" (click)="clearAllDocs()">
+					<app-icon>delete</app-icon>
+					Удалить
+				</button>
+			</label>
+			<div formArrayName="documents" class="leave" *ngFor="let formGroup of documents.controls; let i = index">
+				<ng-container [formGroupName]="i">
+					<app-selectbox formControlName="dictionary" [data]="extraFieldsList" [otherEmptyValue]="emptyValue"
+						[isDisabled]="i !== documents.length - 1" (appNextPage)="extraFieldsNextPage()"
+						(appFilterChanges)="onExtraFieldsFilterChanges($event)"
+						(appCollapse)="onExtraFieldsFilterChanges({search: ''})"></app-selectbox>
+					<app-textbox formControlName="fieldName" placeholder="Наименование" maxLength="256"
+						[isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary"
+						name="Наименование (дополнительные поля)">
+					</app-textbox>
+					<app-textbox formControlName="fieldValue" placeholder="Значение" maxLength="256"
+						[isDisabled]="i !== documents.length - 1" name="Значение (дополнительные поля)">
+					</app-textbox>
+					<app-textbox formControlName="fieldCode" placeholder="Код" maxLength="6"
+						[isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary">
+					</app-textbox>
+					<div class="remove" (click)="removeDocument(i)">
+						<app-icon>delete</app-icon>
+					</div>
+					<button type="button" class="add" *ngIf="i === documents.length - 1" (click)="addExtraField()">
+						<app-icon>add</app-icon>
+					</button>
+				</ng-container>
+			</div>
+		</div>
+	</div>
+</div>
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Свое</dd>
+	</dl>
+</template>

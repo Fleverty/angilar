@@ -1,0 +1,70 @@
+<div class="grid-container" #container
+	(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+	<table *ngIf="items && listHeaders">
+		<thead>
+			<tr>
+				<th></th>
+				<th>
+					<div class="icon">
+						<app-icon *ngIf="selectedItems && selectedItems?.length > 0 && selectedItems?.length < items.length"
+							(click)="selectAllItems(items)">
+							indeterminate_check_box</app-icon>
+						<app-icon *ngIf="!selectedItems || selectedItems?.length === 0" (click)="selectAllItems(items)">
+							check_box_outline_blank</app-icon>
+						<app-icon *ngIf="items.length > 0 && selectedItems && selectedItems?.length === items.length"
+							(click)="clearSelectedItems()">
+							check_box</app-icon>
+					</div>
+				</th>
+				<th *ngFor="let header of properties">{{header.name}}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let item of items" (click)="clickItem(item)" [class.visited]="highlightId === item.id"
+				[class.checked]="checkedItem(item)">
+				<td>
+					<!-- <div class="icon">
+						<app-icon>fiber_manual_record</app-icon>
+					</div> -->
+				</td>
+				<td>
+					<div class="icon" (click)="stopPropagation($event)">
+						<app-icon *ngIf="checkedItem(item)" (click)="selectedItem(item)">
+							check_box</app-icon>
+						<app-icon *ngIf="!checkedItem(item)" (click)="selectedItem(item)">
+							check_box_outline_blank</app-icon>
+					</div>
+				</td>
+				<td *ngFor="let header of properties">
+					<ng-container [ngSwitch]="header.type">
+						<div class="icon" *ngSwitchCase="'status'">{{item[header.key] && item[header.key].name}}</div>
+						<div *ngSwitchCase="'date'">
+							{{header.key === "dateTime" ? (item[header.key] | date: "dd.MM.yyyy HH:mm:ss"):(item[header.key] | date: "dd.MM.yyyy")}}
+						</div>
+						<div *ngSwitchCase="'boolean'">
+							<app-icon>{{item[header.key] ? "done" : "clear"}}</app-icon>
+						</div>
+						<div *ngSwitchDefault>{{item[header.key]}}</div>
+					</ng-container>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<footer *ngIf="items && items.length > 0 && !withoutFooter" [ngSwitch]="currentDocumentTypeId$ | async">
+	<ng-container *ngSwitchCase="'EWAYBILL'" i18n>
+		Выделено электронных накладных: {{selectedItems ? selectedItems!.length: 0}} из {{items.length}}
+	</ng-container>
+	<ng-container *ngSwitchCase="'ORDERS'">
+		Выделено заказов: {{selectedItems ? selectedItems!.length: 0}} из {{items.length}}
+	</ng-container>
+	<ng-container *ngSwitchCase="'DESADV'">
+		Выделено уведомлений об отгрузке: {{selectedItems ? selectedItems!.length: 0}} из {{items.length}}
+	</ng-container>
+	<ng-container *ngSwitchCase="'EINVOICE'">
+		Выделено электронных актов: {{selectedItems ? selectedItems!.length: 0}} из {{items.length}}
+	</ng-container>
+	<ng-container *ngSwitchCase="'EINVOICEPMT'">
+		Выделено электронных счет-фактур: {{selectedItems ? selectedItems!.length: 0}} из {{items.length}}
+	</ng-container>
+</footer>

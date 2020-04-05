@@ -1,0 +1,74 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Общее</legend>
+	<div class="error" *ngIf="[3, 5].indexOf(form.getRawValue().deliveryStatus) !== -1">
+		<label>Текст ошибки при доставке:</label>
+		<label class="red">{{form?.getRawValue().deliveryError}}</label>
+	</div>
+	<div>
+		<label>Номер заказа, присвоенный отправителем</label>
+		<app-textbox formControlName="senderOrderNumber" placeholder="Будет присвоен автоматически, после сохранения">
+		</app-textbox>
+	</div>
+	<div>
+		<label>Дата заказа</label>
+		<app-datebox formControlName="orderDate"></app-datebox>
+	</div>
+	<div>
+		<label>Вид заказа</label>
+		<app-selectbox formControlName="orderKindId" #kind [data]="orderKinds" [class.red]="kind.value==='70E'">
+		</app-selectbox>
+	</div>
+	<div>
+		<label>Номер договора</label>
+		<app-textbox formControlName="contractNumber" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label class="required">Дата и время доставки</label>
+		<app-datebox formControlName="deliveryDate" [withTime]="true" name="Дата и время доставки"></app-datebox>
+	</div>
+	<div>
+		<label>Дата и время отгрузки</label>
+		<app-datebox formControlName="shipmentDate" [withTime]="true"></app-datebox>
+	</div>
+	<div>
+		<label class="required">Валюта</label>
+		<app-selectbox formControlName="currency" [data]="currencies$ | async" placeholder="Выберите валюту"
+			(appNextPage)="updateCurrenciesFilter()" (appFilterChanges)="updateCurrenciesFilter($event.search)"
+			(appCollapse)="updateCurrenciesFilter('')" [valueTransforFn]="transformFn" name="Валюта">
+		</app-selectbox>
+	</div>
+	<div>
+		<label>Автор заказа</label>
+		<app-textbox formControlName="orderContactName" maxLength="35" name="Автор заказа"></app-textbox>
+	</div>
+	<div>
+		<label>Email автора заказа</label>
+		<app-textbox formControlName="orderContactEmail" maxLength="255"></app-textbox>
+	</div>
+	<div>
+		<label>Телефон автора заказа</label>
+		<app-textbox formControlName="orderContactPhone" maxLength="255"></app-textbox>
+	</div>
+</fieldset>
+
+<template #orderKinds>
+	<dl>
+		<dt>220</dt>
+		<dd i18n>Заказ на поставку</dd>
+		<dt>22E</dt>
+		<dd i18n>Инициативный заказ, сформированный поставщиком</dd>
+		<dt>70E</dt>
+		<dd i18n>Заказ на возврат товара</dd>
+	</dl>
+</template>
+
+<template #processingStatuses>
+	<dl>
+		<dt>draft</dt>
+		<dd i18n>Черновик</dd>
+		<dt>cancel</dt>
+		<dd i18n>Отмене покупателем</dd>
+		<dt>applyAndCancel</dt>
+		<dd i18n>Принят. Отменен покупателем</dd>
+	</dl>
+</template>

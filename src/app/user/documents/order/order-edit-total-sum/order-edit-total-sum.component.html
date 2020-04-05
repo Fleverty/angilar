@@ -1,0 +1,32 @@
+<section>
+	<header>
+		<label>Итоговые суммы</label>
+		<app-icon (click)="close()">close</app-icon>
+	</header>
+	<main *ngIf="form && form.getRawValue() as formValue" [formGroup]="form">
+		<div class="sums">
+			<div>
+				<label>Стоимость: </label>
+				<app-numberbox type="float" [isDisabled]="formValue.autoSum" formControlName="totalAmountWithoutVat">
+				</app-numberbox>
+			</div>
+			<div>
+				<label>Сумма НДС: </label>
+				<app-numberbox type="float" [isDisabled]="formValue.autoSum" formControlName="totalAmountVat"></app-numberbox>
+			</div>
+			<div>
+				<label>Стоимость с НДС: </label>
+				<app-numberbox type="float" [isDisabled]="formValue.autoSum" formControlName="totalAmountWithVat">
+				</app-numberbox>
+			</div>
+		</div>
+		<div class="checkbox">
+			<app-checkbox formControlName="autoSum"></app-checkbox>
+			<label>Автоматический расчет сумм с округлением</label>
+		</div>
+	</main>
+	<footer>
+		<button class="save" appSkin="action-save" (click)="save(form)">Сохранить</button>
+		<button class="save" appSkin="simpleCancel" (click)="close()">Закрыть</button>
+	</footer>
+</section>

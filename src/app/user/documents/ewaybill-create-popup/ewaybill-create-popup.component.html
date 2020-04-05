@@ -1,0 +1,38 @@
+<section>
+	<header>
+		<h2>Параметры новой накладной</h2>
+		<button (click)="close()" type="button">
+			<app-icon>close</app-icon>
+		</button>
+	</header>
+	<div [formGroup]="form" class="main">
+		<div>
+			<b>Тип накладной: </b>
+			<div>Типовая</div>
+		</div>
+		<div>
+			<b>Вид накладной: </b>
+			<app-radio-button-list formControlName="draftType" [data]="draftType"></app-radio-button-list>
+		</div>
+		<div>
+			<b></b>
+			<span>
+				<app-checkbox formControlName="isTest"></app-checkbox>
+				<label>Тестовая электронная накладная <br>(не имеет юридической силы)</label>
+			</span>
+		</div>
+	</div>
+	<footer>
+		<button class="save" appSkin="action-save" (click)="onCreate()">Создать</button>
+		<button class="save" appSkin="simpleCancel" (click)="close()">Закрыть</button>
+	</footer>
+</section>
+
+<template #draftType>
+	<dl>
+		<dt>BLRWBL</dt>
+		<dd i18n>ТТН</dd>
+		<dt>BLRDLN</dt>
+		<dd i18n>ТН</dd>
+	</dl>
+</template>

@@ -1,0 +1,137 @@
+:host {
+	width: 100%;
+	max-width: 600px;
+	max-height: 276px;
+	background-color: #fff;
+	border-radius: 7px;
+}
+
+h2 {
+	margin: 0;
+	color: rgb(25, 25, 25);
+	font-family: Roboto-Bold;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 13px 10px 13px 20px;
+	background-color: rgba(240, 240, 240, 0.76);
+	border-radius: 7px 7px 0px 0px;
+	color: rgb(25, 25, 25);
+	font-size: 24px;
+	cursor: default;
+
+	button {
+		display: flex;
+		align-items: center;
+		padding: 0;
+		font-size: 24px;
+		background: none;
+		border: none;
+		outline: none;
+	}
+
+	app-icon {
+		font-weight: normal;
+		cursor: pointer;
+		transition: 0.2s;
+
+		&:hover {
+			color: rgba(0, 0, 0, 0.7);
+		}
+	}
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	padding: 0 26px 0;
+}
+
+section {
+	display: flex;
+	align-items: center;
+	height: 108px;
+	justify-content: space-between;
+
+	button {
+		margin-left: 12px;
+		height: 28px;
+	}
+}
+
+label {
+	color: rgb(77, 77, 77);
+	font-family: Roboto-Medium;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+h4 {
+	color: rgb(103, 103, 103);
+	font-size: 12px;
+	font-weight: normal;
+	line-height: 16px;
+	margin: 0;
+	cursor: default;
+}
+
+footer {
+	padding: 25px 26px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+footer > button {
+	height: 36px;
+	padding: 0 20px;
+	font-size: 14px;
+	font-weight: 500;
+	font-family: Roboto-Medium;
+
+	&:not(:last-of-type) {
+		margin-right: 10px;
+	}
+
+	&:disabled {
+		cursor: default;
+		opacity: 0.5;
+	}
+}
+
+input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.custom-input {
+	display: flex;
+	align-items: center;
+	border-radius: 3px;
+	border: 1px dashed rgb(195, 199, 210);
+	height: 52px;
+	width: 410px;
+	outline: none;
+	cursor: pointer;
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 12px 0 12px;
+		line-height: 28px;
+		font-family: Roboto-Regular;
+		border-radius: 4px;
+		padding: 0 8px;
+		box-shadow: 0 1px 2px 0 rgba(57, 86, 249, 0.18),
+			0 2px 4px 0 rgba(10, 4, 52, 0.1);
+	}
+}

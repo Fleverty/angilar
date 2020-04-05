@@ -1,0 +1,14 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend class="required">Место доставки</legend>
+	<div>
+		<label>Адрес</label>
+		<app-selectbox formControlName="dictionary" [data]="storages" (appNextPage)="filterChangeHandler()"
+			(appCollapse)="filterChangeHandler({ search: '' })" (appFilterChanges)="filterChangeHandler($event)"
+			name="Место доставки Адрес" [valueTransforFn]="transformFn">
+		</app-selectbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-numberbox formControlName="deliveryPointGln" [isDisabled]="true" name="Место доставки GLN"></app-numberbox>
+	</div>
+</fieldset>

@@ -1,0 +1,195 @@
+<main>
+	<section>
+		<h1>Основные данные</h1>
+		<div>
+			<div>
+				<label class="required" *hint="hint">GLN:</label>
+				<div>
+					<app-textbox></app-textbox>
+					<button appSkin="simple-edit">Проверить GLN</button>
+					<button appSkin="simple-edit">Получить LLN</button>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Группа компаний:</label>
+				<app-selectbox></app-selectbox>
+			</div>
+			<div>
+				<label class="required">Юридическое наименование:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Наименование:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label *hint="hint">УНП:</label>
+				<app-textbox></app-textbox>
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>Тип подключения</h1>
+		<div>
+			<div>
+				<label>Тип подключения:</label>
+				<app-selectbox></app-selectbox>
+			</div>
+			<div>
+				<label>Коннектор подключения:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Список провайдеров:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+		</div>
+		<div>
+			<app-checkbox></app-checkbox>
+			<label>Работает через других провайдеров</label>
+		</div>
+	</section>
+	<section>
+		<h1>Другое</h1>
+		<div>
+			<div>
+				<label>Структурная принадлежность:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Руководитель (ФИО):</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>На основание чего действует:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Номер договора:</label>
+				<app-textbox></app-textbox>
+			</div>
+			<div>
+				<label>Дата договора:</label>
+				<app-datebox></app-datebox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Инспекция МНС:</label>
+				<app-selectbox></app-selectbox>
+			</div>
+			<div>
+				<label>Код в своей УС:</label>
+				<app-textbox></app-textbox>
+			</div>
+			<div>
+				<label>Плательщик:</label>
+				<app-selectbox></app-selectbox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Описание:</label>
+				<app-textbox class="description"></app-textbox>
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>Юридический адрес</h1>
+		<div>
+			<div>
+				<label class="required">Почтовый индекс:</label>
+				<app-textbox></app-textbox>
+			</div>
+			<div>
+				<label class="required">Страна:</label>
+				<app-selectbox></app-selectbox>
+			</div>
+			<div>
+				<label>Регион:</label>
+				<app-selectbox placeholder="Не выбрано"></app-selectbox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Населенный пункт:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div class="address">
+				<label>Адрес:</label>
+				<div>
+					<app-selectbox class="short"></app-selectbox>
+					<app-textbox placeholder="Название улицы"></app-textbox>
+					<app-textbox placeholder="№ дома"></app-textbox>
+					<app-textbox placeholder="№ корпуса"></app-textbox>
+					<app-textbox placeholder="№ офиса"></app-textbox>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>Банковские реквизиты</h1>
+		<div>
+			<div>
+				<label>Наименование банка:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Адрес банка:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Расчетный счет:</label>
+				<app-textbox></app-textbox>
+			</div>
+			<div>
+				<label>Код банка:</label>
+				<app-textbox></app-textbox>
+			</div>
+		</div>
+	</section>
+	<section>
+		<h1>Контактная информация</h1>
+		<div>
+			<div>
+				<label class="required">Фамилия:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Имя:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Отчество:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+		</div>
+		<div>
+			<div>
+				<label>Должность:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label>Контактный телефон:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+			<div>
+				<label class="required">Email:</label>
+				<app-textbox class="long"></app-textbox>
+			</div>
+		</div>
+	</section>
+</main>
+
+<ng-template #hint>
+	<div>
+		<span><b>Test</b> - help</span><br><br>
+		<span><b>Test</b> - help</span>
+	</div>
+</ng-template>

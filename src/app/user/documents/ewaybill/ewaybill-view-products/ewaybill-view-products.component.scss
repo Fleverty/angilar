@@ -1,0 +1,133 @@
+:host {
+	display: flex;
+	font-size: 13px;
+	line-height: 16px;
+	background-color: #f1f3f5;
+}
+
+h3 {
+	cursor: default;
+	margin: 20px 0 9px;
+	font-size: 16px;
+	color: #191919;
+	font-family: Roboto-Bold;
+	font-weight: 700;
+	line-height: 24px;
+}
+
+.product {
+	width: 100%;
+	max-width: 1349px;
+	padding: 0 50px 26px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+table {
+	cursor: default;
+	width: 100%;
+	line-height: 18px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+tbody {
+	background-color: #fff;
+}
+
+th {
+	position: relative;
+	padding: 0 12px 3px 0;
+	font-size: 12px;
+	box-shadow: 0px 1px 0px 0px rgba(0, 2, 26, 0.18);
+	vertical-align: bottom;
+
+	&:first-child {
+		padding-left: 12px;
+	}
+}
+
+td {
+	position: relative;
+	padding: 6px 12px 2px 0;
+	box-shadow: 0px 1px 0px 0px rgba(0, 2, 26, 0.13);
+	white-space: nowrap;
+
+	&:nth-child(1) {
+		width: 42px;
+	}
+
+	&:nth-child(8) {
+		width: 64px;
+	}
+
+	&:first-child {
+		padding-left: 12px;
+	}
+
+	&:nth-child(12) {
+		width: 62px;
+	}
+
+	&:nth-child(13) {
+		width: 48px;
+	}
+}
+
+th,
+td {
+	text-align: left;
+
+	&:nth-child(n + 5) {
+		text-align: right;
+	}
+}
+
+div {
+	white-space: normal;
+	color: #535353;
+
+	span {
+		display: inline;
+		margin-right: 10px;
+		color: #191919;
+	}
+
+	.notice {
+		margin-right: 5px;
+		font-weight: bold;
+		color: #b78e00;
+	}
+
+	p {
+		margin: 0;
+
+		&:first-child {
+			margin-bottom: 2px;
+		}
+	}
+}
+
+.note {
+	padding: 0;
+	background-color: #fff;
+
+	&:first-child {
+		padding-left: 0;
+	}
+
+	div {
+		margin: 8px;
+		padding: 8px;
+		background-color: rgba(241, 243, 245, 0.8);
+	}
+}
+
+tfoot {
+	background-color: #fff;
+
+	td {
+		font-weight: bold;
+		color: #b78e00;
+	}
+}

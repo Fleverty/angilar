@@ -1,0 +1,71 @@
+<div class="product" *ngIf="draft">
+	<h3>Товарный раздел</h3>
+	<table>
+		<thead>
+			<tr>
+				<th>№</th>
+				<th>GTIN</th>
+				<th>Наименование</th>
+				<th>Един. изм-ия</th>
+				<th>Кол-во</th>
+				<th>Цена, Br</th>
+				<th>Стоимость, Br</th>
+				<th>Сумма акциза</th>
+				<th>Ставка НДС, %</th>
+				<th>Сумма НДС</th>
+				<th>Стоимость с НДС</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngFor=" let item of draft?.einvoiceItemList; let i=index">
+				<tr>
+					<td>{{item.position}}</td>
+					<td>{{item.gtin || '-'}}</td>
+					<td>{{item.fullName}}</td>
+					<td>{{item.uom && item.uom.name}}</td>
+					<td>{{item.quantity}}</td>
+					<td>{{item.priceNet}}</td>
+					<td>{{item.amountWithoutVat || 0}}</td>
+					<td>{{item.amountExcise || 0}}</td>
+					<td>{{item.vatRate || 0}}</td>
+					<td>{{item.amountVat || 0}}</td>
+					<td>{{item.amountWithVat || 0}}</td>
+				</tr>
+				<tr>
+					<td colspan="13" class="note">
+						<div>
+							<p *ngIf="item.addInfo"><span class="notice">Примечание:</span> {{item.addInfo}}</p>
+							<p>
+								<ng-container *ngIf="item.codeByBuyer">Код товара/услуги присвоенный поку-лем:
+									<span>{{item.codeByBuyer}}</span> </ng-container>
+								<ng-container *ngIf="item.codeBySupplier">Код товара/услуги присвоенный пост-ком:
+									<span>{{item.codeBySupplier}}</span> </ng-container>
+								<ng-container *ngIf="item.country && item.country.name">Страна производства:
+									<span>{{item.country.name}}</span> </ng-container>
+								<ng-container
+									*ngIf="item?.einvoiceItemExtraFieldList && item?.einvoiceItemExtraFieldList.length && isAllIsNotNull(item?.einvoiceItemExtraFieldList)">
+									Доп. поля:<span> {{ getFormatedExtraFieldsList(item?.einvoiceItemExtraFieldList) }}</span>
+								</ng-container>
+							</p>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td>Итого</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td>{{draft?.totalQuantity}}</td>
+				<td></td>
+				<td>{{draft?.totalAmountWithoutVat}}</td>
+				<td>{{draft?.totalAmountExcise}}</td>
+				<td></td>
+				<td>{{draft?.totalAmountVat}}</td>
+				<td>{{draft?.totalAmountWithVat}}</td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

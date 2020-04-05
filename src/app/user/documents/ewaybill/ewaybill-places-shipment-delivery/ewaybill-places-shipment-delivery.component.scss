@@ -1,0 +1,25 @@
+:host {
+	display: block;
+	padding: 0 50px;
+}
+
+header {
+	padding: 14px 0 8px;
+}
+
+h3 {
+	display: inline-block;
+	margin: 0 12px 0 0;
+	color: rgb(25, 25, 25);
+	font-size: 16px;
+	font-weight: bold;
+	line-height: 24px;
+}
+
+span.checkbox-text {
+	display: flex;
+	align-items: center;
+	label {
+		padding: 0;
+	}
+}

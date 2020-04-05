@@ -1,0 +1,80 @@
+<header>
+	<h3>Место отгрузки, доставки</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent">
+		<ng-container *ngIf="showContent">Свернуть</ng-container>
+		<ng-container *ngIf="!showContent">Развернуть</ng-container>
+	</button>
+</header>
+
+<form class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div class="line" formGroupName="loading">
+		<div>
+			<label>Пункт погрузки:</label>
+			<div class="checkbox">
+				<app-selectbox formControlName="loadingPoint" [data]="loadingPoints"
+							   (appNextPage)="nextLoadingPointsPage()"
+							   (appFilterChanges)="onLoadingPointsFilterChanges($event)"
+							   (appCollapse)="onLoadingPointsFilterChanges({search: ''})"
+							   [valueTransforFn]="transforFn">
+				</app-selectbox>
+				<span class="checkbox-text">
+					<app-checkbox formControlName="isPublicGln"></app-checkbox><label>Общественный
+						GLN</label>
+				</span>
+			</div>
+		</div>
+		<div class="align-start">
+			<label>Общественный GLN:</label>
+			<app-selectbox [data]="generalGLNs" (appNextPage)="nextGLNPage()"
+						   (appFilterChanges)="onGLNFilterChanges($event)" [valueTransforFn]="publicGLNTransforFn"
+						   formControlName="publicGln" class="date" (appCollapse)="onGLNFilterChanges({search: ''})">
+			</app-selectbox>
+		</div>
+		<div class="align-start">
+			<label class="required">Адрес:</label>
+			<app-textbox [isDisabled]="!loadingFormGroup.get('isPublicGln')?.value" formControlName="address"
+						 maxLength="140"
+						 name="Адрес (пункт погрузки)"></app-textbox>
+		</div>
+		<div class="align-start">
+			<label class="required">GLN:</label>
+			<app-textbox isDisabled="true" formControlName="gln" maxLength="13"
+						 name="GLN (пункт погрузки)"></app-textbox>
+		</div>
+	</div>
+
+	<div class="line" formGroupName="unloading">
+		<div>
+			<label>Пункт разгрузки</label>
+			<div class="checkbox">
+				<app-selectbox formControlName="unloadingPoint" [data]="unloadingPoints"
+							   (appNextPage)="nextUnloadingPointsPage()"
+							   (appFilterChanges)="onUnloadingPointsFilterChanges($event)"
+							   (appCollapse)="onUnloadingPointsFilterChanges({search: ''})"
+							   [valueTransforFn]="transforFn">
+				</app-selectbox>
+				<span class="checkbox-text">
+					<app-checkbox formControlName="isPublicGln"></app-checkbox><label>Общественный
+						GLN</label>
+				</span>
+			</div>
+		</div>
+		<div class="align-start">
+			<label>Общественный GLN:</label>
+			<app-selectbox formControlName="publicGln" [data]="generalGLNs" (appNextPage)="nextGLNPage()"
+						   (appFilterChanges)="onGLNFilterChanges($event)" class="date"
+						   (appCollapse)="onGLNFilterChanges({search: ''})" [valueTransforFn]="publicGLNTransforFn">
+			</app-selectbox>
+		</div>
+		<div class="align-start">
+			<label class="required">Адрес:</label>
+			<app-textbox [isDisabled]="!unloadingFormGroup.get('isPublicGln')?.value" formControlName="address"
+						 maxLength="140" name="Адрес (пункт разгрузки)"></app-textbox>
+		</div>
+		<div class="align-start">
+			<label class="required">GLN:</label>
+			<app-textbox isDisabled="true" formControlName="gln" maxLength="13"
+						 name="GLN (пункт разгрузки)"></app-textbox>
+		</div>
+	</div>
+</form>

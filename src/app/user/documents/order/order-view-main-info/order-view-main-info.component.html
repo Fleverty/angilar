@@ -1,0 +1,148 @@
+<table *ngIf="order">
+	<h3>Общая информация</h3>
+	<tbody>
+		<tr *ngIf="order?.deliveryError">
+			<td>Текст ошибки при доставке:</td>
+			<td>{{order?.deliveryError}}</td>
+		</tr>
+		<tr *ngIf="order?.processingStatus">
+			<td>Статус обработки:</td>
+			<td [class.red]="order?.processingStatus === 6 || order?.processingStatus === 7"
+				[class.gold]="order?.processingStatus !== 6 && order?.processingStatus !== 7">
+				{{orderStatusService.getProcessingStatusById(order?.processingStatus!)}}</td>
+		</tr>
+		<tr *ngIf="order?.deliveryStatus">
+			<td>Статус доставки:</td>
+			<td>{{orderStatusService.getDeliveryStatusById(order?.deliveryStatus!)}}</td>
+		</tr>
+		<tr *ngIf="order?.id">
+			<td>Номер заказа:</td>
+			<td>{{order?.id}}</td>
+		</tr>
+		<tr *ngIf="order?.documentNumber">
+			<td>Номер заказа, присвоенный отправителем:</td>
+			<td>{{order?.documentNumber}}</td>
+		</tr>
+		<tr *ngIf="order?.documentDate">
+			<td>Дата заказа:</td>
+			<td>{{order?.documentDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+		</tr>
+		<tr *ngIf="order?.documentNameCode">
+			<td>Вид заказа:</td>
+			<ng-container [ngSwitch]="order?.documentNameCode">
+				<td *ngSwitchCase="'220'" i18n>Заказ на поставку</td>
+				<td *ngSwitchCase="'22E'" i18n>Инициативный заказ</td>
+				<td *ngSwitchCase="'70E'" i18n>Заказ на возврат товара</td>
+			</ng-container>
+		</tr>
+		<tr *ngIf="order?.contractNumber">
+			<td>Номер договора:</td>
+			<td>{{order?.contractNumber}}</td>
+		</tr>
+		<tr *ngIf="order?.deliveryDate">
+			<td>Дата и время доставки:</td>
+			<td>{{order?.deliveryDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+		</tr>
+		<tr *ngIf="order?.responseDocument?.ordrspDeliveryDate">
+			<td>Принятая дата и время доставки:</td>
+			<td [class.changed]="order?.deliveryDate !== order?.responseDocument?.ordrspDeliveryDate">
+				{{order?.responseDocument?.ordrspDeliveryDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+		</tr>
+		<tr *ngIf="order?.shipmentDate">
+			<td>Дата и время отгрузки:</td>
+			<td>{{order?.shipmentDate | date: 'dd.MM.yyy, HH:mm:ss'}}</td>
+		</tr>
+		<tr *ngIf="order?.currency?.code">
+			<td i18n>Валюта:</td>
+			<td>{{order?.currency?.code}} ({{order?.currency?.name}})</td>
+		</tr>
+		<tr *ngIf="order?.orderContactName">
+			<td>Автор заказа:</td>
+			<td>{{order?.orderContactName}}</td>
+		</tr>
+		<tr *ngIf="order?.orderContactEmail">
+			<td>Email автора заказа:</td>
+			<td>{{order?.orderContactEmail}}</td>
+		</tr>
+		<tr *ngIf="order?.orderContactPhone">
+			<td>Телефон автора заказа:</td>
+			<td>{{order?.orderContactPhone}}</td>
+		</tr>
+		<tr *ngIf="order?.originalOrdersId">
+			<td>Номер замененного заказа:</td>
+			<td>{{order?.originalOrdersId}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table *ngIf="order?.buyerName || order?.buyerGln">
+	<h3>Покупатель</h3>
+	<tbody>
+		<tr *ngIf="order?.buyerName">
+			<td>Наименование:</td>
+			<td>{{order?.buyerName}}</td>
+		</tr>
+		<tr *ngIf="order?.buyerGln">
+			<td>GLN:</td>
+			<td>{{order?.buyerGln}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table *ngIf="order?.supplierName || order?.supplierGln">
+	<h3>Поставщик</h3>
+	<tbody>
+		<tr *ngIf="order?.supplierName">
+			<td>Наименование:</td>
+			<td>{{order?.supplierName}}</td>
+		</tr>
+		<tr *ngIf="order?.supplierGln">
+			<td>GLN:</td>
+			<td>{{order?.supplierGln}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table *ngIf="order?.deliveryPointGln || order?.deliveryPointAddress">
+	<h3>Место доставки</h3>
+	<tbody>
+		<tr *ngIf="order?.deliveryPointGln">
+			<td>GLN:</td>
+			<td>{{order?.deliveryPointGln}}</td>
+		</tr>
+		<tr *ngIf="order?.deliveryPointAddress">
+			<td>Адрес:</td>
+			<td>{{order?.deliveryPointAddress}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<table *ngIf="order?.ultimateRecipientGln || order?.ultimateRecipientAddress">
+	<h3>Конечный получатель</h3>
+	<tbody>
+		<tr *ngIf="order?.ultimateRecipientGln">
+			<td>GLN:</td>
+			<td>{{order?.ultimateRecipientGln}}</td>
+		</tr>
+		<tr *ngIf="order?.ultimateRecipientAddress">
+			<td>Адрес:</td>
+			<td>{{order?.ultimateRecipientAddress}}</td>
+		</tr>
+	</tbody>
+</table>
+
+<section *ngIf="order?.orderComment || order?.responseDocument?.ordrspComment">
+	<table>
+		<h3>Комментарий</h3>
+		<tbody>
+			<tr *ngIf="order?.orderComment">
+				<td>Комментарий:</td>
+				<td>{{order?.orderComment}}</td>
+			</tr>
+			<tr *ngIf="order?.responseDocument?.ordrspComment">
+				<td>Комментарий к ответу:</td>
+				<td>{{order?.responseDocument?.ordrspComment}}</td>
+			</tr>
+		</tbody>
+	</table>
+</section>

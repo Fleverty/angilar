@@ -1,0 +1,19 @@
+<div class="grid-container" #container
+	(scroll)="onScroll(container.scrollHeight, container.scrollTop, container.clientHeight)">
+	<h4> Организации, с которыми настроены партнерские связи для обмена электронными документами.</h4>
+	<table *ngIf="items && listHeaders">
+		<thead>
+			<th></th>
+			<th *ngFor="let header of properties">{{header.name}}</th>
+			<th></th>
+		</thead>
+		<tbody>
+			<tr *ngFor="let partner of items" [class.checked]="checkedItem(partner)">
+				<td></td>
+				<td>{{partner.name}}</td>
+				<td>{{partner.gln}}</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

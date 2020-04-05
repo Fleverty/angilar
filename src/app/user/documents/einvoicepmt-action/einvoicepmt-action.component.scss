@@ -1,0 +1,29 @@
+:host {
+	display: flex;
+	height: 56px;
+}
+
+app-button {
+	margin: 16px 12px 0 0;
+
+	&:first-of-type {
+		margin-left: auto;
+	}
+
+	&:not(:last-of-type) {
+		margin-right: 6px;
+	}
+}
+
+.expand {
+	margin-right: 12px;
+}
+
+app-drop-list {
+	width: 120px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	z-index: 2;
+}

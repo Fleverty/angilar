@@ -1,0 +1,48 @@
+<h3>Дополнительные поля</h3>
+<ng-container *ngIf="formArray">
+	<section *ngIf="!formArray.length">
+		<app-button type="button" (click)="addDocument()" skin="add-field" icon="add">Добавить дополнительное
+			поле
+		</app-button>
+	</section>
+	<section *ngIf="formArray.length">
+		<label>
+			<span>Справочник полей:</span>
+			<button type="button" class="pointer" (click)="clearAllDocs()">
+				<app-icon>delete</app-icon>
+				Удалить
+			</button>
+		</label>
+		<div>
+			<div class="document" *ngFor="let formGroup of formArray?.controls; let i = index">
+				<fieldset [formGroup]="formGroup">
+					<app-select-box-self-fetch [option]="extraFieldOption" formControlName="dictionary"
+											   [otherEmptyValue]="emptyValue" class="without-radius"
+											   [attr.disabled]="i !== formArray.length - 1"></app-select-box-self-fetch>
+					<app-textbox class="without-radius" placeholder="Наименование" formControlName="fieldName"
+								 [isDisabled]="i !== formArray.length - 1 || formGroup.value.dictionary" maxLength="256"
+								 name="Наименование (дополнительные поля)">
+					</app-textbox>
+					<app-textbox class="without-radius" placeholder="Значение" formControlName="fieldValue"
+								 maxLength="256"
+								 [isDisabled]="i !== formArray.length - 1" name="Значение (дополнительные поля)">
+					</app-textbox>
+					<app-textbox class="without-radius" placeholder="Код" formControlName="fieldCode" maxLength="6"
+								 name="Код (дополнительные поля)"
+								 [isDisabled]="i !== formArray.length - 1 || formGroup.value.dictionary">
+					</app-textbox>
+				</fieldset>
+				<nav>
+					<app-icon class="basket" (click)="removeDocumentAt(i)">delete</app-icon>
+					<app-icon class="add" (click)="addDocument()">add</app-icon>
+				</nav>
+			</div>
+		</div>
+	</section>
+</ng-container>
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Свое</dd>
+	</dl>
+</template>

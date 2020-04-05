@@ -1,0 +1,25 @@
+:host {
+	display: contents;
+}
+
+button {
+	display: inline-flex;
+	align-items: center;
+	font-size: 13px;
+	line-height: 16px;
+	color: #fc795f;
+	background: none;
+	border: none;
+	outline: none;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+app-icon {
+	width: auto;
+	transition: 0.2s;
+	font-size: 18px;
+}

@@ -1,0 +1,13 @@
+<div class="date">
+	<div class="input">
+		<input #date (input)="onInputDate($event.target.value)" (click)="$event.preventDefault();" type="date">
+		<button type="button" appSkin="simple-cancel" (click)="clear()">Очистить</button>
+	</div>
+	<div class="date-pickers">
+		<app-date-picker [value]="value" [date]="value" (valueChange)="onValueChange($event)">
+			<!-- (keyup.enter)="onEnter($event)" -->
+		</app-date-picker>
+	</div>
+</div>
+
+<app-time-picker *ngIf="withTime" [value]="value" (appEmitTime)="emitTime($event)"></app-time-picker>

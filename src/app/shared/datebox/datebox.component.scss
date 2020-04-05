@@ -1,0 +1,47 @@
+div {
+	display: flex;
+}
+
+app-select-date {
+	display: flex;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	z-index: 1;
+}
+
+input {
+	width: 100%;
+
+	&:disabled {
+		color: #676767;
+		background-color: #efefef;
+	}
+}
+
+:host-context(.without-border) input {
+	border-radius: 0;
+	border: 1px solid transparent;
+}
+
+:host-context(.without-radius) input {
+	border-radius: 0;
+}
+
+.expand {
+	cursor: default;
+	background-color: #f7f7f7;
+	border: 1px solid rgb(156, 185, 252);
+}
+
+:host-context(.error) input {
+	border: 1px solid var(--error-color);
+}
+
+:host([disabled]) {
+	pointer-events: none;
+}
+
+.error {
+	border: 1px solid var(--error-color);
+}

@@ -1,0 +1,7 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Комментарий</legend>
+	<div>
+		<label>Комментарий</label>
+		<app-textbox formControlName="commentText"></app-textbox>
+	</div>
+</fieldset>

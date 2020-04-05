@@ -1,0 +1,43 @@
+<header>
+	<div>
+		<h2 class="text" *ngIf="draftType === 'BLRDLN' || draftType === 'BLRDNR'">Товарная накладная</h2>
+		<h2 class="text" *ngIf="draftType === 'BLRWBL' || draftType === 'BLRWBR'">Товарно-транспортная
+			накладная</h2>
+	</div>
+</header>
+
+<ng-container *ngIf="document">
+	<section *ngIf="draftType === 'BLRDLN' || draftType === 'BLRWBL'">
+		<app-shared-ewaybill-signature [draft]="document"></app-shared-ewaybill-signature>
+		<app-ewaybill-view-main-info [draft]="document" [messageType]="draftType">
+		</app-ewaybill-view-main-info>
+		<app-ewaybill-view-products [draft]="document" [messageType]="draftType"></app-ewaybill-view-products>
+	</section>
+
+	<section *ngIf="draftType === 'BLRDNR' || draftType === 'BLRWBR'">
+		<app-ewaybill-draft-signature [draft]="document"></app-ewaybill-draft-signature>
+		<app-ewaybill-view-main-info [draft]="document.msgEwaybill" [response]="document" [messageType]="draftType">
+		</app-ewaybill-view-main-info>
+		<app-ewaybill-view-products [draft]="document.msgEwaybill" [messageType]="draftType"></app-ewaybill-view-products>
+	</section>
+
+	<footer>
+		<button appSkin="simple-gray no-shadow bold bordered" type="button"
+			[attr.disabled]="buttonsDisable || document?.processingStatus === '1' ? '' : null"
+			(click)="send()">Отправить</button>
+		<button [attr.disabled]="buttonsDisable ? '' : null" appSkin="simple-gray no-shadow bold bordered" type="button"
+			(click)="delete()">Удалить</button>
+		<button appSkin="simple no-shadow bold bordered" type="button" (click)="prevPage()">Закрыть</button>
+	</footer>
+</ng-container>
+
+<template #texts>
+	<dl>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронной накладной?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

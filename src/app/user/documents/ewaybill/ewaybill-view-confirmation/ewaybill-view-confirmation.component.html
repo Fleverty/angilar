@@ -1,0 +1,69 @@
+<div class="head">
+	<h3 i18n>Подтверждение операций провайдером</h3>
+	<button appSkin="dots" type="button" *ngIf="operationsBlockOpened" (click)="operationsBlockOpened = false"
+			i18n>Свернуть
+	</button>
+	<button appSkin="dots" type="button" *ngIf="!operationsBlockOpened" (click)="operationsBlockOpened = true"
+			i18n>Развернуть
+	</button>
+</div>
+
+<ng-container *ngIf="operationsBlockOpened && (providerConfirmation$ | async) as providerConfirmation">
+	<ng-container *ngIf="(organizationInfo$ | async) as organizationInfo">
+		<ng-container *ngIf="providerConfirmation?.receiverProvider as shipperProvider">
+			<h3 i18n>EDI-провайдер грузоотправителя</h3>
+			<table>
+				<tbody>
+				<tr *ngIf="shipperProvider.legalName">
+					<td i18n>Наименование:</td>
+					<td>{{shipperProvider.legalName}}</td>
+				</tr>
+				<tr *ngIf="shipperProvider.gln">
+					<td i18n>GLN:</td>
+					<td>{{shipperProvider.gln}}</td>
+				</tr>
+				<tr *ngIf="shipperProvider.ewaybillProviderCode">
+					<td i18n>Код:</td>
+					<td>{{shipperProvider.ewaybillProviderCode}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</ng-container>
+
+		<ng-container *ngIf="providerConfirmation?.receiverProvider as receiverProvider">
+			<h3 i18n>EDI-провайдер грузополучателя</h3>
+			<table>
+				<tbody>
+				<tr *ngIf="receiverProvider.legalName">
+					<td i18n>Наименование:</td>
+					<td>{{receiverProvider.legalName}}</td>
+				</tr>
+				<tr *ngIf="receiverProvider.gln">
+					<td i18n>GLN:</td>
+					<td>{{receiverProvider.gln}}</td>
+				</tr>
+				<tr *ngIf="receiverProvider.ewaybillProviderCode">
+					<td i18n>Код:</td>
+					<td>{{receiverProvider.ewaybillProviderCode}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</ng-container>
+
+		<app-current-organization-equal-receiver-equal-shipper
+			*ngIf="organizationInfo.ewaybillProviderCode === providerConfirmation.shipperProvider.ewaybillProviderCode && organizationInfo.ewaybillProviderCode === providerConfirmation.receiverProvider.ewaybillProviderCode"
+			[providerConfirmation]="providerConfirmation" [organizationInfo]="organizationInfo"
+			[ewaybill]="ewaybill$ | async">
+		</app-current-organization-equal-receiver-equal-shipper>
+		<app-current-organization-equal-receiver-not-equal-shipper
+			*ngIf="organizationInfo.ewaybillProviderCode === providerConfirmation.receiverProvider.ewaybillProviderCode && providerConfirmation.shipperProvider.ewaybillProviderCode !== organizationInfo.ewaybillProviderCode"
+			[providerConfirmation]="providerConfirmation" [organizationInfo]="organizationInfo"
+			[ewaybill]="ewaybill$ | async">
+		</app-current-organization-equal-receiver-not-equal-shipper>
+		<app-current-organization-equal-shipper-not-equal-receiver
+			*ngIf="organizationInfo.ewaybillProviderCode === providerConfirmation.shipperProvider.ewaybillProviderCode && providerConfirmation.receiverProvider.ewaybillProviderCode !== organizationInfo.ewaybillProviderCode"
+			[providerConfirmation]="providerConfirmation" [organizationInfo]="organizationInfo"
+			[ewaybill]="ewaybill$ | async">
+		</app-current-organization-equal-shipper-not-equal-receiver>
+	</ng-container>
+</ng-container>

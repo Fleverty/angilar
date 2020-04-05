@@ -1,0 +1,11 @@
+<main (click)="expand = !expand">
+	<div class="container">
+		<div class="element" *ngFor="let el of value; let i = index">
+			<div>{{valueTransformFn ? valueTransformFn(el) : el}}</div>
+			<app-icon (click)="deleteItem(i, $event)">close</app-icon>
+		</div>
+	</div>
+	<app-icon (click)="expand = !expand">unfold_more</app-icon>
+</main>
+<app-list *ngIf="expand" [data]="list" (appInput)="onInput($event)" (appSelect)="addItem($event)"
+		  (appClickOutside)="expandList(false)" (appScrolled)="onScrolled()"></app-list>

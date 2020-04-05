@@ -1,0 +1,89 @@
+:host {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	background: var(--grey-bg);
+	box-shadow: 0px 1px 1px 0px rgba(0, 10, 51, 0.07),
+		0px 0px 3px 0px rgba(0, 10, 51, 0.25);
+	z-index: 1;
+	padding: 0 12px 0 20px;
+	cursor: default;
+}
+
+h3 {
+	font-size: 20px;
+	height: 24px;
+	margin: 18px 30px 14px 0;
+	font-family: Roboto-Bold;
+}
+
+button:first-of-type {
+	margin: 0 10px 0 auto;
+}
+
+button {
+	margin: 14px 0 14px 0;
+	line-height: 24px;
+	font-size: 14px;
+}
+
+app-profile-change-password {
+	margin: 14px 6px 14px auto;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	padding: 30px 0 30px 50px;
+	overflow-y: auto;
+	height: 100%;
+
+	> div:first-child {
+		margin-bottom: 12px;
+	}
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	margin: 0;
+
+	> div {
+		margin: 0 12px 12px 0;
+	}
+}
+
+label {
+	display: block;
+	font-family: "Roboto-Medium";
+	font-size: 13px;
+	margin-bottom: 4px;
+	font-weight: 500;
+	color: rgb(77, 77, 77);
+}
+
+app-textbox,
+app-selectbox,
+app-datebox {
+	width: 350px;
+}
+
+.required:after {
+	content: "*";
+	color: rgb(255, 0, 0);
+	font-size: 15px;
+	margin-left: 2px;
+	line-height: 0;
+}
+
+button:disabled {
+	background: rgb(242, 212, 135);
+	cursor: default;
+}

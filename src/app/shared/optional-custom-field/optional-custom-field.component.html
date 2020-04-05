@@ -1,0 +1,15 @@
+<div *ngIf="!isShowField && !hasValue(); else showField" class="without-label">
+	<app-button (click)="isShowField = true" skin="add-field" icon="add">{{title}}
+	</app-button>
+</div>
+<ng-template #showField>
+	<div>
+		<p><label>{{title}}:</label>
+			<button type="button" class="pointer" (click)="delete()">
+				<app-icon>delete</app-icon>
+				Удалить
+			</button>
+		</p>
+		<ng-content></ng-content>
+	</div>
+</ng-template>

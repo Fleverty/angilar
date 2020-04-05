@@ -1,0 +1,33 @@
+<header>
+	<div>
+		<app-icon (click)="prevPage()">arrow_back</app-icon>
+		<h2 class="text">Счет-фактура для расчетов</h2>
+	</div>
+</header>
+
+<main *ngIf="document">
+	<app-shared-einvoicepmt-signature [document]="document"></app-shared-einvoicepmt-signature>
+	<app-einvoicepmt-view-main-info [document]="document"></app-einvoicepmt-view-main-info>
+	<app-einvoicepmt-view-products-list [document]="document"></app-einvoicepmt-view-products-list>
+</main>
+
+<footer>
+	<button [disabled]="disableSend" appSkin="simple-gray no-shadow bold bordered" type="button" (click)="send()">Отправить</button>
+	<ng-container *ngIf="disableSend">
+		<button appSkin="simple-gray no-shadow bold" (click)="export({ id: this.draftId, type: 'XSLX' })">Экспорт XSLX</button>
+		<button appSkin="simple-gray no-shadow bold" (click)="export({ id: this.draftId, type: 'XML' })">Экспорт XML</button>
+	</ng-container>
+	<button type="button" appSkin="simple-gray no-shadow bold" (click)="delete()">Удалить</button>
+	<button type="button" appSkin="simple no-shadow bold bordered" (click)="prevPage()">Закрыть</button>
+</footer>
+
+<template #textsTemplate>
+	<dl>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронного счета-фактуры?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+	</dl>
+</template>

@@ -1,0 +1,41 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend>Покупатель</legend>
+	<section class="inline">
+		<div>
+			<label i18n class="required">Покупатель:</label>
+			<app-select-box-self-fetch formControlName="dictionary" name="Покупатель" [option]="buyerSelectBoxOption">
+			</app-select-box-self-fetch>
+		</div>
+		<div>
+			<label i18n class="required">Адрес:</label>
+			<app-textbox formControlName="buyerAddress" name="Адрес (покупатель)"></app-textbox>
+		</div>
+		<div>
+			<label i18n class="required">GLN:</label>
+			<app-textbox formControlName="buyerGln" name="GLN (покупатель)"></app-textbox>
+		</div>
+		<div>
+			<label i18n class="required">УНП:</label>
+			<app-textbox formControlName="buyerUnp" name="УНП (покупатель)"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Расчетный счет:</label>
+			<app-textbox formControlName="buyerAccountNumber"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Банк:</label>
+			<app-textbox formControlName="buyerBankName"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Адрес банка:</label>
+			<app-textbox formControlName="buyerBankAddress"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Код банка:</label>
+			<app-textbox formControlName="buyerBankCode"></app-textbox>
+		</div>
+	</section>
+	<app-optional-custom-field title="ОКПО" [control]="form.controls['buyerOkpo']">
+		<app-textbox formControlName="buyerOkpo" maxLength="12"></app-textbox>
+	</app-optional-custom-field>
+</fieldset>

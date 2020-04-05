@@ -1,0 +1,7 @@
+<div (appClickOutside)="expand = false">
+	<input [class.expand]="expand" (click)="expand = !expand" #input type="text" readonly="readonly"
+		[value]="isArray(value) ? ((value![0] | date : 'shortDate') || '') + ' - ' + ((value![1] | date : 'shortDate') || '') : ''">
+	<app-icon (click)="expand = !expand">unfold_more</app-icon>
+	<app-select-date-range *ngIf="expand" [value]="value" (appClose)="selectRange($event)">
+	</app-select-date-range>
+</div>

@@ -1,0 +1,122 @@
+:host {
+	margin-bottom: 15px;
+}
+
+header {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 14px 0 8px;
+
+	> h3 {
+		margin: 0 15px 0 0;
+	}
+
+	> button {
+		font-size: 16px;
+	}
+}
+
+.add {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 24px;
+	height: 22px;
+	margin-left: 3px;
+	padding: 0;
+	font-size: 20px;
+	background-color: #0066d1;
+	border: none;
+	border-radius: 2px;
+	transition: 0.2s;
+	cursor: pointer;
+
+	&:hover {
+		opacity: 0.8;
+	}
+
+	app-icon {
+		color: white;
+		width: auto;
+	}
+}
+
+.remove {
+	background: rgb(234, 234, 234);
+	border-radius: 2px;
+	height: 22px;
+	width: 24px;
+	margin-left: 3px;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+
+	app-icon {
+		width: auto;
+	}
+}
+
+.line {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	// margin-top: 4px;
+	box-sizing: border-box;
+
+	&:first-of-type {
+		margin-top: 0;
+	}
+
+	> div {
+		display: flex;
+		flex-direction: column;
+	}
+}
+
+.pointer {
+	cursor: pointer;
+	display: flex;
+}
+
+.status {
+	width: 350px;
+}
+
+div.leave {
+	flex-direction: row;
+	align-items: center;
+
+	app-datebox {
+		width: 180px;
+	}
+	:nth-child(2) {
+		width: 350px;
+	}
+	:nth-child(3) {
+		width: 350px;
+	}
+}
+
+button {
+	display: flex;
+	align-items: center;
+	margin-left: 5px;
+	padding: 0;
+	font-size: 13px;
+	line-height: 16px;
+	color: rgb(252, 121, 95);
+	background: none;
+	border: none;
+	transition: 0.2s;
+	outline: none;
+	padding: 0 0 4px;
+
+	&:hover {
+		color: rgba(252, 121, 95, 0.8);
+	}
+
+	app-icon {
+		font-size: 18px;
+	}
+}

@@ -1,0 +1,18 @@
+<header>
+	<div>
+		<app-icon (click)="back()">arrow_back</app-icon>
+		<h2>Уведомления об отгрузке</h2>
+	</div>
+</header>
+<section *ngIf="document">
+	<app-shipment-notification-view-main-info [draft]="document"></app-shipment-notification-view-main-info>
+	<app-shipment-notifications-view-products [products]="document.msgDesadvItems" [document]="document">
+	</app-shipment-notifications-view-products>
+</section>
+<footer>
+	<nav>
+		<button appSkin="gray" (click)="export()">Экспорт</button>
+		<button appSkin="gray" (click)="createEwaybill()">Создать эНакладную</button>
+		<button appSkin="simple" (click)="back()">Закрыть</button>
+	</nav>
+</footer>

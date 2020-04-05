@@ -1,0 +1,52 @@
+<header>
+	<h3>Дополнительные поля</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent" [ngSwitch]="showContent">
+		<ng-container *ngSwitchCase="false">Развернуть</ng-container>
+		<ng-container *ngSwitchCase="true">Свернуть</ng-container>
+	</button>
+</header>
+<fieldset *ngIf="showContent && form" [formGroup]="form">
+	<section>
+		<div class="field" *ngIf="!documents.length">
+			<app-button type="button" (click)="addExtraField()" skin="add-field" icon="add">Добавить дополнительное
+				поле</app-button>
+		</div>
+		<div class="field" *ngIf="documents.length">
+
+			<label class="with-button">
+				<span>Справочник полей:</span>
+				<app-einvoice-remove-button (click)="clearAllDocs()"></app-einvoice-remove-button>
+			</label>
+
+			<div formArrayName="documents" class="row" *ngFor="let formGroup of documents.controls; let i = index">
+				<ng-container [formGroupName]="i">
+
+					<app-select-box-self-fetch formControlName="dictionary" [option]="dictionaryOption"
+						[otherEmptyValue]="emptyValue" [attr.disabled]="i !== documents.length - 1 ? true : null">
+					</app-select-box-self-fetch>
+					<app-textbox formControlName="fieldName" placeholder="Наименование" maxLength="256"
+						[isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary">
+					</app-textbox>
+					<app-textbox formControlName="fieldValue" placeholder="Значение" maxLength="256"
+						[isDisabled]="i !== documents.length - 1">
+					</app-textbox>
+					<app-textbox formControlName="fieldCode" placeholder="Код" maxLength="6"
+						[isDisabled]="i !== documents.length - 1 || formGroup.value.dictionary">
+					</app-textbox>
+					<div class=" remove" (click)="removeDocument(i)">
+						<app-icon>delete</app-icon>
+					</div>
+					<button type="button" class="add" *ngIf="i === documents.length - 1" (click)="addExtraField()">
+						<app-icon>add</app-icon>
+					</button>
+				</ng-container>
+			</div>
+		</div>
+	</section>
+</fieldset>
+<template #emptyValue>
+	<dl>
+		<dt json>null</dt>
+		<dd i18n>Свое</dd>
+	</dl>
+</template>

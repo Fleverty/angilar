@@ -1,0 +1,12 @@
+span.checkbox-text {
+	display: flex;
+	align-items: center;
+	label {
+		padding: 0;
+	}
+}
+
+section[formGroupName="loading"],
+section[formGroupName="unloading"] {
+	display: flex;
+}

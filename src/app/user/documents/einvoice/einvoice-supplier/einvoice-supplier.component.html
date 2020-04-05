@@ -1,0 +1,54 @@
+<header>
+	<h3>Поставщик/Исполнитель</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent" [ngSwitch]="showContent">
+		<ng-container *ngSwitchCase="false">Развернуть</ng-container>
+		<ng-container *ngSwitchCase="true">Свернуть</ng-container>
+	</button>
+</header>
+
+<fieldset *ngIf="showContent && form" [formGroup]="form">
+	<section class="two-row">
+		<div class="field">
+			<label>Наименование:</label>
+			<app-textbox formControlName="supplierName"></app-textbox>
+		</div>
+		<div class="field">
+			<label>GLN:</label>
+			<app-numberbox class="small" formControlName="supplierGln" maxLength="13" name="GLN (поставщика/исполнителя)">
+			</app-numberbox>
+		</div>
+		<div class="field">
+			<label>УНП:</label>
+			<app-textbox class="small" formControlName="supplierUnp" maxLength="70" name="УНП (поставщика/исполнителя)">
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label>Адрес:</label>
+			<app-textbox formControlName="supplierAddress" maxLength="140" name="Адрес (поставщика/исполнителя)" withTitle>
+			</app-textbox>
+		</div>
+	</section>
+	<section class="two-row">
+		<div class="field">
+			<label>Расчетный счет:</label>
+			<app-textbox formControlName="supplierAccountNumber" maxLength="35" name="Расчетный счет (поставщика/исполнителя)"
+				withTitle></app-textbox>
+		</div>
+		<div class="field">
+			<label>Банк:</label>
+			<app-textbox formControlName="supplierBankName" maxLength="140" name="Банк (поставщика/исполнителя)" withTitle>
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label>Код банка:</label>
+			<app-textbox formControlName="supplierBankCode" maxLength="17" name="Код банка (поставщика/исполнителя)"
+				withTitle>
+			</app-textbox>
+		</div>
+		<div class="field">
+			<label>Адрес банка:</label>
+			<app-textbox formControlName="supplierBankAddress" maxLength="140" name="Адрес банка (поставщика/исполнителя)"
+				withTitle></app-textbox>
+		</div>
+	</section>
+</fieldset>

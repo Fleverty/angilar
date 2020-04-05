@@ -1,0 +1,31 @@
+.line div.series {
+	justify-content: space-between;
+	flex-direction: row;
+	align-items: center;
+	width: 570px;
+
+	:nth-child(1) {
+		width: 60px;
+	}
+
+	:nth-child(2) {
+		width: 150px;
+	}
+
+	:nth-child(3) {
+		width: 340px;
+	}
+}
+
+.main > .error > label.red {
+	color: var(--error-color);
+}
+
+.main > .error > label {
+	&:first-of-type {
+		margin-right: 5px;
+	}
+
+	display: inline-block;
+	font-size: 15px;
+}

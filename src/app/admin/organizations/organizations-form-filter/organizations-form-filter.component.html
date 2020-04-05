@@ -1,0 +1,24 @@
+<form [formGroup]="form" (appFormValueChanges)="filterChanged.emit(form.getRawValue())">
+	<div>
+		<label i18n>Введите группу компаний</label>
+		<app-selectbox placeholder="Группа компаний" formControlName="companiesGroup">
+		</app-selectbox>
+	</div>
+	<div>
+		<label i18n>Название организации</label>
+		<app-textbox formControlName="orgName"></app-textbox>
+	</div>
+	<div>
+		<label i18n>GLN организации</label>
+		<app-textbox formControlName="orgGLN"></app-textbox>
+	</div>
+	<div>
+		<label i18n>Тип подключения</label>
+		<app-selectbox placeholder="Тип подключения" formControlName="connectionType">
+		</app-selectbox>
+	</div>
+	<div>
+		<app-checkbox (change)="form.patchValue({ isChecked: $event })" formControlName="isChecked"></app-checkbox>
+		<label i18n>Непроверенные организации</label>
+	</div>
+</form>

@@ -1,0 +1,115 @@
+<header>
+	<h3>Общая информация</h3>
+	<button appSkin="dots" type="button" (click)="showContent = !showContent" [ngSwitch]="showContent">
+		<ng-container *ngSwitchCase="false">Развернуть</ng-container>
+		<ng-container *ngSwitchCase="true">Свернуть</ng-container>
+	</button>
+</header>
+
+<fieldset class="main" *ngIf="showContent && form" [formGroup]="form">
+	<section>
+		<div class="field">
+			<label for="processingStatus" class="required">Статус:</label>
+			<app-selectbox [data]="statuses" formControlName="processingStatus" class="status">
+			</app-selectbox>
+		</div>
+	</section>
+
+	<section>
+		<div class="field">
+			<label class="required">Серия и номер:</label>
+			<div class="nested-fields series">
+				<app-numberbox formControlName="seria01"></app-numberbox>
+				<span>-</span>
+				<app-numberbox formControlName="seria02">
+				</app-numberbox>
+				<span>-</span>
+				<app-numberbox formControlName="number" name="Номер акта" maxLength="25">
+				</app-numberbox>
+			</div>
+		</div>
+
+		<div class="field">
+			<label class="required">Дата акта:</label>
+			<app-datebox formControlName="invoiceDate" name="Дата акта" class="date">
+			</app-datebox>
+		</div>
+	</section>
+
+	<section>
+		<div class="field">
+			<label class="required text-act">Текст Акта:</label>
+			<app-textarea formControlName="purport" maxLength="512" name="Текст акта" rows="3"></app-textarea>
+		</div>
+	</section>
+
+	<section>
+		<div class="field">
+			<label class="required">Расчетный период:</label>
+			<div class="nested-fields">
+				<label>с</label>
+				<app-datebox formControlName="paymentBeginDate" name="Дата начала расчетного периода" class="date">
+				</app-datebox>
+				<label>по</label>
+				<app-datebox formControlName="paymentEndDate" name="Дата окончания расчетного периода" class="date">
+				</app-datebox>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="field">
+			<label class="required">Договор:</label>
+			<div class="nested-fields contract">
+				<app-textbox formControlName="contractNumber" maxLength="70" name="Номер договора" placeholder="Номер">
+				</app-textbox>
+				<label>от</label>
+				<app-datebox formControlName="contractDate" name="Дата договора">
+				</app-datebox>
+			</div>
+		</div>
+	</section>
+
+	<!-- <section>
+		<div class="field">
+			<label>Накладная:</label>
+			<div class="nested-fields contract">
+				<app-textbox formControlName="deliveryNoteNumber" maxLength="70" placeholder="Номер"></app-textbox>
+				<label>от</label>
+				<app-datebox formControlName="deliveryNoteDate"></app-datebox>
+			</div>
+		</div>
+	</section> -->
+
+	<section>
+		<div class="field">
+			<label class="required">Валюта:</label>
+			<app-select-box-self-fetch [option]="currencySelectBoxOption" formControlName="currency"
+				placeholder="Выберите валюту">
+			</app-select-box-self-fetch>
+		</div>
+		<div class="field order-number" *ngIf="!isNumberOfOrder && !form?.get('ordersNumber')?.value">
+			<app-button (click)="isNumberOfOrder = true" skin="add-field" icon="add">Номер заказа</app-button>
+		</div>
+		<div *ngIf="isNumberOfOrder || form?.get('ordersNumber')?.value" class="field">
+			<label class="with-button">
+				<span>Номер заказа</span>
+				<app-einvoice-remove-button (click)="deleteNumberOrder()"></app-einvoice-remove-button>
+			</label>
+			<app-textbox formControlName="ordersNumber" maxLength="35"></app-textbox>
+		</div>
+	</section>
+
+	<section>
+		<div class="test">
+			<app-checkbox formControlName="testIndicator"></app-checkbox><label>Тестовый электронный акт</label>
+		</div>
+	</section>
+</fieldset>
+
+<template #statuses>
+	<dl>
+		<dt>0</dt>
+		<dd>Черновик</dd>
+	</dl>
+</template>

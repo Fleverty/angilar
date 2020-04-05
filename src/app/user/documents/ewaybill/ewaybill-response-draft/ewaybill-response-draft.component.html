@@ -1,0 +1,54 @@
+<section class="main-part">
+	<header>
+		<div>
+			<app-icon (click)="prevPage()">arrow_back</app-icon>
+			<h2 class="text" *ngIf="type === 'BLRDLN' || type === 'BLRDNR'">Товарная накладная</h2>
+			<h2 class="text" *ngIf="type === 'BLRWBL' || type === 'BLRWBR'">Товарно-транспортная накладная</h2>
+		</div>
+	</header>
+	<main *ngIf="ewaybillResponse">
+		<app-shared-ewaybill-signature [draft]="ewaybillResponse.msgEwaybill"></app-shared-ewaybill-signature>
+		<app-ewaybill-view-main-info [draft]="ewaybillResponse.msgEwaybill" [response]="ewaybillResponse" [hideAdditionalView]="true"
+			[messageType]="type">
+		</app-ewaybill-view-main-info>
+		<app-ewaybill-consignee-accept *ngIf="form && !ewaybillResponse?.certificate" [form]="form?.get('accept')"
+			[showAdditionalFields]="type === ADDITIONAL_FIELDS_DRAFT_TYPE">
+		</app-ewaybill-consignee-accept>
+		<app-ewaybill-marks-acts *ngIf="type === ADDITIONAL_FIELDS_DRAFT_TYPE && form && !ewaybillResponse?.certificate"
+			[isAddClicked]="isAddDocumentClicked" [form]="form?.get('acts')" (appAddDocument)="addDocument()">
+		</app-ewaybill-marks-acts>
+		<app-ewaybill-extra-fields-receiver *ngIf="form && !ewaybillResponse?.certificate" [form]="form?.get('extras')"
+			[extraFields]="responseExtraFields$ | async" (appExtraFieldsFilterChanges)="updateExtraFieldsFilter($event)"
+			(appAddExtraField)="addExtraField()" [isAddClicked]="isAddExtraFieldClicked">
+		</app-ewaybill-extra-fields-receiver>
+		<app-ewaybill-view-products [draft]="ewaybillResponse.msgEwaybill" [messageType]="type">
+		</app-ewaybill-view-products>
+	</main>
+	<nav>
+		<button appSkin="action no-shadow bold bordered" *ngIf="!ewaybillResponse?.certificate"
+			(click)="signing()">Подписать
+		</button>
+		<button appSkin="action no-shadow bold bordered" (click)="save()">Сохранить</button>
+		<button appSkin="simple-gray no-shadow bold" (click)="edit()">Изменить</button>
+		<button appSkin="simple-gray no-shadow bold" (click)="delete()">Удалить</button>
+		<button appSkin="simple no-shadow bold bordered" (click)="prevPage()">Закрыть</button>
+	</nav>
+
+</section>
+
+<app-pending *ngIf="(signingStatus$ | async) === 'PENDING'">Подписание</app-pending>
+
+<app-overlay #editPopup></app-overlay>
+
+<template #texts>
+	<dl>
+		<dt>deletionPopupText</dt>
+		<dd i18n>Вы действительно хотите удалить черновик электронной накладной?</dd>
+		<dt>deletionPopupAgreeButton</dt>
+		<dd i18n>Ок</dd>
+		<dt>deletionPopupDisagreeButton</dt>
+		<dd i18n>Отмена</dd>
+		<dt>proxyUnavailable</dt>
+		<dd>Не удалось подключиться к EDS Proxy</dd>
+	</dl>
+</template>

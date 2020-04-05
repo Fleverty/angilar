@@ -1,0 +1,163 @@
+:host {
+	font-size: 13px;
+	line-height: 16px;
+	background-color: #f1f3f5;
+}
+
+h3 {
+	color: #191919;
+	margin: 0;
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 24px;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	max-width: 1349px;
+	padding: 25px 50px;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+table {
+	width: 100%;
+	line-height: 18px;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+tbody {
+	background-color: #fff;
+
+	tr {
+		cursor: pointer;
+
+		&.selected {
+			color: white;
+			background: rgb(28, 46, 180);
+
+			&:hover {
+				background: rgb(28, 46, 180);
+			}
+		}
+
+		&:hover {
+			background: rgb(214, 223, 254);
+
+			> td app-icon {
+				visibility: visible;
+			}
+		}
+	}
+}
+
+th {
+	position: relative;
+	padding: 0 12px 3px 0;
+	font-size: 12px;
+	box-shadow: 0px 1px 0px 0px rgba(0, 2, 26, 0.18);
+	vertical-align: bottom;
+
+	&:first-child {
+		padding-left: 12px;
+	}
+}
+
+td {
+	position: relative;
+	padding: 6px 12px 2px 0;
+	box-shadow: 0px 1px 0px 0px rgba(0, 2, 26, 0.13);
+	// white-space: nowrap;
+
+	app-icon {
+		margin: 0;
+		padding: 0;
+		visibility: hidden;
+	}
+
+	&:nth-child(1) {
+		width: 42px;
+	}
+
+	&:nth-child(8) {
+		width: 64px;
+	}
+
+	&:first-child {
+		padding-left: 12px;
+	}
+
+	&:nth-child(12) {
+		width: 62px;
+	}
+
+	&:nth-child(13) {
+		width: 48px;
+	}
+}
+
+th,
+td {
+	text-align: left;
+
+	&:nth-child(n + 5) {
+		text-align: right;
+	}
+}
+
+div {
+	// white-space: normal;
+	color: #535353;
+
+	span {
+		// display: inline-block;
+		margin-right: 10px;
+		color: #191919;
+	}
+
+	.notice {
+		margin-right: 5px;
+		font-weight: bold;
+		color: #b78e00;
+	}
+
+	p {
+		margin: 0;
+
+		&:first-child {
+			margin-bottom: 2px;
+		}
+	}
+}
+
+.note {
+	padding: 0;
+	background-color: #fff;
+
+	&:first-child {
+		padding-left: 0;
+	}
+
+	div {
+		margin: 8px;
+		padding: 8px;
+		background-color: rgba(241, 243, 245, 0.8);
+	}
+}
+
+tfoot {
+	background-color: #fff;
+
+	td {
+		font-weight: bold;
+		color: #b78e00;
+	}
+}
+
+app-button {
+	margin-top: 7px;
+}

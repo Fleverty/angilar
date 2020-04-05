@@ -1,0 +1,332 @@
+<div *ngIf="messageType && draft">
+	<h3 *ngIf="draft?.testIndicator || response?.testIndicator" class="warning">Электронная накладная является тестовой
+		или электронной копией ТТН/ТН</h3>
+	<table>
+		<h3>Общая информация</h3>
+		<tbody>
+			<tr *ngIf="draft?.deliveryError; else responseDeliveryError">
+				<td i18n>Текст ошибки при доставке:</td>
+				<td class="warning">{{draft?.deliveryError}}</td>
+			</tr>
+			<ng-template #responseDeliveryError>
+				<tr *ngIf="response?.deliveryError">
+					<td i18n>Текст ошибки при доставке:</td>
+					<td class="warning">{{response?.deliveryError}}</td>
+				</tr>
+			</ng-template>
+			<tr *ngIf="[6, 9].indexOf(draft?.deliveryStatus) !== -1">
+				<td i18n>Причина изменения:</td>
+				<td>{{draft?.blrapnDesc}}</td>
+			</tr>
+			<tr *ngIf="draft?.processingStatus">
+				<td i18n>Статус обработки:</td>
+				<td>{{texts?.get(draft?.processingStatus?.toString())}}</td>
+			</tr>
+			<tr *ngIf="draft?.blrapnDesc">
+				<td i18n>Причина изменения:</td>
+				<td>{{draft?.blrapnDesc}}</td>
+			</tr>
+			<tr *ngIf="draft?.dateCreate">
+				<td i18n>Дата создания:</td>
+				<td>{{draft?.dateCreate | date: 'dd.MM.yyy HH:mm:ss'}}</td>
+			</tr>
+			<tr *ngIf="draft?.deliveryNoteNumber">
+				<td i18n>Cерия и номер:</td>
+				<td>{{draft?.deliveryNoteNumber}}</td>
+			</tr>
+			<tr *ngIf="draft?.deliveryNoteDate">
+				<td i18n>Дата накладной:</td>
+				<td>{{draft?.deliveryNoteDate | date:'dd.MM.yyy'}}</td>
+			</tr>
+			<tr *ngIf="draft?.contractDate || draft?.contractNumber || draft?.contractName">
+				<td i18n>Основание отпуска:</td>
+				<td>{{[draft?.contractDate | date:'dd.MM.yyy', draft?.contractNumber, draft?.contractName] | smartJoin}}</td>
+			</tr>
+			<tr *ngIf="draft?.ordersNumber">
+				<td i18n>Номер заказа:</td>
+				<td>{{draft?.ordersNumber}}</td>
+			</tr>
+			<tr *ngIf="draft?.currency?.code">
+				<td i18n>Валюта:</td>
+				<td>{{draft?.currency?.code}} ({{draft?.currency?.name}})</td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<h3>Грузоотправитель</h3>
+		<tbody>
+			<tr *ngIf="draft?.shipperName || draft?.shipperAddress">
+				<td>Наименование и адрес:</td>
+				<td>{{[draft?.shipperName, draft?.shipperAddress] | smartJoin}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipperUnp">
+				<td>УНП:</td>
+				<td>{{draft?.shipperUnp}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipperGln">
+				<td>GLN:</td>
+				<td>{{draft?.shipperGln}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<table>
+		<h3>Грузополучатель</h3>
+		<tbody>
+			<tr *ngIf="draft?.receiverName || draft?.receiverAddress">
+				<td>Наименование и адрес:</td>
+				<td>{{[draft?.receiverName, draft?.receiverAddress] | smartJoin}}</td>
+			</tr>
+			<tr *ngIf="draft?.receiverUnp">
+				<td>УНП:</td>
+				<td>{{draft?.receiverUnp}}</td>
+			</tr>
+			<tr *ngIf="draft?.receiverGln">
+				<td>GLN:</td>
+				<td>{{draft?.receiverGln}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<ng-container
+		*ngIf="(messageType === 'BLRWBL' || messageType === 'BLRWBR') && (draft?.freightPayerName || draft?.freightPayerAddress || draft?.freightPayerUnp || draft?.freightPayerGln)">
+		<h3>Заказчик</h3>
+		<table>
+			<tbody>
+				<tr *ngIf="draft?.freightPayerName || draft?.freightPayerAddress">
+					<td>Наименование и адрес:</td>
+					<td>{{[draft?.freightPayerName, draft?.freightPayerAddress] | smartJoin}}</td>
+				</tr>
+				<tr *ngIf="draft?.freightPayerUnp">
+					<td>УНП:</td>
+					<td>{{draft?.freightPayerUnp}}</td>
+				</tr>
+				<tr *ngIf="draft?.freightPayerGln">
+					<td>GLN:</td>
+					<td>{{draft?.freightPayerGln}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</ng-container>
+	<table>
+		<h3>Место отгрузки, доставки</h3>
+		<tbody>
+			<tr *ngIf="draft?.shipFrom?.address">
+				<td>Адрес погрузки:</td>
+				<td>{{draft?.shipFrom?.address}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipFrom?.gln">
+				<td>GLN погрузки:</td>
+				<td>{{draft?.shipFrom?.gln}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipTo?.address">
+				<td>Адрес разгрузки:</td>
+				<td>{{draft?.shipTo?.address}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipTo?.gln">
+				<td>GLN разгрузки:</td>
+				<td>{{draft?.shipTo?.gln}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<ng-container *ngIf="messageType === 'BLRWBL' || messageType === 'BLRWBR'">
+		<h3>Транспортные реквизиты</h3>
+		<table>
+			<tbody>
+				<tr *ngIf="draft?.transportNumber">
+					<td>Автомобиль:</td>
+					<td>{{draft?.transportNumber}}</td>
+				</tr>
+				<tr *ngIf="draft?.trailerNumber">
+					<td>Прицеп:</td>
+					<td>{{draft?.trailerNumber}}</td>
+				</tr>
+				<tr *ngIf="draft?.waybillNumber">
+					<td>Путевой лист №:</td>
+					<td>{{draft?.waybillNumber}}</td>
+				</tr>
+				<tr *ngIf="draft?.transportOwnerName">
+					<td>Владелец автомобиля:</td>
+					<td>{{draft?.transportOwnerName}}</td>
+				</tr>
+				<tr *ngIf="draft?.quantityTrip">
+					<td>Количество заездов:</td>
+					<td>{{draft?.quantityTrip}}</td>
+				</tr>
+				<tr *ngIf="draft?.transportContact">
+					<td>Водитель:</td>
+					<td>{{draft?.transportContact}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</ng-container>
+	<h3>Реквизиты ответственных лиц</h3>
+	<table>
+		<tbody>
+			<tr *ngIf="draft?.shipperContact">
+				<td>Отпуск разрешил:</td>
+				<td>{{draft?.shipperContact}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipFrom?.contact">
+				<td>Сдал грузоотправитель:</td>
+				<td>{{draft?.shipFrom?.contact}}</td>
+			</tr>
+			<tr *ngIf="draft?.shipperSealNumber">
+				<td>№ пломбы:</td>
+				<td>{{draft?.shipperSealNumber}}</td>
+			</tr>
+			<tr *ngIf="draft?.deliveryContact">
+				<td>Товар к доставке принял:</td>
+				<td>{{draft?.deliveryContact}}</td>
+			</tr>
+			<tr *ngIf="draft?.proxyDate || draft?.proxyNumber">
+				<td>Дата и номер доверенности:</td>
+				<td>{{[draft?.proxyDate | date:'dd.MM.yyy', draft?.proxyNumber] | smartJoin}}</td>
+			</tr>
+			<tr *ngIf="draft?.partyIssuingProxyName">
+				<td>Название организации, выдавшей доверенность:</td>
+				<td>{{draft?.partyIssuingProxyName}}</td>
+			</tr>
+			<tr
+				*ngIf="draft?.baseShippingDocumentDate || draft?.baseShippingDocumentNumber || draft?.baseShippingDocumentName">
+				<td>Основание доставки:</td>
+				<td>
+					{{[draft?.baseShippingDocumentDate | date:'dd.MM.yyy', draft?.baseShippingDocumentNumber, draft?.baseShippingDocumentName] | smartJoin}}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<ng-container *ngIf="draft?.msgEwaybillDocList && draft?.msgEwaybillDocList?.length">
+		<table>
+			<h3>C товаром переданы документы</h3>
+			<tbody>
+				<ng-container *ngFor="let doc of draft?.msgEwaybillDocList">
+					<tr *ngIf="doc.documentName">
+						<td i18n>Наименование документа:</td>
+						<td>{{doc.documentName}}</td>
+					</tr>
+					<tr *ngIf="doc.documentNumber || doc.documentDate">
+						<td i18n>Номер:</td>
+						<td>{{[doc.documentNumber] | smartJoin}} <ng-container *ngIf="doc.documentDate"><span>&nbsp;от</span>
+								{{doc.documentDate | date:'dd.MM.yyy'}}</ng-container>
+						</td>
+					</tr>
+				</ng-container>
+			</tbody>
+		</table>
+	</ng-container>
+	<ng-container *ngIf="draft?.msgEwaybillExtraFieldList && draft?.msgEwaybillExtraFieldList?.length">
+		<h3>Дополнительно</h3>
+		<table>
+			<tbody>
+				<tr *ngFor="let additional of draft?.msgEwaybillExtraFieldList">
+					<td>{{additional.fieldName}}</td>
+					<td>{{additional.fieldValue}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</ng-container>
+
+	<table *ngIf="notEmpty(response?.shipTo?.contact)">
+		<h3>Принял грузополучатель</h3>
+		<tbody>
+			<tr>
+				<td i18n>Наименование:</td>
+				<td>{{response?.shipTo?.contact}}</td>
+			</tr>
+			<tr *ngIf="notEmpty(response?.receiverSealNumber)">
+				<td i18n>№ пломбы</td>
+				<td>{{response?.receiverSealNumber}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<table *ngIf="response?.msgEwaybillResponseActDtoList?.length">
+		<h3>Отметки о составленных актах</h3>
+		<tbody>
+			<ng-container *ngFor="let extraField of response?.msgEwaybillResponseActDtoList">
+				<tr *ngIf="extraField?.actName">
+					<td i18n>Наименование:</td>
+					<td>{{extraField?.actName}}</td>
+				</tr>
+				<tr *ngIf="extraField?.actNumber">
+					<td i18n>Номер:</td>
+					<td>{{extraField?.actNumber}}</td>
+				</tr>
+				<tr *ngIf="extraField?.actDate">
+					<td i18n>Дата:</td>
+					<td>{{extraField?.actDate | date: "dd.MM.yyy"}}</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+
+	<table *ngIf="response?.msgEwaybillExtraFieldList?.length && !hideAdditionalView">
+		<h3>Дополнительные поля грузополучателя</h3>
+		<tbody>
+			<ng-container *ngFor="let extraField of response?.msgEwaybillExtraFieldList">
+				<tr>
+					<td i18n>Наименование:</td>
+					<td>{{extraField?.fieldName}}</td>
+				</tr>
+				<tr>
+					<td i18n>Значение:</td>
+					<td>{{extraField?.fieldValue}}</td>
+				</tr>
+				<tr>
+					<td i18n>Код:</td>
+					<td>{{extraField?.fieldCode}}</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+
+	<table *ngIf="draft?.changeRequestList?.length || response?.msgEwaybill?.changeRequestList?.length">
+		<h3>Причина изменения</h3>
+		<tbody>
+			<ng-container *ngIf="response?.msgEwaybill?.changeRequestList?.length; else other">
+				<ng-container *ngFor="let changeRequestDocument of response?.msgEwaybill?.changeRequestList">
+					<tr>
+						<td>{{changeRequestDocument.changeReason}}</td>
+					</tr>
+				</ng-container>
+			</ng-container>
+
+			<ng-template #other>
+				<ng-container *ngIf="draft?.changeRequestList?.length">
+					<ng-container *ngFor="let changeRequestDocument of draft?.changeRequestList">
+						<tr>
+							<td>{{changeRequestDocument.changeReason}}</td>
+						</tr>
+					</ng-container>
+				</ng-container>
+			</ng-template>
+
+		</tbody>
+	</table>
+</div>
+
+<template #statuses>
+	<dl>
+		<dt>1</dt>
+		<dd i18n>Отправлена</dd>
+		<dt>2</dt>
+		<dd i18n>Передана</dd>
+		<dt>3</dt>
+		<dd i18n>Получена</dd>
+		<dt>4</dt>
+		<dd i18n>Создана</dd>
+		<dt>5</dt>
+		<dd i18n>Отменена</dd>
+		<dt>6</dt>
+		<dd i18n>Треб. изменений</dd>
+		<dt>7</dt>
+		<dd i18n>Создана и подтверждена</dd>
+		<dt>8</dt>
+		<dd i18n>Отменена не подтверждена</dd>
+		<dt>9</dt>
+		<dd i18n>Треб. изменений не подтверждено</dd>
+		<dt>10</dt>
+		<dd i18n>Создана. Отправлена отмена</dd>
+		<dt>11</dt>
+		<dd i18n>Создана и подтверждена. Отправлена отмена.</dd>
+	</dl>
+</template>

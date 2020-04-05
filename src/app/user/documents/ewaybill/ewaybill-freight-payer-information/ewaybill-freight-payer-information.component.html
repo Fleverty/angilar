@@ -1,0 +1,42 @@
+<header>
+	<h3 i18n>Заказчик</h3>
+	<button appSkin="dots" type="button" *ngIf="showContent" (click)="showContent = false">Свернуть</button>
+	<button appSkin="dots" type="button" *ngIf="!showContent" (click)="showContent = true">Развернуть</button>
+</header>
+<div class="main" *ngIf="showContent && form" [formGroup]="form">
+	<div *ngIf="!isAddFreightPayerClicked">
+		<app-button (click)="addFreightPayer()" skin="add-field" icon="add">Заказчик перевозки
+		</app-button>
+	</div>
+	<div class="line" *ngIf="isAddFreightPayerClicked">
+		<div>
+			<label>
+				<span>
+					Заказчик перевозки:
+				</span>
+				<button type="button" class="pointer" (click)="deleteFreightPayer()">
+					<app-icon>delete</app-icon>Удалить
+				</button>
+			</label>
+			<app-textbox maxLength="175" [formControl]="form?.get('name')" class="naming" isDisabled
+				name="Заказчик перевозки"></app-textbox>
+		</div>
+		<div>
+			<label class="required">Адрес:</label>
+			<app-textbox [formControl]="form?.get('address')" maxLength="70" class="naming" withTitle name="Адрес (заказчик)">
+			</app-textbox>
+		</div>
+		<div>
+			<label class="required">УНП</label>
+			<app-textbox [formControl]="form?.get('unp')" maxLength="70" class="unp" name="УНП (заказчик)"></app-textbox>
+		</div>
+		<div>
+			<label>GLN</label>
+			<app-numberbox [formControl]="form?.get('gln')" maxLength="13" class="unp"></app-numberbox>
+		</div>
+	</div>
+	<nav class="line" *ngIf="isAddFreightPayerClicked">
+		<button appSkin="mirror" type="button" (click)="equateToParticipant('PROVIDER')">Грузоотправитель</button>
+		<button appSkin="mirror" type="button" (click)="equateToParticipant('CUSTOMER')">Грузополучатель</button>
+	</nav>
+</div>

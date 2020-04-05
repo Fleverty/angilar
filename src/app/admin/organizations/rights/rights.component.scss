@@ -1,0 +1,93 @@
+:host {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+
+	> main {
+		height: 80%;
+		padding-top: 25px;
+
+		> section:first-child > div {
+			display: flex;
+			align-items: center;
+			margin-top: 10px;
+			margin-bottom: 20px;
+
+			label {
+				margin-bottom: 4px;
+			}
+
+			> div {
+				display: flex;
+				flex-direction: column;
+				margin-right: 12px;
+			}
+		}
+
+		> section:nth-child(2) > main {
+			display: flex;
+			margin-top: 10px;
+
+			> section {
+				display: flex;
+				flex-direction: column;
+				margin-right: 58px;
+
+				label {
+					margin-left: 5px;
+					font-size: 12px;
+					font-weight: normal;
+					color: rgb(25, 25, 25);
+				}
+
+				> div:first-child > label {
+					font-weight: bold;
+				}
+
+				div {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+					margin-bottom: 10px;
+				}
+
+				.sub-section {
+					display: flex;
+					flex-direction: column;
+					margin-left: 20px;
+					align-items: flex-start;
+				}
+			}
+		}
+	}
+}
+
+h1 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+label {
+	color: rgb(85, 85, 85);
+	font-size: 13px;
+	font-weight: 500;
+}
+
+hr {
+	width: 100%;
+	margin: auto 0 0;
+}
+
+app-textbox {
+	width: 320px;
+}
+
+app-datebox {
+	width: 240px;
+}
+
+app-checkbox {
+	color: var(--accent-color);
+	font-size: 18px;
+}

@@ -1,0 +1,42 @@
+:host {
+	display: flex;
+	height: 56px;
+}
+
+app-button {
+	margin: 16px 12px 0 0;
+
+	&:first-of-type {
+		margin-left: auto;
+	}
+
+	&:not(:last-of-type) {
+		margin-right: 6px;
+	}
+}
+
+.expand {
+	margin-right: 12px;
+}
+
+.mass-events {
+	button {
+		height: 28px;
+		font-size: 14px;
+		margin: 16px 12px 0 0;
+		font-weight: 400;
+	}
+
+	app-drop-list {
+		width: 190px;
+	}
+}
+
+app-drop-list {
+	width: 120px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: absolute;
+	z-index: 2;
+}

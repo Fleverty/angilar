@@ -1,0 +1,18 @@
+<header>
+	<h3>Помощь</h3>
+</header>
+
+<div class="content-page" *ngIf="sectionList$ | async">
+	<app-help-tree [nodes]="(sectionList$ | async)![0].children" [priority]="1" [activeHelpId]="activeHelpId$ | async">
+	</app-help-tree>
+
+	<div class="content" *ngIf="activeHelpId$ | async">
+		<router-outlet></router-outlet>
+
+		<nav>
+			<app-icon (click)="clickPrevious()">keyboard_arrow_left</app-icon>
+			<app-icon (click)="clickNext()">keyboard_arrow_right</app-icon>
+		</nav>
+	</div>
+
+</div>

@@ -1,0 +1,23 @@
+:host {
+	display: flex;
+	align-items: center;
+	min-height: 3em;
+	padding: 12px;
+	border: 2px dashed rgb(195, 199, 210);
+	.area {
+		display: flex;
+		align-items: center;
+
+		app-button {
+			margin-right: 10px;
+		}
+
+		.file {
+			color: black;
+		}
+	}
+}
+
+input[type="file"] {
+	display: none;
+}

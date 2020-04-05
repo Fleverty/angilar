@@ -1,0 +1,5 @@
+<div *ngFor="let element of list">
+	<app-icon *ngIf="element[0] !== value" (click)="checkItem(element[0])">radio_button_unchecked</app-icon>
+	<app-icon *ngIf="element[0] === value">radio_button_checked</app-icon>
+	<label>{{element[1]}}</label>
+</div>

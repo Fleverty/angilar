@@ -1,0 +1,19 @@
+<header>
+	<app-icon class="left-icon" (click)="switchMonth(date, false);$event.stopPropagation();">arrow_back
+	</app-icon>
+	<div class="button" (click)="changePicker.emit(date);$event.stopPropagation();">
+		{{capitalize(date | date:'LLLL, yyyy')}}</div>
+	<app-icon class="right-icon" (click)="switchMonth(date, true);$event.stopPropagation();">
+		arrow_forward</app-icon>
+</header>
+<ul>
+	<li *ngFor="let day of daysOfWeek; index as i" [class.isWeekend]="isWeekendConsiderRole(i)">{{day}}</li>
+</ul>
+<app-grid-drawer [columns]="7" [rows]="6" [items]="days">
+	<ng-template #itemTemplate let-item>
+		<div class="grid-item" [class.weekend]="isWeekend(item.date.getDay())" [class.outside]="item.isOutside"
+			[class.today]="isToday(item.date)" (click)="setRangeByOrder(item.date)" [class.part]="isRangeContain(item.date)"
+			[class.start]="isStart(item.date)" [class.end]="isEnd(item.date)" [attr.disabled]="item.disabled || null">
+			{{item.date.getDate()}}</div>
+	</ng-template>
+</app-grid-drawer>

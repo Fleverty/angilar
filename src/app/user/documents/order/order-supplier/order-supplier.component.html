@@ -1,0 +1,14 @@
+<fieldset *ngIf="form" [formGroup]="form">
+	<legend class="required">Поставщик</legend>
+	<div>
+		<label>Наименование</label>
+		<app-selectbox formControlName="supplierName" [data]="suppliers" (appNextPage)="filterChangeHandler()"
+					   (appCollapse)="filterChangeHandler({ search: '' })"
+					   (appFilterChanges)="filterChangeHandler($event)"
+					   name="Поставщик наименование"></app-selectbox>
+	</div>
+	<div>
+		<label>GLN</label>
+		<app-textbox [isDisabled]="true" formControlName="supplierGln" name="Поставщик GLN"></app-textbox>
+	</div>
+</fieldset>

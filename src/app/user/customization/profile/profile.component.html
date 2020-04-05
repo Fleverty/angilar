@@ -1,0 +1,75 @@
+<header>
+	<h3>Мой профиль</h3>
+	<button appSkin="simple" (click)="openPopup()" i18n>Изменить пароль</button>
+	<button appSkin="action" [attr.disabled]="(persistent$ | async) ? null : ''" (click)="saveProfile()"
+		i18n>Сохранить</button>
+</header>
+<section *ngIf="form" [formGroup]="form">
+
+	<div>
+		<label i18n>Логин:</label>
+		<app-textbox formControlName="login" withTitle></app-textbox>
+	</div>
+
+	<div class="row">
+		<div>
+			<label class="required" i18n>Фамилия:</label>
+			<app-textbox maxLength="255" formControlName="lastName" name="Фамилия"></app-textbox>
+		</div>
+		<div>
+			<label class="required" i18n>Имя:</label>
+			<app-textbox maxLength="255" formControlName="firstName" name="Имя"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Отчество:</label>
+			<app-textbox maxLength="255" formControlName="middleName" name="Отчество"></app-textbox>
+		</div>
+	</div>
+
+	<div class="row">
+		<div>
+			<label i18n>Должность:</label>
+			<app-textbox maxLength="255" formControlName="jobPost" name="Должность"></app-textbox>
+		</div>
+		<div>
+			<label class="required" class="required" i18n>Email:</label>
+			<app-textbox maxLength="255" formControlName="email" name="Email">
+			</app-textbox>
+		</div>
+		<div>
+			<label i18n>Телефон:</label>
+			<app-textbox maxLength="255" formControlName="phoneNumber" name="Телефон"></app-textbox>
+		</div>
+		<div>
+			<label i18n>Cклад:</label>
+			<app-selectbox [valueTransforFn]="valueTransformFn" [data]="storagesLists$ | async" formControlName="storage"
+				(appNextPage)="nextStagePage()" (appFilterChanges)="onStageFilterChange($event)"
+				(appCollapse)="onStageFilterChange({search:''})">
+			</app-selectbox>
+		</div>
+	</div>
+
+	<div class="row">
+		<div>
+			<label i18n>Дата обновления профиля:</label>
+			<app-datebox formControlName="updateProfile" [withTime]="true"></app-datebox>
+		</div>
+		<div>
+			<label i18n>Дата последней авторизации:</label>
+			<app-datebox formControlName="lastAuthorization" [withTime]="true"></app-datebox>
+		</div>
+	</div>
+
+</section>
+
+
+<template #popupMessage>
+	<dl>
+		<dt>ask</dt>
+		<dd i18n>Сохранить изменения в профиле?</dd>
+		<dt>agreeButtonText</dt>
+		<dd i18n>Сохранить</dd>
+		<dt>invalid</dt>
+		<dd i18n>Невозможно сохранить невалидную форму</dd>
+	</dl>
+</template>

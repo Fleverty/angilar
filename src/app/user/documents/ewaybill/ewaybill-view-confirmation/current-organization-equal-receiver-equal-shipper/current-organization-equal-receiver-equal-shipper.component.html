@@ -1,0 +1,140 @@
+<ng-container *ngIf="providerConfirmation?.sendingEwaybillSubunit as sendingEwaybillSubunit">
+	<h3 i18n>Отправка электронной накладной</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="sendingEwaybillSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{sendingEwaybillSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss'}}
+			</td>
+		</tr>
+		<tr *ngIf="sendingEwaybillSubunit.shipperProviderReceivingConfirmBlrapn && sendingEwaybillSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2550 && +ewaybill?.functionCode === 9">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{sendingEwaybillSubunit.shipperProviderReceivingConfirm ? (sendingEwaybillSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="sendingEwaybillSubunit.shipperProviderSendingConfirmBlrapn && sendingEwaybillSubunit.shipperProviderSendingConfirmBlrapn.blrapnCode === 2560 && +ewaybill?.functionCode === 9">
+			<td i18n>Подтверждение об отправке</td>
+			<td>
+				{{sendingEwaybillSubunit.shipperProviderSendingConfirm ? (sendingEwaybillSubunit.shipperProviderSendingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>
+
+<ng-container *ngIf="providerConfirmation?.ewaybillReceivingConfirmSubunit as ewaybillReceivingConfirmSubunit">
+	<h3 i18n>Подтверждение получения электронной накладной</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="ewaybillReceivingConfirmSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{ewaybillReceivingConfirmSubunit.receivingTimestamp ? (ewaybillReceivingConfirmSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="ewaybillReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn && ewaybillReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2551">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{ewaybillReceivingConfirmSubunit.shipperProviderReceivingConfirm ? (ewaybillReceivingConfirmSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>
+
+<ng-container *ngIf="providerConfirmation?.responseOnEwaybillSendingSubunit as responseOnEwaybillSendingSubunit">
+	<h3 i18n>Отправка ответа на электронную накладную</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="responseOnEwaybillSendingSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{responseOnEwaybillSendingSubunit.receivingTimestamp ? (responseOnEwaybillSendingSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="responseOnEwaybillSendingSubunit.shipperProviderReceivingConfirmBlrapn && responseOnEwaybillSendingSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2550">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{responseOnEwaybillSendingSubunit.shipperProviderReceivingConfirm ? (responseOnEwaybillSendingSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="responseOnEwaybillSendingSubunit.shipperProviderSendingConfirmBlrapn && responseOnEwaybillSendingSubunit.shipperProviderSendingConfirmBlrapn.blrapnCode === 2560">
+			<td i18n>Подтверждение об отправке</td>
+			<td>
+				{{responseOnEwaybillSendingSubunit.shipperProviderSendingConfirm ? (responseOnEwaybillSendingSubunit.shipperProviderSendingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>
+
+<ng-container
+	*ngIf="providerConfirmation?.responseOnEwaybillReceivingConfirmSubunit as responseOnEwaybillReceivingConfirmSubunit">
+	<h3 i18n>Подтверждение получения ответа на электронную накладную</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="responseOnEwaybillReceivingConfirmSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{responseOnEwaybillReceivingConfirmSubunit.receivingTimestamp ? (responseOnEwaybillReceivingConfirmSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="responseOnEwaybillReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn && responseOnEwaybillReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2551">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{responseOnEwaybillReceivingConfirmSubunit.shipperProviderReceivingConfirm ? (responseOnEwaybillReceivingConfirmSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>
+
+<ng-container
+	*ngIf="+ewaybill?.functionCode === 1 && providerConfirmation?.ewaybillCancelSendingSubunit as ewaybillCancelSendingSubunit">
+	<h3 i18n>Отправка отмены электронной накладной</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="ewaybillCancelSendingSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{ewaybillCancelSendingSubunit.receivingTimestamp ? (ewaybillCancelSendingSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="ewaybillCancelSendingSubunit.shipperProviderReceivingConfirmBlrapn && ewaybillCancelSendingSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2550">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{ewaybillCancelSendingSubunit.shipperProviderReceivingConfirm ? (ewaybillCancelSendingSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="ewaybillCancelSendingSubunit.shipperProviderSendingConfirmBlrapn && ewaybillCancelSendingSubunit.shipperProviderSendingConfirmBlrapn.blrapnCode === 2560">
+			<td i18n>Подтверждение об отправке</td>
+			<td>
+				{{ewaybillCancelSendingSubunit.shipperProviderSendingConfirm ? (ewaybillCancelSendingSubunit.shipperProviderSendingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>
+
+<ng-container
+	*ngIf="+ewaybill?.functionCode === 1 && providerConfirmation?.ewaybillCancelReceivingConfirmSubunit as ewaybillCancelReceivingConfirmSubunit">
+	<h3 i18n>Подтверждение получения отмены электронной накладной</h3>
+	<table>
+		<tbody>
+		<tr *ngIf="ewaybillCancelReceivingConfirmSubunit.receivingTimestamp">
+			<td i18n>Дата и время получения</td>
+			<td>
+				{{ewaybillCancelReceivingConfirmSubunit.receivingTimestamp ? (ewaybillCancelReceivingConfirmSubunit.receivingTimestamp | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		<tr *ngIf="ewaybillCancelReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn && ewaybillCancelReceivingConfirmSubunit.shipperProviderReceivingConfirmBlrapn.blrapnCode === 2551">
+			<td i18n>Подтверждение о получении</td>
+			<td>
+				{{ewaybillCancelReceivingConfirmSubunit.shipperProviderReceivingConfirm ? (ewaybillCancelReceivingConfirmSubunit.shipperProviderReceivingConfirm | date:'dd.MM.yyy HH:mm:ss') : "—"}}
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</ng-container>

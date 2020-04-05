@@ -1,0 +1,21 @@
+{
+	"eslint.autoFixOnSave": true,
+	"eslint.run": "onSave",
+	"eslint.workingDirectories": [
+		"./src"
+	],
+	"eslint.options": {
+		"configFile": "./.eslintrc.js"
+	},
+	"importSorter.generalConfiguration.sortOnBeforeSave": true,
+	"cSpell.ignoreWords": [
+		"blrapn",
+		"gln",
+		"glns",
+		"gtin",
+		"nonconfirmed",
+		"seria",
+		"валидную",
+		"заредиректит"
+	]
+}

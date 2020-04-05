@@ -1,0 +1,16 @@
+:host {
+	width: 192px;
+	display: block;
+	background: var(--grey-bg);
+	box-shadow: 1px 0px 1px 0px rgba(0, 10, 51, 0.1),
+		1px 0px 6px 0px rgba(0, 10, 51, 0.15);
+
+	padding: 14px 0;
+	z-index: 3;
+}
+
+app-document-type {
+	cursor: pointer;
+	user-select: none;
+	outline: none;
+}

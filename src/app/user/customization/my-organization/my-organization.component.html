@@ -1,0 +1,21 @@
+<header>
+	<h3 i18n>Моя организация</h3>
+
+	<app-tab>
+		<app-tab-item routerLink="./" [routerLinkActiveOptions]="{ exact: true }" routerLinkActive="active" i18n>
+			Организация</app-tab-item>
+		<app-tab-item routerLink="./storages" routerLinkActive="active" i18n>Склады</app-tab-item>
+		<app-tab-item routerLink="./partners" routerLinkActive="active" i18n>Партнерские связи</app-tab-item>
+	</app-tab>
+
+	<button *ngIf="isActive('organization')" [attr.disabled]="(persistent$ | async) ? null : ''" [appSkin]="'action'"
+		(click)="saveOrganization()" i18n>Сохранить</button>
+</header>
+<router-outlet></router-outlet>
+
+<template #texts>
+	<dl>
+		<dt>required</dt>
+		<dd i18n>Не заполнены обязательные поля.</dd>
+	</dl>
+</template>
